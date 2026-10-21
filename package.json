@@ -1,0 +1,26 @@
+{
+  "name": "c4bi",
+  "version": "0.1.0",
+  "description": "My theme",
+  "keywords": [
+    "theme"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@codeberg.org/hikame/c4bi.git"
+  },
+  "license": "MIT",
+  "author": "hikame",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.3.3"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "lucide": "^1.57.0"
+  }
+}

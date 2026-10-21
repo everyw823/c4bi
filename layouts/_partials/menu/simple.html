@@ -1,0 +1,30 @@
+{{- $page := .page }}
+{{- $menuID := .menuID }}
+{{- $isMin := .isMinimal}}
+
+{{- with index site.Menus $menuID }}
+<ul class="flex">
+{{- range . }}
+    {{- $attrs := dict "href" .URL}}
+    {{- if $page.IsMenuCurrent .Menu . }}
+      {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
+    {{- else if $page.HasMenuCurrent .Menu .}}
+      {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
+    {{- end }}
+    {{- $name := .Name }}
+    
+    {{- with .Identifier }}
+      {{- with T . }}
+        {{- $name = . }}
+      {{- end }}
+    {{- end }}
+
+    
+    <li class="mx-2">
+      
+      <a class="underline decoration-dashed decoration-1 text-secondary-300 hover:text-primary-500" href="{{ $attrs.href }}">{{- if $isMin }}{{ substr $name 0 1 }}{{- else }}{{ $name }}{{- end }}</a>
+    </li>
+
+{{- end }}
+</ul>
+{{- end }}

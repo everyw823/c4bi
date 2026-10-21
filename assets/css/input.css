@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+@theme static {
+  --color-white: #ffffff;
+
+  --color-primary-50: #eff0f6;
+  --color-primary-100: #dde0ee;
+  --color-primary-200: #b7bfe1;
+  --color-primary-300: #93a0d2;
+  --color-primary-400: #6f80c3;
+  --color-primary-500: #4b60b4;
+  --color-primary-600: #3c4d90;
+  --color-primary-700: #2d3a6c;
+  --color-primary-800: #1e2648;
+  --color-primary-900: #141829;
+  --color-primary-950: #0b0d14;
+
+  --color-secondary-50: #f8fafc;
+  --color-secondary-100: #f1f5f9;
+  --color-secondary-200: #e2e8f0;
+  --color-secondary-300: #cbd5e1;
+  --color-secondary-400: #94a3b8;
+  --color-secondary-500: #64748b;
+  --color-secondary-600: #475569;
+  --color-secondary-700: #334155;
+  --color-secondary-800: #1e293b;
+  --color-secondary-900: #0f172a;
+  --color-secondary-950: #020617;
+
+  --color-accent-50: #fdfff5;
+  --color-accent-100: #fbffe6;
+  --color-accent-200: #f7ffcc;
+  --color-accent-300: #f1ffa4;
+  --color-accent-400: #e3fe48;
+  --color-accent-500: #adcb01;
+  --color-accent-600: #8ea701;
+  --color-accent-700: #687a01;
+  --color-accent-800: #3c4700;
+  --color-accent-900: #1e2400;
+  --color-accent-950: #111400;
+
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-300: #a5b4fc;
+  --color-brand-400: #818cf8;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-brand-800: #3730a3;
+  --color-brand-900: #312e81;
+  --color-brand-950: #1e1b4e;
+
+  --font-sans: ui-sans-serif, system-ui;
+  --font-serif: ui-serif, Georgia;
+  --font-mono: ui-monospace, SFMono-Regular;
+  --font-display: Oswald;
+  --font-body: "Open Sans";
+  --font-pixel: "Pixel";
+  --font-pixeloid: "Pixeloid";
+
+  --animate-slide: slideInFromLeft 0.5s ease-in-out;
+
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-10%);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+}
+
+
+@font-face {
+  font-family: 'Pixel';
+  src: url('../fonts/XiuZhenXiangSuTi.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pixeloid';
+  src: url('../fonts/QiuYeYuanTi-16.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.bg-thingie {
+  background-image: url('../texture.png');
+  background-blend-mode: color-dodge;
+}
+
+*,
+::before,
+::after {
+  @media (max-width: 768px) {
+    --border-size: 7vw;
+  }
+
+  @media (min-width: 768px) {
+    --border-size: 40px;
+  }
+
+  @media (min-width: 1280px) {
+    --border-size: 60px;
+  }
+}
+
+hr {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border: 0;
+  width: 100%;
+  border-top: 0.2em dotted var(--color-primary-800);
+}
+
+.container {
+  background: url('../contour.png') var(--color-white);
+}
+
+
+.font-pixel {
+  transform: translateX(.1em) translateY(.1em);
+}
+
+
+
+.flooder {
+  filter: url(#flood);
+}

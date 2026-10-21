@@ -1,0 +1,18 @@
+
+<a class="pt-0 md:flex-1 h-fit flex justify-center w-full xl:w-auto" href="/" id="logo-container">
+  {{ partial "svg/logo.html" .}}
+</a>
+{{- if eq .RelPermalink "/" }}
+<div class=" hidden 2xl:block flex-1 "></div>
+{{- end }}
+  <section class="w-full 2xl:w-auto flex flex-col">
+    {{- if eq .RelPermalink "/" }}
+    <nav class="font-pixeloid h-fit overflow-hidden flex sm:px-20 md:px-0 lg:py-0 py-4 xl:pb-0 flex-auto lg:grow xl:shrink-0 2xl:justify-end justify-center flex-wrap">
+{{ partial "menu/main_menu.html" (dict "menuID" "main" "page" .) }}
+
+</nav>
+      <div class="text-center text-secondary-500">
+您是第&nbsp;<span class="counter">-3-</span>&nbsp;位来到这里的用户!
+</div>
+{{- end }}
+  </section>

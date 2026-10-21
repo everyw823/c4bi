@@ -1,0 +1,40 @@
+
+{{ define "main" }}
+  <!-- {{ .Content }}
+  {{ range site.RegularPages }}
+    <section>
+      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+      {{ .Summary }}
+    </section>
+  {{ end }} 
+   
+   -->
+
+   <div class="grid justify-center items-center">
+    <article class="px-10 py-10">
+            <div class="flex flex-row flex-wrap justify-center items-center">
+
+          <div class="w-auto p-4 text-center  my-10 px-10 py-10 border-primary-300 bg-primary-50 border-[6px] border-dashed rounded-lg text-primary-500">
+            <blockquote class=" text-secondary-500 my-2">{{ .Content }}</blockquote></div>
+
+          </div>
+
+      </div>
+    </article>
+    <article class="px-10 py-10">
+      <h1 class="overflow-clip text-left text-4xl font-bold text-secondary-500"><i data-lucide="playing-cards-fan" width="36px" height="36px" class="mr-4 inline-block"></i>随机文章</h1>
+      <div class="flex flex-row flex-wrap justify-center items-center">
+
+        {{- $random := int (math.Rand | mul (site.RegularPages.Len) | math.Floor)}}
+        {{- with (index site.RegularPages $random) }}
+          <div class="w-auto p-4">
+            <blockquote class="text-sm text-secondary-500 my-2 line-clamp-3">{{ .Summary }}</blockquote>
+<div class="text-right text-secondary-400" >来自 {{ .Title }} ｜<a href="{{ .RelPermalink }}" class="text-blue-500 hover:text-blue-700">阅读更多</a></div>
+
+          </div>
+        {{ end }}
+
+      </div>
+      </article>
+    </div>
+{{ end }}

@@ -1,0 +1,91 @@
+{{- /*
+Renders a menu for the given menu ID.
+
+@context {page} page The current page.
+@context {string} menuID The menu ID.
+
+@example: {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+*/}}
+
+{{- $page := .page }}
+{{- $menuID := .menuID }}
+
+
+{{- with index site.Menus $menuID }}
+
+
+  {{- if eq $page.RelPermalink "/"}}
+
+
+    <ul class="
+    lg:flex lg:flex-row flex-wrap justify-center xl:flex-nowrap
+    grid md:grid-cols-6 sm:grid-cols-3 grid-cols-2
+    xl:w-[100%]
+     2xl:w-auto
+    ">
+
+      {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+
+    </ul>
+
+  {{- else }}
+
+  <div class="flex pb-4 xl:pb-0 flex-auto justify-center 2xl:justify-end">
+    <ul class="flex flex-row justify-center flex-nowrap">
+
+      {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+
+    </ul>
+  </div>
+
+{{- end }}
+
+{{- end }}
+
+{{- define "_partials/inline/menu/walk.html" }}
+  {{- $page := .page }}
+  
+  {{- range .menuEntries }}
+    {{- $attrs := dict "href" .URL "pre" .Pre}}
+    {{- if $page.IsMenuCurrent .Menu . }}
+      {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
+    {{- else if $page.HasMenuCurrent .Menu .}}
+      {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
+    {{- end }}
+    {{- $name := .Name }}
+    {{- with .Identifier }}
+      {{- with T . }}
+        {{- $name = . }}
+      {{- end }}
+    {{- end }}
+
+
+    <li >
+    
+  <a class=" w-full flex mx-1 sm:py-2  flex-col items-center justify-center cursor-pointer rounded-md hover:scale-110 hover:-translate-y-1  transition-all"
+        href="{{ $attrs.href }}"
+      >
+
+        <img style="image-rendering:pixelated;" src="{{ $attrs.pre }}" aria-hidden="false" class="flooder block tint w-[max(32vw,14vh)] md:w-[96px]  " draggable="false" />
+
+        <label class="block nav-link text-3xl sm:text-xl
+     underline decoration-dashed decoration-1
+     text-primary-400 hover:text-accent-500 
+     cursor-pointer 
+     ">
+        {{ $name }}
+        </label>
+
+
+
+
+
+    </a>
+      {{- with .Children }}
+        <ul>
+          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+        </ul>
+      {{- end }}
+    </li>
+  {{- end }}
+{{- end }}

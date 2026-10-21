@@ -1,0 +1,72 @@
+baseURL = 'https://example.org/'
+locale = 'en-us'
+title = '四只柜子'
+theme = 'c4bi'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      hardWraps = false
+      unsafe = true
+      xhtml = false
+
+[security]
+  allowContent = ['! ^text/org$']
+
+[menus]
+
+  [[menus.main]]
+    name = '世界观'
+    pre = "/menu/world.png"
+    pageRef = '/posts'
+    weight = 20
+
+  [[menus.main]]
+    name = '角色'
+    pre = "/menu/character.png"
+    pageRef = '/tags'
+    weight = 30
+
+    [[menus.main]]
+    name = '画作'
+    pre = "/menu/art.png"
+    pageRef = '/tags'
+    weight = 40
+
+  [[menus.main]]
+    name = '故事'
+    pre = "/menu/writing.png"
+    pageRef = '/tags'
+    weight = 50
+  [[menus.main]]
+    name = '关于我'
+    pre = "/menu/about.png"
+    pageRef = '/'
+    weight = 60
+
+  [[menus.main]]
+    name = '杂记'
+    pre = "/menu/misc.png"
+    pageRef = '/tags'
+    weight = 10
+
+
+  [[menus.subsite]]
+    name = '四只柜子'
+    pageRef = '/'
+    weight = 10
+
+  [[menus.subsite]]
+    name = '技术站'
+    url = 'https://t.c4bi.net'
+    weight = 20
+
+[module]
+  [module.hugoVersion]
+    extended = false
+    min = '0.146.0'
+
+[taxonomies]
+  tag = 'tags'
+  year = 'years'
+  category = 'categories'

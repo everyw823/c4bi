@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale }}" dir="{{ or site.Language.Direction `ltr` }}">
+
+<head>
+  {{ partial "head.html" . }}
+</head>
+
+<body class="bg-thingie bg-primary-700 overflow-hidden h-screen flex flex-col">
+
+
+  {{ partial "svg/filter.html" . }}
+{{ partial "header/nav.html" (dict "page" .) }}
+
+  <div class="border-overlay fixed pointer-events-none h-full z-10 border-dotted xl:border-[60px] md:border-[40px] border-[7vw] border-primary-700 bg-transparent"></div>
+ 
+  
+
+  <div id="real-container" class=" relative overflow-y-auto overflow-x-hidden container scrollbar-none bg-blend-multiply  mx-auto h-full
+  xl:px-48 lg:px-24 md:px-10 sm:px-4 px-8 py-8
+  
+  ">
+
+
+ 
+
+
+<div class="h-fit sm:h-auto relative justify-center md:justify-normal">
+
+    <header class="animate-slide md:animate-none sm:pt-10 w-full flex flex-row flex-wrap 2xl:flex-nowrap items-baseline-last">
+      {{ partial "header/header.html" . }}
+</header>
+     
+  
+  <main class="animate-slide bg-white my-4  border-y-4 border-secondary-200 border-dotted">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <footer>
+    {{ partial "footer.html" . }}
+  </footer>
+</div>
+</div>
+  </div>
+</body>
+
+</html>
