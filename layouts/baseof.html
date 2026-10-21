@@ -5,54 +5,42 @@
   {{ partial "head.html" . }}
 </head>
 
-<body class="bg-primary-500 overflow-hidden">
-  <svg height="0" width="0" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <filter id="flood" color-interpolation-filters="linearRGB" filterUnits="objectBoundingBox"
-        primitiveUnits="userSpaceOnUse">
-        <feFlood id="svgflood" flood-color="#0400ff" flood-opacity="1" x="0%" y="0%" width="100%" height="100%"
-          result="flood" />
-        <feComposite in="flood" in2="SourceAlpha" operator="in" x="0%" y="0%" width="100%" height="100%"
-          result="composite" />
-    </defs>
-  </svg>
+<body class="bg-thingie bg-primary-700 overflow-hidden h-screen flex flex-col">
 
-  </filter>
-  <div class="border-overlay"></div>
 
-  {{- if eq .RelPermalink "/" }}
-  <div id="real-container" class="overflow-y-auto overflow-x-hidden container mx-auto h-screen 
-  py-5
-  xl:px-48 lg:px-24 md:px-24 sm:px-24 px-8
-  bg-white 
+  {{ partial "svg/filter.html" . }}
+{{ partial "header/nav.html" (dict "page" .) }}
+
+  <div class="border-overlay fixed pointer-events-none h-full z-10 border-dotted xl:border-[60px] md:border-[40px] border-[7vw] border-primary-700 bg-transparent"></div>
+ 
+  
+
+  <div id="real-container" class=" relative overflow-y-auto overflow-x-hidden container scrollbar-none bg-blend-multiply  mx-auto h-full
+  xl:px-48 lg:px-24 md:px-10 sm:px-4 px-8 py-8
+  
   ">
-<div class="h-screen relative sm:pt-40" >
-      <header class="force-center sm:h-auto">
-        {{ partial "header.html" . }}
-      </header>
+
+
+ 
+
+
+<div class="h-fit sm:h-auto relative justify-center md:justify-normal">
+
+    <header class="animate-slide md:animate-none sm:pt-10 w-full flex flex-row flex-wrap 2xl:flex-nowrap items-baseline-last">
+      {{ partial "header/header.html" . }}
+</header>
+     
+  
+  <main class="animate-slide bg-white my-4  border-y-4 border-secondary-200 border-dotted">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <footer>
+    {{ partial "footer.html" . }}
+  </footer>
 </div>
-      
- {{- else }}
-  <div id="real-container" class="overflow-y-auto overflow-x-hidden container mx-auto h-auto
-  py-10
-  xl:px-48 lg:px-24 md:px-24 sm:px-24 px-8
-  bg-white 
-  "><div class="h-screen relative sm:pt-40" >
-      <header class="sm:h-auto">
-        {{ partial "header.html" . }}
-      </header>
 </div>
-      
-  {{- end }}
-    <main>
-        {{ block "main" . }}{{ end }}
-      </main>
-
-      <footer>
-        {{ partial "footer.html" . }}
-      </footer>
-
-
+  </div>
 </body>
 
 </html>
