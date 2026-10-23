@@ -7,6 +7,14 @@ hasCJKLanguage = true
 
 [markup]
   [markup.goldmark]
+    [markup.goldmark.parser]
+      wrapStandAloneImageWithinParagraph = false
+      [markup.goldmark.parser.attribute]
+        block = true
+        title = true
+    [markup.goldmark.renderHooks]
+      [markup.goldmark.renderHooks.image]
+        useEmbedded = "fallback"
     [markup.goldmark.renderer]
       hardWraps = false
       unsafe = true

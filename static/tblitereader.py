@@ -36,7 +36,9 @@ def parse_content_according_to_type(d:dict[str, str | None]) -> dict[str, str | 
         elif d['type'] == 3:
             return {
                 "t" : "image",
-                "v" : d.get('filename')
+                "v" : d.get('filename'),
+                "width" : d.get('show_width'),
+                "height" : d.get('show_height')
             }
             # image
         else:
@@ -56,7 +58,10 @@ def markdownify(content:dict[str, str | None]) -> str | None:
         elif content['t'] == 'emoji':
             return f"emoji: {content['v']}:"
         elif content['t'] == 'image':
-            return f"![{content['v']}](../img/{content['v']}){mdbreak}"
+            return f"""
+
+![{content['v']}](../img/{content['v']})
+{{width=\"{content['width']}\"}}"""
 
 
 

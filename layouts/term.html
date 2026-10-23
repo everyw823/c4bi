@@ -1,37 +1,12 @@
 {{ define "main" }}
 
-
-<h1 class="text-center text-4xl font-bold text-primary-500 mt-15 mb-2">{{ .Title }}</h1>
+<h1 class="text-center text-4xl font-bold text-primary-500 dark:text-primary-400 mt-15 mb-2">{{ .Title }}</h1>
 {{ .Content }}
 
-<div class="text-secondary-400 text-center mt-5 mb-10 text-sm">找到 {{ len .Pages }} 个结果</div>
+<div class="text-secondary-400 dark:text-secondary-500 text-center mt-5 mb-10 text-sm">找到 {{ len .Pages }} 个结果</div>
 <div class="grid grid-cols-1 xl:grid-cols-2  gap-5">
 	{{- range ( .Paginate .Pages 10 ).Pages }}
-	<article class="mb-4 post post-preview">
-		<div class="block">
-			<div class="title-wrapper flex items-center py-2 flex-wrap justify-between">
-				<h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-				<div class="flex-1 text-right text-secondary-300">全文字数</div> <label
-					class="font-pixel text-center border-dotted border-4 border-secondary-200 w-fit min-w-[2em] h-[2em] p-[.25em] text-primary-300 text-xl mr-3">{{
-					.WordCount }}</label>
-			</div>
-
-			{{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-			{{ $dateHuman := .Date | time.Format ":date_long" }}
-			<time id="root-time" class=" text-secondary-400" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
-
-			{{- $source := index (.GetTerms "sources") 0 }}
-		</div>
-		<div class="image-text-preview-wrapper grid gap-4" style="grid-template-columns:min(20vw,200px) 1fr">
-			<div class="w-full">
-
-				<img class="img-preview rounded-lg w-full max-h-[400px]" style="image-rendering: pixelated;">
-			</div>
-			<div class=" text-secondary-500 flex-1 ">{{ .Summary | replaceRE "<img[^>]*>" "" | safeHTML | truncate 200
-					}}</div>
-
-		</div>
-	</article>
+	{{ partial "post-preview.html" (dict "page" . "summaryLength" 200) }}
 	{{- end }}
 </div>
 

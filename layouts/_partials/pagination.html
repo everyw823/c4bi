@@ -1,0 +1,19 @@
+{{- /*
+Renders pagination controls for paginated content.
+
+@context {page} . The current page with pagination data.
+
+@example: {{ partial "pagination.html" . }}
+*/}}
+
+{{ if .Paginator.HasPrev }}
+  <a href="{{ .Paginator.Prev.URL }}" class="text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">← Previous</a>
+{{ end }}
+
+<span class="mx-2">
+  Page {{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }}
+</span>
+
+{{ if .Paginator.HasNext }}
+  <a href="{{ .Paginator.Next.URL }}" class="text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">Next →</a>
+{{ end }}

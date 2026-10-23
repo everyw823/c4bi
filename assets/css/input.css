@@ -60,14 +60,11 @@
   --font-mono: ui-monospace, SFMono-Regular;
   --font-display: Oswald;
   --font-body: "Open Sans";
-  /* --font-pixel: "Pixel";
+  --font-pixel: "Pixel";
   --font-pixeloid: "Pixeloid";
   --font-handwritten: "Kingnam";
-  --font-pixe lsq: "PixelSquare"; */
-  --font-pixel: sans-serif;
-  --font-pixeloid: sans-serif;
-  --font-handwritten: sans-serif;
-  --font-pixelsq: sans-serif;
+  --font-pixe lsq: "PixelSquare";
+
 
 
 
@@ -108,7 +105,7 @@
 
 }
 
-/* 
+
 @font-face {
   font-family: 'Pixel';
   src: url('../fonts/XiuZhenXiangSuTi.ttf') format('truetype');
@@ -131,7 +128,7 @@
 @font-face {
   font-family: 'PixelSquare';
   src: url("../fonts/quan.ttf") format('truetype');
-} */
+}
 
 .bg-thingie {
   background-image: url('../texture.png');
@@ -154,19 +151,19 @@
   }
 }
 
-a{
-  @apply text-brand-500 hover:text-accent-500 underline underline-offset-4 decoration-1 decoration-dashed;
-  
-}
-a.tag{
-  @apply text-secondary-200
+/* a{
+  @apply text-brand-500 hover:text-accent-500 dark:text-brand-400 dark:hover:text-accent-400 underline underline-offset-4 decoration-1 decoration-dashed;
+
+} */
+/* a.tag{
+  @apply text-secondary-200 dark:text-secondary-400
 }
 a.menu-item{
-  @apply text-secondary-200
-}
+  @apply text-primary-600 dark:text-primary-500
+} */
 
 h1, h2, h3, h4, h5, h6 {
-  @apply text-primary-500 font-sans font-bold break-before-all;
+  @apply text-primary-500 dark:text-primary-400 font-sans font-bold break-before-all;
   line-break: anywhere;
 }
 
@@ -187,7 +184,7 @@ h5{
 }
 
 time{
-  @apply text-secondary-400 font-pixeloid text-sm select-none;
+  @apply text-secondary-400 dark:text-secondary-500 font-pixeloid text-sm select-none;
 }
 
 time.reply-time{
@@ -204,8 +201,20 @@ hr {
   border-top: 0.2em dotted var(--color-primary-800);
 }
 
+@media (prefers-color-scheme: dark) {
+  hr {
+    border-top-color: var(--color-primary-300);
+  }
+}
+
 .container {
   background: url('../contour.png') var(--color-white);
+}
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: url('../contour.png') var(--color-primary-900);
+  }
 }
 
 
@@ -224,4 +233,8 @@ hr {
 
 p{
   @apply mb-2;
+}
+
+img{
+  @apply transition hover:shadow-md shadow-accent-400 dark:shadow-accent-600
 }

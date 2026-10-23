@@ -5,7 +5,8 @@
   {{ partial "head.html" . }}
 </head>
 
-<body class="bg-thingie bg-primary-700 overflow-hidden h-screen flex flex-col">
+<body class="bg-thingie bg-primary-700 dark:bg-primary-900 overflow-hidden h-screen flex flex-col">
+
 
 
   {{ partial "svg/filter.html" . }}
@@ -14,17 +15,14 @@
 {{ partial "header/nav.html" (dict "page" .) }}
 {{- end }}
 
-  <div class="border-overlay fixed pointer-events-none h-full z-10 border-dotted xl:border-[60px] md:border-[40px] border-[7vw] border-primary-200 sm:border-primary-700 bg-transparent"></div>
+  <div class="border-overlay fixed pointer-events-none h-full z-10 border-dotted xl:border-x-[60px] md:border-x-[40px] border-x-[7vw] border-primary-200 dark:border-primary-800 sm:border-primary-700 dark:sm:border-primary-900 bg-transparent"></div>
  
   
 
   <div id="real-container" class=" relative overflow-y-auto overflow-x-hidden container scrollbar-none bg-blend-multiply  mx-auto h-full
-  xl:px-48 lg:px-24 md:px-10 sm:px-4 px-8 py-8
+  xl:px-48 lg:px-24 md:px-10 sm:px-4 px-8 py-8 text-secondary-800 dark:text-secondary-400
   
   ">
-
-
- 
 
 
 <div id="real-container-inner" class="h-fit sm:h-auto relative justify-center md:justify-normal">
@@ -34,7 +32,7 @@
 </header>
      
   
-  <main class="px-4 md:px-8 lg:px-15 bg-white my-4  border-y-4 border-secondary-200 border-dotted">
+  <main class="px-4 md:px-8 lg:px-15 bg-white dark:bg-primary-800 my-4  border-y-4 border-secondary-200 dark:border-secondary-700 border-dotted">
     {{ block "main" . }}{{ end }}
   </main>
 
@@ -44,6 +42,7 @@
 </div>
 </div>
   </div>
+    {{ partialCached "head/js.html" . }}
 </body>
 
 </html>

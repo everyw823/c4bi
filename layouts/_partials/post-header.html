@@ -1,0 +1,30 @@
+{{- /*
+Renders a post header with title and metadata (date and word count).
+
+@context {page} page The current page.
+@context {bool} large Optional - if true, uses h1 with larger font; default is h1 with standard size.
+
+@example: {{ partial "post-header.html" (dict "page" . "large" true) }}
+*/}}
+
+{{- $page := .page }}
+{{- $large := .large }}
+
+{{ $dateMachine := $page.Date | time.Format "2006-01-02T15:04:05-07:00" }}
+{{ $dateHuman := $page.Date | time.Format ":date_long" }}
+
+<div class="mb-10">
+  <div class="title-wrapper flex items-center py-2 flex-wrap {{ if $large }}justify-between{{ end }}">
+    {{ if $large }}
+      <h1>{{ $page.Title }}</h1>
+      <div class="flex-1 text-right text-secondary-300">全文字数</div>
+      <label class="font-pixel text-center border-dotted border-4 border-secondary-200 w-[2em] h-[2em] py-[.33em] text-primary-300 text-3xl mr-3">{{ $page.WordCount }}</label>
+    {{ else }}
+      <h2><a href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h2>
+      <div class="flex-1 text-right dark:text-secondary-400 text-secondary-300">全文字数</div>
+      <label class="font-pixel text-center border-dotted border-4 dark:border-secondary-400 border-secondary-200 w-fit min-w-[2em] h-[2em] p-[.25em] text-primary-300 text-xl mr-3">{{ $page.WordCount }}</label>
+    {{ end }}
+  </div>
+
+  <time id="root-time" class="text-secondary-400 dark:text-secondary-500" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+</div>

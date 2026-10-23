@@ -20,9 +20,9 @@
     {{- end }}
 
     
-    <li class="mx-1 md:mx-2 lg:mx-3 xl:mx-4 2xl:mx-5 ">
+    <li class="mx-2  lg:mx-3 xl:mx-4 2xl:mx-5 ">
       
-      <a class="menu-item underline decoration-dashed decoration-1 text-secondary-300 hover:text-primary-500" href="{{ $attrs.href }}">{{- if $isMin }}{{ substr $name 0 1 }}{{- else }}{{ $name }}{{- end }}</a>
+      <a class="menu-item underline decoration-dashed decoration-1" href="{{ $attrs.href }}">{{- if $isMin }}{{ substr $name 0 1 }}{{- else }}{{ $name }}{{- end }}</a>
     </li>
 
 {{- end }}

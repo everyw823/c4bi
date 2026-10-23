@@ -4,13 +4,13 @@
   <div class="w-full h-full flex items-center 
   justify-center pointer-events-auto animate-slide-up ">
   
-  <div class="sm:hidden w-full h-full bg-thingie bg-primary-400 px-4 flex z-1000 rounded-b-xl border-b-2 border-b-primary-800 shadow-primary-500 shadow-sm items-center justify-center text-3xl  text-primary-600">
+  <div class="sm:hidden w-full h-full bg-thingie bg-primary-400 dark:bg-primary-600 px-4 flex z-1000 rounded-b-xl border-b-2 border-b-primary-800 dark:border-b-primary-900 shadow-primary-500 dark:shadow-primary-900 shadow-sm items-center justify-center text-3xl  text-primary-600 dark:text-primary-200">
     {{ partial "menu/simple.html" (dict "menuID" "main" "page" $page "isMinimal" true) }}
 </div>
 
-<div class="hidden w-fit h-full bg-thingie bg-primary-400 px-4 sm:flex z-1000 rounded-b-xl border-b-2 border-b-primary-800 shadow-primary-500 shadow-sm 
+<div class="hidden w-fit h-full bg-thingie bg-primary-400 dark:bg-primary-600 px-4 sm:flex z-1000 rounded-b-xl border-b-2 border-b-primary-800 dark:border-b-primary-900 shadow-primary-500 dark:shadow-primary-900 shadow-sm
 items-center justify-center
- text-2xl text-primary-600">
+ text-2xl text-primary-600 dark:text-primary-200">
     {{ partial "menu/simple.html" (dict "menuID" "main" "page" $page "isMinimal" false) }}
 </div>
 
