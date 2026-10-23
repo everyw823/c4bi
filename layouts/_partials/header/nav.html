@@ -1,25 +1,16 @@
 {{- $page := .page}}
 
-<script>
-  console.log("{{ $page }}");
-</script>
-
-
-
-{{- if not (eq $page.RelPermalink "/") }}
-
-
-<nav class="z-20 w-full h-16">
+<nav class="fixed z-20 w-full h-12">
   <div class="w-full h-full flex items-center 
-  justify-center pointer-events-auto ">
+  justify-center pointer-events-auto animate-slide-up ">
   
-  <div class="sm:hidden w-full h-full bg-thingie bg-primary-400 px-4 flex z-1000 rounded-b-xl border-b-2 border-b-primary-800 shadow-primary-500 shadow-sm items-center justify-center text-3xl font-pixeloid text-primary-600">
+  <div class="sm:hidden w-full h-full bg-thingie bg-primary-400 px-4 flex z-1000 rounded-b-xl border-b-2 border-b-primary-800 shadow-primary-500 shadow-sm items-center justify-center text-3xl  text-primary-600">
     {{ partial "menu/simple.html" (dict "menuID" "main" "page" $page "isMinimal" true) }}
 </div>
 
 <div class="hidden w-fit h-full bg-thingie bg-primary-400 px-4 sm:flex z-1000 rounded-b-xl border-b-2 border-b-primary-800 shadow-primary-500 shadow-sm 
 items-center justify-center
- text-2xl font-pixeloid text-primary-600">
+ text-2xl text-primary-600">
     {{ partial "menu/simple.html" (dict "menuID" "main" "page" $page "isMinimal" false) }}
 </div>
 
@@ -28,5 +19,3 @@ items-center justify-center
 
 
 </nav>
-
-{{- end }}

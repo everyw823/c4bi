@@ -1,6 +1,6 @@
 
 
-import { createIcons, Menu, ArrowRight, Globe, SquareArrowOutUpRight, PlayingCardsFan } from 'js/lucide.min.js';
+import { createIcons, Menu, ArrowRight, Globe, SquareArrowOutUpRight, PlayingCardsFan, Tags, Clock } from 'js/lucide.min.js';
 
 let raf =  null;
 const b = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
@@ -30,8 +30,6 @@ function updateOverlaySize() {
 function tintSVG(svgElement, strokeColor, fillColor){
     
     uuid = "c"+generateUID(6,'a');
-    console.log(uuid);
-
     svgElement.querySelectorAll('[stroke]').forEach(el => {
         if (el.getAttribute('stroke') !== 'none') {
             el.setAttribute('stroke', strokeColor);
@@ -51,7 +49,6 @@ function tintSVG(svgElement, strokeColor, fillColor){
   // 也处理 style 里的颜色
     const svgStyle = svgElement.querySelector('style');
     if (svgStyle) {
-        console.log(svgStyle);
 
         svgStyle.textContent = svgStyle.textContent
             .replace(/stroke:\s*#[0-9a-fA-F]{3,6}/g, `stroke: ${strokeColor}`)
@@ -61,17 +58,38 @@ function tintSVG(svgElement, strokeColor, fillColor){
             c.push(e[1]);
         })
         classes = c.filter((item, index) => c.indexOf(item) === index);  // 去重
-        console.log(classes);
         
     }
 
     classes.forEach(e => {
         svgElement.innerHTML = svgElement.innerHTML.replaceAll(e, (match) => `${uuid}-${match}`);
-        console.log(svgElement.innerHTML);
     })
 
-    console.log(svgStyle);
     // todo: 特定颜色不tint
+}
+
+function ParseThisTimeInterval(time, rootTime, units = { d: 'd ', h: 'h ', m: 'm ', s: 's' }) {
+    var timeDiff = time - rootTime;
+    var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+    var timeString = '';
+    if (days > 0) {
+        timeString += `${days}${units.d}`;
+    }
+    if (hours > 0) {
+        timeString += `${hours}${units.h}`;
+    }
+    if (minutes > 0) {
+        timeString += `${minutes}${units.m}`;
+    }
+    if (seconds > 0) {
+        timeString += `${seconds}${units.s}`;
+    }
+
+    return timeString;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -80,13 +98,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     svgpromise.then(() => {
         const svgtint = document.querySelectorAll("svg.tint");
-        console.log(svgtint);
         svgtint.forEach(el => {
             tintSVG(el, primary[500], primary[300]);
         });
     })
 
-    console.log(Menu);
     const primary = {};
     const secondary = {};
     b.forEach(a => {
@@ -129,6 +145,45 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    const post = document.querySelectorAll('article.post');
+    post.forEach(el => {
+    const times = el.querySelectorAll('time.reply-time');
+    const rt = el.querySelector('#root-time');
+    const rootTime = new Date(rt.getAttribute("datetime"));
+
+    rt.title = rootTime;
+    times.forEach(elem => {
+        mytime = new Date(elem.getAttribute("datetime"));
+        elem.title = mytime;
+        elem.innerText = `${ParseThisTimeInterval(mytime, rootTime)} 后`;
+        const timeMarker = document.createElement('i');
+        timeMarker.setAttribute('data-lucide', 'clock');
+        timeMarker.setAttribute('width', '16px');
+        timeMarker.setAttribute('height', '16px');
+        timeMarker.setAttribute('class', 'time-icon');
+        timeMarker.style.display = 'inline-block';
+        timeMarker.style.transform = 'translateY(-2px)';
+        elem.appendChild(timeMarker);
+    });
+
+    })
+
+
+    
+    let hugocounts = [];
+
+    const tag = document.querySelectorAll(".tag");
+    tag.forEach(el => hugocounts.push(el.getAttribute('tag-count')));
+
+    countsMax = Math.max(...hugocounts);
+
+    hugocounts = hugocounts.map(count => (count / countsMax) );
+
+
+    var ticking = false;
+
+    
+
     createIcons({ 
         icons: { 
             Menu,
@@ -136,6 +191,8 @@ document.addEventListener('DOMContentLoaded', function () {
             Globe,
             SquareArrowOutUpRight, 
             PlayingCardsFan,
+            Tags, 
+            Clock,
         } 
     });
 
@@ -150,6 +207,44 @@ window.addEventListener('resize', function () {
     setTimeout(function () { debounce = false; }, 50);
 });
 
+
+	window.addEventListener('load', function () {
+		const preview = document.querySelectorAll('.post-preview');
+		preview.forEach(p => {
+			const pa = p.querySelector('a');
+			const pp = p.querySelector('img.img-preview');
+			const wrapper = p.querySelector('.image-text-preview-wrapper');
+
+			url = pa.getAttribute('href');
+
+			const imgUrlGetter = fetchImage(url)
+			imgUrlGetter.then(imageUrl => {
+				if (imageUrl) {
+					pp.setAttribute('src', imageUrl);
+				} else {
+					wrapper.style.gridTemplateColumns = '1fr';
+				}
+			})
+
+
+		});
+	});
+
+	async function fetchImage(url) {
+		const response = await fetch(url);
+		const data = await response.text();
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(data, 'text/html');
+		const pimage = doc.querySelector('img[origin=md]');
+
+		if (!pimage) {
+			return null;
+		} else {
+			var eleLink = doc.createElement('a');
+			eleLink.href = url + pimage.getAttribute('src');
+			return eleLink.href;
+		}
+	}
 
 
 

@@ -1,4 +1,8 @@
+
+
 @import "tailwindcss";
+
+
 
 @theme static {
   --color-white: #ffffff;
@@ -56,10 +60,19 @@
   --font-mono: ui-monospace, SFMono-Regular;
   --font-display: Oswald;
   --font-body: "Open Sans";
-  --font-pixel: "Pixel";
+  /* --font-pixel: "Pixel";
   --font-pixeloid: "Pixeloid";
+  --font-handwritten: "Kingnam";
+  --font-pixe lsq: "PixelSquare"; */
+  --font-pixel: sans-serif;
+  --font-pixeloid: sans-serif;
+  --font-handwritten: sans-serif;
+  --font-pixelsq: sans-serif;
 
-  --animate-slide: slideInFromLeft 0.5s ease-in-out;
+
+
+  --animate-slide-left: slideInFromLeft 0.5s ease-in-out;
+  --animate-slide-up: slideInFromUp 0.5s ease-in-out;
 
   @keyframes slideInFromLeft {
     0% {
@@ -72,10 +85,30 @@
       opacity: 1;
     }
   }
+  @keyframes slideInFromUp {
+    0% {
+      transform: translateY(-100%);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  --animate-wiggle: wiggle 4s ease-in-out infinite;
+  @keyframes wiggle {
+    0%, 100% {
+      transform: rotate(-3deg);
+    }
+
+    50% {
+      transform: rotate(3deg);
+    }
+  }
 
 }
 
-
+/* 
 @font-face {
   font-family: 'Pixel';
   src: url('../fonts/XiuZhenXiangSuTi.ttf') format('truetype');
@@ -89,6 +122,16 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'Kingnam';
+  src: url("../fonts/Kingnammm_Maiyuan_II-Regular.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'PixelSquare';
+  src: url("../fonts/quan.ttf") format('truetype');
+} */
 
 .bg-thingie {
   background-image: url('../texture.png');
@@ -111,6 +154,48 @@
   }
 }
 
+a{
+  @apply text-brand-500 hover:text-accent-500 underline underline-offset-4 decoration-1 decoration-dashed;
+  
+}
+a.tag{
+  @apply text-secondary-200
+}
+a.menu-item{
+  @apply text-secondary-200
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply text-primary-500 font-sans font-bold break-before-all;
+  line-break: anywhere;
+}
+
+h1{
+  @apply text-4xl;
+}
+h2{
+  @apply text-3xl;
+}
+h3{
+  @apply text-2xl;
+}
+h4{
+  @apply text-xl;
+}
+h5{
+  @apply text-lg;
+}
+
+time{
+  @apply text-secondary-400 font-pixeloid text-sm select-none;
+}
+
+time.reply-time{
+  @apply mt-5
+}
+
+
+
 hr {
   margin-top: 1em;
   margin-bottom: 1em;
@@ -125,6 +210,7 @@ hr {
 
 
 .font-pixel {
+  letter-spacing: 0.05em;
   transform: translateX(.1em) translateY(.1em);
 }
 
@@ -132,4 +218,10 @@ hr {
 
 .flooder {
   filter: url(#flood);
+}
+
+
+
+p{
+  @apply mb-2;
 }

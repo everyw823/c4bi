@@ -1,0 +1,7 @@
+<figure class="w-full py-5 ">
+<img origin="md" class="rounded-md" src="{{ .Destination | safeURL }}"
+  {{- with .PlainText }} alt="{{ . }}"{{ end -}}
+  {{- with .Title }} title="{{ . }}"{{ end -}}
+>
+</figure>
+{{- /* chomp trailing newline */ -}}

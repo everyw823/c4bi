@@ -1,7 +1,9 @@
-baseURL = 'https://example.org/'
+baseURL = 'http://localhost:1313/'
 locale = 'en-us'
 title = '四只柜子'
 theme = 'c4bi'
+
+hasCJKLanguage = true
 
 [markup]
   [markup.goldmark]
@@ -47,7 +49,7 @@ theme = 'c4bi'
   [[menus.main]]
     name = '杂记'
     pre = "/menu/misc.png"
-    pageRef = '/tags'
+    pageRef = '/categories/miscellaneous'
     weight = 10
 
 
@@ -70,3 +72,4 @@ theme = 'c4bi'
   tag = 'tags'
   year = 'years'
   category = 'categories'
+  source = 'sources'

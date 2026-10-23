@@ -1,7 +1,13 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
+  <h1 class="text-left text-4xl font-bold text-primary-500 mt-15 mb-5">{{ .Title }}</h1>
+  <span>找到 {{ len .Pages }} 个结果</span>
+  {{ .Content }}  <div class="mt-10 mb-10 flex">
   {{ range .Pages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-  {{ end }}
+
+    <a class=" tag decoration-2 decoration-dotted decoration-accent-600  underline  m-1"
+      href="{{ .Page.RelPermalink }}">
+      <div class="inline-block hover:bg-brand-500 bg-primary-500  rounded-full px-2 pr-2 font-bold mr-2"> {{ .LinkTitle }}</div>
+    </a>
+
+  {{ end }}  </div>
 {{ end }}

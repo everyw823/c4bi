@@ -77,7 +77,7 @@
     --font-body: "Open Sans";
     --font-pixel: "Pixel";
     --font-pixeloid: "Pixeloid";
-    --animate-slide: slideInFromLeft 0.5s ease-in-out;
+    --animate-slide-left: slideInFromLeft 0.5s ease-in-out;
   }
 }
 @layer base {
@@ -382,8 +382,8 @@
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
   }
-  .animate-slide {
-    animation: var(--animate-slide);
+  .animate-slide-left {
+    animation: var(--animate-slide-left);
   }
   .cursor-pointer {
     cursor: pointer;
