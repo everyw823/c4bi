@@ -7,7 +7,6 @@ tags = ['misc']
 sources = ['10668936475']
 +++
 
-<time class='main-time' datetime='2026-09-01T22:08:48+08:00'>22:08:48</time>
 我换firefox的原因还有，chrome已经不支持mv2了即便加命令行参数也没用，edge马上也要去掉mv2支持；与其待在暗处用chromium内核浏览器不如换firefox
 
 <time class='reply-time' datetime='2026-09-01T22:14:49+08:00'>2026-09-01T22:14:49 +08:00</time>

@@ -1,11 +1,12 @@
 {{- $page := .page }}
 {{- $menuID := .menuID }}
 {{- $isMin := .isMinimal}}
+{{- $class := .class}}
 
 {{- with index site.Menus $menuID }}
 <ul class="flex">
 {{- range . }}
-    {{- $attrs := dict "href" .URL}}
+    {{- $attrs := dict "href" .URL "post" .Post}}
     {{- if $page.IsMenuCurrent .Menu . }}
       {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
     {{- else if $page.HasMenuCurrent .Menu .}}
@@ -22,7 +23,13 @@
     
     <li class="mx-2  lg:mx-3 xl:mx-4 2xl:mx-5 ">
       
-      <a class="menu-item underline decoration-dashed decoration-1" href="{{ $attrs.href }}">{{- if $isMin }}{{ substr $name 0 1 }}{{- else }}{{ $name }}{{- end }}</a>
+      <a class="{{ $class }}" href="{{ $attrs.href }}">
+        <i class="inline-block" data-lucide="{{ $attrs.post }}"></i>
+        {{- if not $isMin }}
+        {{ $name }}
+          
+        {{- end }}
+          </a>
     </li>
 
 {{- end }}

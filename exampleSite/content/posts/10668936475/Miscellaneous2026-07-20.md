@@ -7,7 +7,6 @@ tags = ['misc']
 sources = ['10668936475']
 +++
 
-<time class='main-time' datetime='2026-07-20T10:48:08+08:00'>10:48:08</time>
 在我精力高的时候ai焦虑能耗光我的精力，在我精力低的时候ai焦虑能弄死我
 
 <time class='reply-time' datetime='2026-07-20T10:48:55+08:00'>2026-07-20T10:48:55 +08:00</time>

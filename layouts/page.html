@@ -1,7 +1,10 @@
 {{ define "main" }}
+
 <article class="py-15 post">
   {{ partial "post-header.html" (dict "page" . "large" true) }}
   {{ .Content }}
-  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+  <div class="mt-10 flex">
+  {{ partial "terms.html" (dict "taxonomy" "tags" "page" . "withNum" false) }}
+  </div>
 </article>
 {{ end }}

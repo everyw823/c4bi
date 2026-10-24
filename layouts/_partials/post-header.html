@@ -17,14 +17,14 @@ Renders a post header with title and metadata (date and word count).
   <div class="title-wrapper flex items-center py-2 flex-wrap {{ if $large }}justify-between{{ end }}">
     {{ if $large }}
       <h1>{{ $page.Title }}</h1>
-      <div class="flex-1 text-right text-secondary-300">全文字数</div>
-      <label class="font-pixel text-center border-dotted border-4 border-secondary-200 w-[2em] h-[2em] py-[.33em] text-primary-300 text-3xl mr-3">{{ $page.WordCount }}</label>
+      <div class="flex-1 text-right text-secondary-300 dark:text-secondary-700">全文字数</div>
+      <label class="counter font-pixel text-center border-dotted border-4 dark:border-secondary-500 border-secondary-200 w-[2em] h-[2em] py-[.33em] text-primary-300 dark:text-primary-500 text-3xl mr-3" data-value="{{ $page.WordCount }}">{{ $page.WordCount }}</label>
     {{ else }}
       <h2><a href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h2>
-      <div class="flex-1 text-right dark:text-secondary-400 text-secondary-300">全文字数</div>
-      <label class="font-pixel text-center border-dotted border-4 dark:border-secondary-400 border-secondary-200 w-fit min-w-[2em] h-[2em] p-[.25em] text-primary-300 text-xl mr-3">{{ $page.WordCount }}</label>
+      <div class="flex-1 text-right dark:text-secondary-400 text-secondary-700">全文字数</div>
+      <label class="counter font-pixel text-center border-dotted border-4 dark:border-secondary-500 border-secondary-200 w-fit min-w-[2em] h-[2em] p-[.25em] text-primary-300 dark:text-primary-500 text-xl mr-3" data-value="{{ $page.WordCount }}">{{ $page.WordCount }}</label>
     {{ end }}
   </div>
 
-  <time id="root-time" class="text-secondary-400 dark:text-secondary-500" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+  <time class="root-time text-secondary-400 dark:text-secondary-500" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
 </div>

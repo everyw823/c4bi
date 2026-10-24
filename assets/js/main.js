@@ -1,5 +1,20 @@
-import { createIcons, Menu, ArrowRight, Globe, SquareArrowOutUpRight, PlayingCardsFan, Tags, Clock } from 'js/lucide.min.js';
-import { updateOverlaySize } from './modules/overlay.js';
+import {
+    createIcons,
+    Menu,
+    ArrowRight,
+    Globe,
+    SquareArrowOutUpRight,
+    PlayingCardsFan,
+    Tags,
+    Clock,
+    Earth,
+    UsersCollaboration,
+    Brush,
+    BookBookmark,
+    MessageCircleQuestionMark,
+    Sparkles,
+} from 'js/lucide.min.js';
+// import { updateOverlaySize } from './modules/overlay.js';
 import { tintSVG } from './modules/svg.js';
 import { ParseThisTimeInterval } from './modules/time.js';
 import { initImagePreviews } from './modules/image-preview.js';
@@ -17,10 +32,10 @@ document.addEventListener('DOMContentLoaded', function (e) {
         secondary[a] = getComputedStyle(document.documentElement).getPropertyValue(`--color-secondary-${a}`).trim();
     });
 
-    globalThis.borderOverlay = document.querySelector('.border-overlay');
-    globalThis.container = document.getElementById('real-container');
-    updateOverlaySize();
-    globalThis.borderOverlay.style.display = 'fixed';
+    // globalThis.borderOverlay = document.querySelector('.border-overlay');
+    // globalThis.container = document.getElementById('real-container');
+    // updateOverlaySize();
+    // globalThis.borderOverlay.style.display = 'fixed';
 
     const svgpromise = SVGInject(document.querySelectorAll('img.injectable'));
 
@@ -62,10 +77,11 @@ document.addEventListener('DOMContentLoaded', function (e) {
         }
     });
 
-    document.querySelectorAll('article.post').forEach(el => {
+    document.querySelectorAll('article').forEach(el => {
         const times = el.querySelectorAll('time.reply-time');
-        const rt = el.querySelector('#root-time');
+        const rt = el.querySelector('.root-time');
         const rootTime = new Date(rt.getAttribute("datetime"));
+        console.log(rootTime);
         rt.title = rootTime;
         times.forEach(elem => {
             const mytime = new Date(elem.getAttribute("datetime"));
@@ -87,6 +103,58 @@ document.addEventListener('DOMContentLoaded', function (e) {
     const countsMax = Math.max(...hugocounts);
     hugocounts = hugocounts.map(count => count / countsMax);
 
+    const counters = document.querySelectorAll(".counter");
+    counters.forEach(counter => {
+        const value = counter.getAttribute("data-value");
+        if (value > 5000) {
+            counter.classList.add("text-red-500!");
+        } else if (value > 1000) {
+            counter.classList.add("text-orange-500!");
+        } else if (value > 500) {
+            counter.classList.add("text-yellow-500!");
+        }
+    });
+
+
+    const nav = document.querySelector('nav.fixed');
+    console.log(nav);
+
+    if (nav) {
+
+        let lastScrollTop = null;
+        let nowTop = 0;
+        let scrollDelta = 0;
+
+
+        document.addEventListener("scroll", e => {
+
+            if (!debounce) {
+                window.requestAnimationFrame(function () {
+                    scrollDelta = window.scrollY - lastScrollTop;
+                    if (scrollDelta > 0) {
+                        if (scrollDelta - nowTop > nav.clientHeight) {
+                            nowTop = nav.clientHeight * -1;
+                        } else {
+                            nowTop = nowTop - scrollDelta;
+                        }
+                    }
+                    else {
+                        if (nowTop - scrollDelta < 0) {
+                            nowTop = nowTop - scrollDelta;
+                        } else {
+                            nowTop = 0;
+                        }
+                    }
+                    if (nowTop >= nav.clientHeight * -1 && nowTop <= 0) { nav.style.top = `${nowTop}px`; }
+                    lastScrollTop = window.scrollY;
+                });
+
+
+
+            };
+        })
+    }
+
     createIcons({
         icons: {
             Menu,
@@ -96,18 +164,15 @@ document.addEventListener('DOMContentLoaded', function (e) {
             PlayingCardsFan,
             Tags,
             Clock,
+            Earth,
+            UsersCollaboration,
+            Brush,
+            BookBookmark,
+            MessageCircleQuestionMark,
+            Sparkles,
         }
     });
 });
-
-window.addEventListener('resize', function () {
-    if (!debounce) {
-        updateOverlaySize();
-    }
-    debounce = true;
-    setTimeout(function () { debounce = false; }, 50);
-});
-
 
 
 function thematicColorChange(event, primary) {
@@ -119,5 +184,14 @@ function thematicColorChange(event, primary) {
     });
 
     const svgflood = document.getElementById("svgflood");
-    svgflood.setAttribute("flood-color", primary[preferredTheme ? 700 : 500]);
+    svgflood.setAttribute("flood-color", primary[preferredTheme ? 600 : 500]);
 }
+
+window.addEventListener("load", function () {
+    const s = document.querySelectorAll(".scattered");
+    console.log(s);
+    s.forEach(el => {
+        el.style.transform = `rotate(${Math.random() * 10 - 5}deg)`;
+    });
+});
+

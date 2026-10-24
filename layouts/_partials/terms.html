@@ -9,17 +9,30 @@ For a given taxonomy, renders a list of terms assigned to the page.
 
 {{- $page := .page }}
 {{- $taxonomy := .taxonomy }}
+{{- $withNum := .withNum }}
+
 
 {{- with $page.GetTerms $taxonomy }}
   {{- $label := (index . 0).Parent.LinkTitle }}
   <div>
-    <!-- <div>{{ $label }}:</div> -->
     <ul>
       {{- range . }}
-        <li> <a class=" tag decoration-2 decoration-dotted decoration-accent-600 dark:decoration-accent-500 underline "
+        <li> 
+          {{- if $withNum }}
+                <a class=" text-secondary-400 m-1"
+      href="{{ .Page.RelPermalink }}" data-count="{{ .Count }}">
+      <div class=" hover:bg-brand-500 dark:hover:bg-brand-600 bg-primary-500 dark:bg-primary-600 rounded-full pl-2 md:pl-4 pr-2 font-bold mx-2"> {{ .Page.Title }}
+        <div
+          class="relative bg-secondary-200 dark:bg-secondary-700 text-secondary-400 dark:text-secondary-300 inline-block rounded-full text-center ml-2 my-2 px-2 h-[1.5em]">
+          {{ .Count }} </div>
+      </div>
+    </a>
+          {{- else }}
+          <a class=" tag text-secondary-200 decoration-2 decoration-dotted decoration-accent-600 dark:decoration-accent-500 underline "
       href="{{ .Page.RelPermalink }}">
       <div class="inline-block hover:bg-brand-500 dark:hover:bg-brand-600 bg-primary-500 dark:bg-primary-600 rounded-full px-2 pr-2 font-bold mr-2"> {{ .LinkTitle }}</div>
     </a></li>
+    {{- end}}
       {{- end }}
     </ul>
   </div>

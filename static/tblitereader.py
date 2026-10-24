@@ -144,7 +144,6 @@ sources = ['""" + root_id + """']
 +++
 
 """
-            + "<time class='main-time' datetime='" + thread.create_time.strftime("%Y-%m-%dT%H:%M:%S+08:00") + "'>" + thread.create_time.strftime("%H:%M:%S") +"</time>" + "\n"
             + markdownified_content + mdbreak
             )
             if thread.children :

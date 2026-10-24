@@ -5,6 +5,7 @@
 
 
 @theme static {
+
   --color-white: #ffffff;
 
   --color-primary-50: #eff0f6;
@@ -63,9 +64,7 @@
   --font-pixel: "Pixel";
   --font-pixeloid: "Pixeloid";
   --font-handwritten: "Kingnam";
-  --font-pixe lsq: "PixelSquare";
-
-
+  --font-pixelsq: "PixelSquare";
 
 
   --animate-slide-left: slideInFromLeft 0.5s ease-in-out;
@@ -111,6 +110,7 @@
   src: url('../fonts/XiuZhenXiangSuTi.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -118,21 +118,25 @@
   src: url('../fonts/QiuYeYuanTi-16.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Kingnam';
   src: url("../fonts/Kingnammm_Maiyuan_II-Regular.ttf") format('truetype');
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'PixelSquare';
   src: url("../fonts/quan.ttf") format('truetype');
+  font-display: swap;
 }
 
 .bg-thingie {
   background-image: url('../texture.png');
   background-blend-mode: color-dodge;
+  font-display: swap;
 }
 
 *,
@@ -151,17 +155,10 @@
   }
 }
 
-/* a{
-  @apply text-brand-500 hover:text-accent-500 dark:text-brand-400 dark:hover:text-accent-400 underline underline-offset-4 decoration-1 decoration-dashed;
 
-} */
-/* a.tag{
-  @apply text-secondary-200 dark:text-secondary-400
+a{
+  cursor: pointer;
 }
-a.menu-item{
-  @apply text-primary-600 dark:text-primary-500
-} */
-
 h1, h2, h3, h4, h5, h6 {
   @apply text-primary-500 dark:text-primary-400 font-sans font-bold break-before-all;
   line-break: anywhere;
@@ -201,19 +198,17 @@ hr {
   border-top: 0.2em dotted var(--color-primary-800);
 }
 
-@media (prefers-color-scheme: dark) {
-  hr {
-    border-top-color: var(--color-primary-300);
-  }
-}
-
 .container {
   background: url('../contour.png') var(--color-white);
 }
 
 @media (prefers-color-scheme: dark) {
+  hr {
+    border-top-color: var(--color-primary-300);
+  }
+
   .container {
-    background: url('../contour.png') var(--color-primary-900);
+    background:  linear-gradient(180deg,var(--color-black) 0%, var(--color-primary-900) 20%, var(--color-primary-800) 100%);
   }
 }
 
@@ -236,5 +231,5 @@ p{
 }
 
 img{
-  @apply transition hover:shadow-md shadow-accent-400 dark:shadow-accent-600
+  @apply transition hover:shadow-md shadow-secondary-200 dark:shadow-secondary-400
 }

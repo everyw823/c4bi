@@ -7,7 +7,6 @@ tags = ['misc']
 sources = ['10668936475']
 +++
 
-<time class='main-time' datetime='2026-04-26T21:30:22+08:00'>21:30:22</time>
 我从来不看画风和我类似又有自己鲜明特征的画师
 
 <time class='reply-time' datetime='2026-04-26T21:30:48+08:00'>2026-04-26T21:30:48 +08:00</time>

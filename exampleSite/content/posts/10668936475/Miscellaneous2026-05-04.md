@@ -7,7 +7,6 @@ tags = ['misc']
 sources = ['10668936475']
 +++
 
-<time class='main-time' datetime='2026-05-04T19:46:16+08:00'>19:46:16</time>
 有时候我会刻意犯一些设计上的错误，但有90%的时候我都是“故意犯下错误”的
 
 <time class='reply-time' datetime='2026-05-04T19:47:07+08:00'>2026-05-04T19:47:07 +08:00</time>

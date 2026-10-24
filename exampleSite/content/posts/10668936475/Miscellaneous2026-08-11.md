@@ -7,7 +7,6 @@ tags = ['misc']
 sources = ['10668936475']
 +++
 
-<time class='main-time' datetime='2026-08-11T18:56:14+08:00'>18:56:14</time>
 一年比一年忙了
 
 <time class='reply-time' datetime='2026-08-11T18:57:20+08:00'>2026-08-11T18:57:20 +08:00</time>

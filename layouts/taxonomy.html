@@ -3,7 +3,6 @@
   <span>找到 {{ len .Pages }} 个结果</span>
   {{ .Content }}  <div class="mt-10 mb-10 flex">
   {{ range .Pages }}
-
     <a class=" tag decoration-2 decoration-dotted decoration-accent-600 dark:decoration-accent-500 underline  m-1"
       href="{{ .Page.RelPermalink }}">
       <div class="inline-block hover:bg-brand-500 dark:hover:bg-brand-600 bg-primary-500 dark:bg-primary-600 rounded-full px-2 pr-2 font-bold mr-2"> {{ .LinkTitle }}</div>

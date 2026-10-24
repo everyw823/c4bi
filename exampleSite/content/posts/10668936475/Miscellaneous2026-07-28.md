@@ -7,7 +7,6 @@ tags = ['misc']
 sources = ['10668936475']
 +++
 
-<time class='main-time' datetime='2026-07-28T21:23:01+08:00'>21:23:01</time>
 洗澡的时候我灵光一现：我喜欢活着的平面设计
 
 <time class='reply-time' datetime='2026-07-28T21:26:07+08:00'>2026-07-28T21:26:07 +08:00</time>

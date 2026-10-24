@@ -7,7 +7,6 @@ tags = ['misc']
 sources = ['10668936475']
 +++
 
-<time class='main-time' datetime='2026-07-21T20:27:23+08:00'>20:27:23</time>
 kanoguti
 
 <time class='reply-time' datetime='2026-07-21T20:27:35+08:00'>2026-07-21T20:27:35 +08:00</time>

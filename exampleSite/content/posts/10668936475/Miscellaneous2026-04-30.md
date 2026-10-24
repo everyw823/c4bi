@@ -7,7 +7,6 @@ tags = ['misc']
 sources = ['10668936475']
 +++
 
-<time class='main-time' datetime='2026-04-30T22:48:07+08:00'>22:48:07</time>
 她想去看海。
 
 <time class='reply-time' datetime='2026-04-30T22:49:08+08:00'>2026-04-30T22:49:08 +08:00</time>

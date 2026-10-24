@@ -4,10 +4,12 @@
 {{ .Content }}
 
 <div class="text-secondary-400 dark:text-secondary-500 text-center mt-5 mb-10 text-sm">找到 {{ len .Pages }} 个结果</div>
-<div class="grid grid-cols-1 xl:grid-cols-2  gap-5">
+<div class="grid grid-cols-1 xl:grid-cols-2  gap-2">
+	
 	{{- range ( .Paginate .Pages 10 ).Pages }}
 	{{ partial "post-preview.html" (dict "page" . "summaryLength" 200) }}
 	{{- end }}
+	
 </div>
 
 <div class="flex">

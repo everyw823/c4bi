@@ -28,28 +28,34 @@ hasCJKLanguage = true
   [[menus.main]]
     name = '世界观'
     pre = "/menu/world.png"
+    post = "earth"
     pageRef = '/posts'
     weight = 20
 
   [[menus.main]]
     name = '角色'
     pre = "/menu/character.png"
+    post = "users-collaboration"
     pageRef = '/tags'
     weight = 30
 
     [[menus.main]]
     name = '画作'
     pre = "/menu/art.png"
+    post = "brush"
     pageRef = '/tags'
     weight = 40
 
   [[menus.main]]
     name = '故事'
     pre = "/menu/writing.png"
+    post = "book-bookmark"
     pageRef = '/tags'
     weight = 50
+
   [[menus.main]]
     name = '关于我'
+    post = "message-circle-question-mark"
     pre = "/menu/about.png"
     pageRef = '/'
     weight = 60
@@ -57,6 +63,7 @@ hasCJKLanguage = true
   [[menus.main]]
     name = '杂记'
     pre = "/menu/misc.png"
+    post = "message-circle-question-mark"
     pageRef = '/categories/miscellaneous'
     weight = 10
 

@@ -1,20 +1,30 @@
 
+
+{{- if eq .RelPermalink "/" }}
 <a class="pt-0 backdrop-blur-[2px] md:flex-1 flex justify-center h-fit" href="/" id="logo-container">
   <div class="h-fit sm:w-full w-[70vw] sm:min-w-[400px] max-w-[500px] py-8">
   <img src="/logo.svg" class="injectable tint" ></img>
 </div>
 </a>
-{{- if eq .RelPermalink "/" }}
 <div class=" hidden 2xl:block flex-1 "></div>
+{{- else }}
+<a class="pt-8 pb-2 backdrop-blur-[2px] md:flex-1 flex justify-center h-fit" href="/" id="logo-container">
+  <div class="h-fit sm:w-full w-[70vw] sm:min-w-[400px] max-w-[500px]">
+  <img src="/logo.svg" class="injectable tint" ></img>
+</div>
+</a>
 {{- end }}
+
+
+  
+  {{- if eq .RelPermalink "/" }}
   <section class="w-full 2xl:w-auto flex flex-col">
-    {{- if eq .RelPermalink "/" }}
     <nav class="font-pixeloid h-fit overflow-hidden flex sm:px-20 md:px-0 lg:py-0 py-4 pb-12 xl:pb-0 flex-auto lg:grow xl:shrink-0 2xl:justify-end justify-center flex-wrap">
 {{ partial "menu/main_menu.html" (dict "menuID" "main" "page" .) }}
 
 </nav>
       <div class="text-center text-secondary-500 dark:text-secondary-400">
 您是第&nbsp;<span class="counter">-3-</span>&nbsp;位来到这里的用户!
-</div>
+</div></section>
 {{- end }}
-  </section>
+  

@@ -13,20 +13,28 @@ Renders a post preview card with image, summary, and metadata.
 {{ $dateMachine := $page.Date | time.Format "2006-01-02T15:04:05-07:00" }}
 {{ $dateHuman := $page.Date | time.Format ":date_long" }}
 
-<article class="mb-4 post post-preview">
-  <div class="block">
-    <div class="title-wrapper flex items-center py-2 flex-wrap justify-between">
-      <h2><a href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h2>
-      <div class="flex-1 text-right dark:text-secondary-400 text-secondary-300">全文字数</div>
-      <label class="font-pixel text-center border-dotted border-4 dark:border-secondary-400 border-secondary-200 w-fit min-w-[2em] h-[2em] p-[.25em] text-primary-300 text-xl mr-3">{{ $page.WordCount }}</label>
+<article class=" post-preview border border-secondary-300 dark:border-secondary-600 p-5 grid grid-row-[1fr_3em]">
+  <time class="hidden root-time text-secondary-400 dark:text-secondary-500" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+  <div class="w-full">
+  <div class="w-full">
+    <div class="title-wrapper flex items-center pb-5 flex-wrap justify-between">
+      <h2><a class=" text-brand-500 hover:text-accent-500 dark:text-brand-400 dark:hover:text-accent-400 underline underline-offset-4 decoration-1 decoration-dashed" href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h2>
+      
     </div>
 
-    <time id="root-time" class="text-secondary-400 dark:text-secondary-500" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+    
 
     {{- $source := index ($page.GetTerms "sources") 0 }}
   </div>
-  <div class="image-text-preview-wrapper grid gap-5" style="grid-template-columns:min(20vw,200px) 1fr">
-    <img class="img-preview aspect-square rounded-lg bg-cover w-full max-h-[400px]" style="image-rendering: pixelated;" alt="{{ $page.Title }}">
-    <div class="text-secondary-500 dark:text-secondary-400 flex-1">{{ $page.Summary | replaceRE "<img[^>]*>" "" | safeHTML | truncate $summaryLength }}</div>
+  <div class="image-text-preview-wrapper text-secondary-500 dark:text-secondary-400" >
+    
+    <img class="img-preview scattered object-cover aspect-square rounded-lg bg-cover w-3/4 max-w-[200px] sm:max-w-none sm:w-[min(150px,25vw)] sm:ml-3 mx-auto sm:mx-0 mb-3 sm:float-right" style="image-rendering: pixelated;" alt="{{ $page.Title }}">
+    {{ $page.Summary | replaceRE "<figure[^>]*>" "" | replaceRE "<img[^>]*>" "" | safeHTML | truncate $summaryLength }}
   </div>
+</div>
+  <div class=" flex items-end text-secondary-400 dark:text-secondary-500">
+    <time class="root-time text-secondary-400 dark:text-secondary-500" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+    <div class="flex-1"></div>
+    <label class="counter font-pixel text-center border-dotted border-4 dark:border-secondary-700 border-secondary-200 w-fit min-w-[2em] h-[2em] p-[.25em] text-primary-200 dark:text-primary-500 text-xl" data-value="{{ $page.WordCount }}">{{ $page.WordCount }}</label>
+         </div>
 </article>

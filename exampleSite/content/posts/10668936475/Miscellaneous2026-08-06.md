@@ -7,7 +7,6 @@ tags = ['misc']
 sources = ['10668936475']
 +++
 
-<time class='main-time' datetime='2026-08-06T23:55:46+08:00'>23:55:46</time>
 这是我电脑里装的双系统拟人
 结果到现在win10桑还是只有一张草图（指p1
 
