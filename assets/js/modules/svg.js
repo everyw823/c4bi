@@ -1,4 +1,4 @@
-import { generateUID } from './uid.js';
+import { generateUID } from './utils.js';
 
 
 export function tintSVG(svgElement, strokeColor, fillColor) {

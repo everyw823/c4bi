@@ -5,9 +5,7 @@
   {{ partial "head.html" . }}
 </head>
 
-<body class="bg-thingie bg-primary-700 dark:bg-primary-900 flex flex-col">
-
-
+<body class=" text-base text-secondary-500 bg-thingie bg-primary-700 dark:bg-primary-900 flex flex-col">
 
   {{ partial "svg/filter.html" . }}
 
@@ -20,7 +18,7 @@
   
 
   <div id="real-container" class=" relative overflow-x-hidden container bg-blend-multiply  mx-auto
-  2xl:px-36 xl:px-24 lg:px-18 md:px-10 sm:px-4 px-2 py-8 text-secondary-800 dark:text-secondary-400
+  2xl:px-36 xl:px-24 lg:px-18 md:px-10 sm:px-4 px-2 py-8 text-secondary-500 dark:text-secondary-400
   
   ">
 
@@ -32,17 +30,20 @@
 </header>
      
   
-  <main class=" px-8 bg-white dark:bg-primary-900 my-4  border-y-4 border-secondary-200 dark:border-secondary-700 border-dotted">
+  <main class=" px-8 pb-24 bg-white dark:bg-primary-900 my-4  border-y-4 border-secondary-200 dark:border-secondary-700 border-dotted">
     {{ block "main" . }}{{ end }}
   </main>
 
   <footer>
     {{ partial "footer.html" . }}
   </footer>
+
+
 </div>
 </div>
   </div>
 <div class="h-24"></div>
+
 </body>
 
 </html>

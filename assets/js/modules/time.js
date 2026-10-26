@@ -10,6 +10,6 @@ export function ParseThisTimeInterval(time, rootTime, units = { d: 'd ', h: 'h '
     if (hours > 0) timeString += `${hours}${units.h}`;
     if (minutes > 0) timeString += `${minutes}${units.m}`;
     if (seconds > 0) timeString += `${seconds}${units.s}`;
-
     return timeString;
 }
+

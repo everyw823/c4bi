@@ -3,8 +3,33 @@
 @import "tailwindcss";
 
 
+*,
+::before,
+::after {
+
+  @media (max-width: 768px) {
+    --border-size: 7vw;
+  }
+
+  @media (min-width: 768px) {
+    --border-size: 40px;
+  }
+
+  @media (min-width: 1280px) {
+    --border-size: 60px;
+  }
+}
+
 
 @theme static {
+
+  --text-sm:0.75em;
+  --text-base:1em;
+  --text-lg:1.25em;
+  --text-xl:1.5em;
+  --text-2xl:1.75em;
+  --text-3xl:2em;
+  --text-4xl:2.25em;
 
   --color-white: #ffffff;
 
@@ -63,8 +88,6 @@
   --font-body: "Open Sans";
   --font-pixel: "Pixel";
   --font-pixeloid: "Pixeloid";
-  --font-handwritten: "Kingnam";
-  --font-pixelsq: "PixelSquare";
 
 
   --animate-slide-left: slideInFromLeft 0.5s ease-in-out;
@@ -121,46 +144,19 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Kingnam';
-  src: url("../fonts/Kingnammm_Maiyuan_II-Regular.ttf") format('truetype');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'PixelSquare';
-  src: url("../fonts/quan.ttf") format('truetype');
-  font-display: swap;
-}
-
 .bg-thingie {
   background-image: url('../texture.png');
   background-blend-mode: color-dodge;
   font-display: swap;
 }
 
-*,
-::before,
-::after {
-  @media (max-width: 768px) {
-    --border-size: 7vw;
-  }
-
-  @media (min-width: 768px) {
-    --border-size: 40px;
-  }
-
-  @media (min-width: 1280px) {
-    --border-size: 60px;
-  }
-}
 
 
 a{
   cursor: pointer;
 }
 h1, h2, h3, h4, h5, h6 {
-  @apply text-primary-500 dark:text-primary-400 font-sans font-bold break-before-all;
+  @apply text-primary-500 dark:text-primary-400 font-pixeloid font-bold break-before-all;
   line-break: anywhere;
 }
 
@@ -180,11 +176,11 @@ h5{
   @apply text-lg;
 }
 
-time{
-  @apply text-secondary-400 dark:text-secondary-500 font-pixeloid text-sm select-none;
+time, .time-icon{
+  @apply text-secondary-400 dark:text-secondary-500 font-pixeloid select-none;
 }
 
-time.reply-time{
+time.time-interval{
   @apply mt-5
 }
 
@@ -225,7 +221,6 @@ hr {
 }
 
 
-
 p{
   @apply mb-2;
 }
@@ -233,3 +228,4 @@ p{
 img{
   @apply transition hover:shadow-md shadow-secondary-200 dark:shadow-secondary-400
 }
+

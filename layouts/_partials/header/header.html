@@ -23,8 +23,8 @@
 {{ partial "menu/main_menu.html" (dict "menuID" "main" "page" .) }}
 
 </nav>
-      <div class="text-center text-secondary-500 dark:text-secondary-400">
-您是第&nbsp;<span class="counter">-3-</span>&nbsp;位来到这里的用户!
+      <div class="timer text-center text-secondary-500 dark:text-secondary-400">
+        距离 <time class="timer-mark time" datetime="2028-06-17T00:00:00+08:00"><a >饿死</a></time> 还剩下 <time class="timer-display time-interval" datetime="{{ time.Now | time.Format "2006-01-02T15:04:05+08:00" }}">-3-</time>&nbsp;
 </div></section>
 {{- end }}
   

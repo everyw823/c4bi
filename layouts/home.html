@@ -1,59 +1,27 @@
 {{ define "main" }}
-
-<section class="md:m-0 px-5 pt-20 pb-5 relative w-full ">
-    <!-- <img src="gz4.svg"
-      class="hidden lg:block absolute injectable tint animate-wiggle origin-bottom-right w-[33vw] max-w-[150px] left-[-70px]"> -->
-    <div class="flex flex-row flex-wrap justify-center items-center">
-      <div
-        class="z-10  text-center w-full  px-4 pt-4 md:px-10 md:py-10 border-secondary-300 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-800 border-2 border-dashed rounded-lg text-secondary-500 dark:text-secondary-300">
-        <blockquote class=" text-secondary-500 dark:text-secondary-400 my-2">{{ .Content }}</blockquote>
-      </div>
-
-    </div>
-
-
-</section>
+{{ $site := .Site }}
 
 <div class="
 lg:grid lg:grid-cols-[1fr_1fr] lg:grid-flow-row-dense
 flex flex-col flex-wrap
-justify-center items-center w-full
+justify-center w-full
 
 ">
 
-<section class="sm:px-5 py-5 w-full h-full"  style="grid-column-start: 1; grid-column-end: 3;">
-   <div
-        class="z-10  text-center w-full  px-5 pt-5 border-secondary-300 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-800 border-2 border-dashed rounded-lg text-secondary-500 dark:text-secondary-300">
-  <h1 class="overflow-clip text-left text-4xl font-bold text-secondary-500 dark:text-secondary-400">
-    <i data-lucide="tags" width="36px"
-      height="36px" class="mr-4 inline-block"></i>标签列表</h1>
-  <div class="flex flex-row flex-wrap justify-center items-center text-secondary-400 dark:text-secondary-500 py-4 h-32 overflow-y-auto">
-
-    <!-- {{- range .Site.Taxonomies.tags.Alphabetical }}
-    <a class=" text-secondary-400 m-1"
-      href="{{ .Page.RelPermalink }}" data-count="{{ .Count }}">
-      <div class=" hover:bg-brand-500 dark:hover:bg-brand-600 bg-primary-500 dark:bg-primary-600 rounded-full pl-2 md:pl-4 pr-2 font-bold mx-2"> {{ .Page.Title }}
-        <div
-          class="relative bg-secondary-200 dark:bg-secondary-700 text-secondary-400 dark:text-secondary-300 inline-block rounded-full text-center ml-2 my-2 px-2 h-[1.5em]">
-          {{ .Count }} </div>
-      </div>
-    </a>
-    {{- end }} -->
-
-
-    {{- partial "terms_omni.html" (dict "taxonomy" "tags" "site" .Site) .}}
-
-  </div>
-   </div>
-  
-</section>
+<div class="flex flex-col">
 <section class="sm:px-5 py-5 w-full h-full">
     <h1 class="overflow-clip text-left text-4xl font-bold text-secondary-500 dark:text-secondary-400 pb-6"><i data-lucide="sparkles"
-      width="36px" height="36px" class="mr-4 inline-block"></i>最新文章</h1>
+      width="36px" height="36px" class="mr-4 inline-block"></i>最新上传的文章</h1>
     {{- with index .Site.RegularPages.ByDate.Reverse 0 }}
     {{ partial "post-preview.html" (dict "page" . "summaryLength" 150) }}
     {{- end }}
-  </section>
+    {{- range seq 1 5}}
+    {{- with index $site.RegularPages.ByDate.Reverse . }}
+    {{ partial "post-preview.html" (dict "page" . "summaryLength" 150 "style" "mini") }}
+    {{- end }}
+    {{- end }}
+</section>
+
 <section class="sm:px-5 py-5 w-full h-full">
  
   <h1 class="overflow-clip text-left text-4xl font-bold text-secondary-500 dark:text-secondary-400 pb-6"><i data-lucide="playing-cards-fan"
@@ -64,4 +32,50 @@ justify-center items-center w-full
       {{ partial "post-preview.html" (dict "page" . "summaryLength" 150) }}
     {{ end }}
 </section>
+</div>
+
+<div class="flex flex-col">
+<section class="sm:px-5 py-5 w-full h-full">
+ 
+  <h1 class="overflow-clip text-left text-4xl font-bold text-secondary-500 dark:text-secondary-400 pb-6"><i data-lucide="brush"
+      width="36px" height="36px" class="mr-4 inline-block"></i>最新上传的画作</h1>
+     <div class="grid grid-cols-3">
+    {{- range seq 1 5}}
+    {{- with index $site.RegularPages.ByDate.Reverse . }}
+      {{ partial "post-preview.html" (dict "page" . "summaryLength" 150 "style" "img") }}
+    {{- end }}
+  {{- end }}</div>
+</section>
+
+<section class="sm:px-5 py-5 w-full h-full flex flex-col">
+    <h1 class="overflow-clip text-left text-4xl font-bold text-secondary-500 dark:text-secondary-400 mb-5">
+    <i data-lucide="tags" width="36px"
+      height="36px" class="mr-4 inline-block"></i>标签列表</h1><div
+        class="flex-1 z-10  text-center w-full  px-5  border-secondary-300 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-800 border-2 border-dashed text-secondary-500 dark:text-secondary-300">
+ 
+  <div class="flex flex-row flex-wrap justify-center items-center text-secondary-400 dark:text-secondary-500 py-4 h-32 overflow-y-auto">
+
+    {{- partial "terms_omni.html" (dict "taxonomy" "tags" "site" .Site) .}}
+
+  </div>
+   
+</section>
+</div>
+
+
+<section class="md:m-0 sm:px-5 pt-5 pb-5 relative w-full " style="grid-column-start: 1; grid-column-end: 3;">
+    <div class="flex flex-row flex-wrap justify-center items-center">
+      <div
+        class="z-10  text-center w-full  px-4 pt-4 md:px-10 md:py-10 border-secondary-300 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-800 border-2 border-dashed  text-secondary-500 dark:text-secondary-300">
+        <blockquote class=" text-secondary-500 dark:text-secondary-400">{{ .Content }}</blockquote>
+      </div>
+
+    </div>
+
+
+</section>
+
+
+  
+</div></section>
 {{ end }}

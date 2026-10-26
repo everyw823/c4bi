@@ -9,11 +9,14 @@ Renders a post preview card with image, summary, and metadata.
 
 {{- $page := .page }}
 {{- $summaryLength := .summaryLength | default 200 }}
+{{- $style := .style | default "default" }}
 
 {{ $dateMachine := $page.Date | time.Format "2006-01-02T15:04:05-07:00" }}
 {{ $dateHuman := $page.Date | time.Format ":date_long" }}
 
-<article class=" post-preview border border-secondary-300 dark:border-secondary-600 p-5 grid grid-row-[1fr_3em]">
+{{- if eq $style "default" }}
+
+<article class="time-context post-preview border border-secondary-300 dark:border-secondary-600 p-5 grid grid-row-[1fr_3em]">
   <time class="hidden root-time text-secondary-400 dark:text-secondary-500" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
   <div class="w-full">
   <div class="w-full">
@@ -28,7 +31,7 @@ Renders a post preview card with image, summary, and metadata.
   </div>
   <div class="image-text-preview-wrapper text-secondary-500 dark:text-secondary-400" >
     
-    <img class="img-preview scattered object-cover aspect-square rounded-lg bg-cover w-3/4 max-w-[200px] sm:max-w-none sm:w-[min(150px,25vw)] sm:ml-3 mx-auto sm:mx-0 mb-3 sm:float-right" style="image-rendering: pixelated;" alt="{{ $page.Title }}">
+    <img class="img-preview object-cover aspect-square rounded-sm bg-cover w-3/4 max-w-[200px] sm:max-w-none sm:w-[min(150px,25vw)] sm:ml-3 mx-auto sm:mx-0 mb-3 sm:float-right filter-[url(#tint)] hover:filter-none " style="image-rendering: pixelated;" alt="{{ $page.Title }}">
     {{ $page.Summary | replaceRE "<figure[^>]*>" "" | replaceRE "<img[^>]*>" "" | safeHTML | truncate $summaryLength }}
   </div>
 </div>
@@ -38,3 +41,20 @@ Renders a post preview card with image, summary, and metadata.
     <label class="counter font-pixel text-center border-dotted border-4 dark:border-secondary-700 border-secondary-200 w-fit min-w-[2em] h-[2em] p-[.25em] text-primary-200 dark:text-primary-500 text-xl" data-value="{{ $page.WordCount }}">{{ $page.WordCount }}</label>
          </div>
 </article>
+
+    
+
+{{- else if eq $style "mini" }}
+<div class="flex flex-wrap border border-secondary-300 dark:border-secondary-600 my-2 px-5 py-2">
+      <h2><a class=" text-brand-500 hover:text-accent-500 dark:text-brand-400 dark:hover:text-accent-400 underline underline-offset-4 decoration-1 decoration-dashed " href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h2>
+    <div class="flex-1"></div>
+    <label class="counter font-pixel text-center border-dotted border-4 dark:border-secondary-700 border-secondary-200 w-fit min-w-[2em] h-[2em] p-[.25em] text-primary-200 dark:text-primary-500 text-xl" data-value="{{ $page.WordCount }}">{{ $page.WordCount }}</label>
+    </div>
+
+{{- else if eq $style "img"}}
+<article class="post-preview border border-secondary-300 dark:border-b-secondary-600 overflow-clip">
+     <a href="{{ $page.RelPermalink }}">
+       <img class="img-preview object-cover aspect-square rounded-sm bg-cover w-full h-full sm:float-right filter-[url(#tint)] hover:filter-none" alt="{{ $page.Title }}">
+     </a>
+    </article>
+{{- end }}

@@ -1,6 +1,6 @@
 
 
-<figure class="overflow-hidden flex flex-col items-center justify-center py-10">
+<figure class="img-container overflow-hidden w-fit flex flex-col mx-auto items-center justify-center py-10">
     <img origin="md" class="rounded-md" src="{{ .Destination | safeURL  }}" alt="{{ .PlainText }}"
       {{- /* 设置图片Title, 鼠标滑上去的时候会显示文字 */ -}}
       {{- with .Title }}

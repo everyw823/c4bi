@@ -133,7 +133,7 @@ def main():
             continue
         
         filename = 'Miscellaneous' + thread.create_time.strftime("%Y-%m-%d") + ".md"
-        with open(savefolder + "/" + filename, "w", encoding="utf-8", errors="replace") as md:
+        with open(savefolder + filename, "w+", encoding="utf-8", errors="replace") as md:
             md.write("""+++
 title = 'Miscellaneous""" + thread.create_time.strftime("%Y-%m-%d") + """'
 author = 'Home'
@@ -156,9 +156,9 @@ sources = ['""" + root_id + """']
                        continue
 
                     if( child.create_time.day != thread.create_time.day ):
-                        md.write( "<time class='reply-time' datetime='" + child.create_time.strftime("%Y-%m-%dT%H:%M:%S+08:00") + "'>" + child.create_time.strftime("%Y-%m-%dT%H:%M:%S +08:00") +"</time>" + "\n")
+                        md.write( "<time class='time-interval' datetime='" + child.create_time.strftime("%Y-%m-%dT%H:%M:%S+08:00") + "'>" + child.create_time.strftime("%Y-%m-%dT%H:%M:%S +08:00") +"</time>" + "\n")
                     else:
-                        md.write("<time class='reply-time' datetime='" + child.create_time.strftime("%Y-%m-%dT%H:%M:%S+08:00") + "'>" + child.create_time.strftime("%Y-%m-%dT%H:%M:%S +08:00") +"</time>" + "\n")
+                        md.write("<time class='time-interval' datetime='" + child.create_time.strftime("%Y-%m-%dT%H:%M:%S+08:00") + "'>" + child.create_time.strftime("%Y-%m-%dT%H:%M:%S +08:00") +"</time>" + "\n")
 
                     md.write(markdownified_content + mdbreak);
             
