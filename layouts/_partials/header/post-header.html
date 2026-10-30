@@ -16,9 +16,16 @@ Renders a post header with title and metadata (date and word count).
 <div class="mb-10">
   <div class="title-wrapper flex items-center py-2 flex-wrap {{ if $large }}justify-between{{ end }}">
     {{ if $large }}
-      <h1>{{ $page.Title }}</h1>
+    <div>
+      <h1 class="pb-1">{{ $page.Title }}</h1>
+       <time class="root-time date text-secondary-400 dark:text-secondary-500" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+      <span class="text-secondary-200 dark:text-secondary-700 select-none">|</span>
+       <label class="font-pixeloid text-secondary-400 dark:text-secondary-500">{{ printf "要读 %d 分钟" $page.ReadingTime }}</label>
+    </div>
       <div class="flex-1 text-right text-secondary-300 dark:text-secondary-700">全文字数</div>
       <label class="counter font-pixel text-center border-dotted border-4 dark:border-secondary-500 border-secondary-200 w-[2em] h-[2em] py-[.33em] text-primary-300 dark:text-primary-500 text-3xl mr-3" data-value="{{ $page.WordCount }}">{{ $page.WordCount }}</label>
+      
+</div>
     {{ else }}
       <h2><a href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h2>
       <div class="flex-1 text-right dark:text-secondary-400 text-secondary-700">全文字数</div>
@@ -26,5 +33,4 @@ Renders a post header with title and metadata (date and word count).
     {{ end }}
   </div>
 
-  <time class="root-time text-secondary-400 dark:text-secondary-500" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
-</div>
+ 

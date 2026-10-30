@@ -3,7 +3,7 @@ async function fetchImage(url) {
     const data = await response.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(data, 'text/html');
-    const pimage = doc.querySelector('img[origin=md]');
+    const pimage = doc.querySelector('img[data-origin=md]');
 
     if (!pimage) {
         return null;

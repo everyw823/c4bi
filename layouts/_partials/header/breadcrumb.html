@@ -1,0 +1,16 @@
+{{- $page := .page}}
+
+<nav aria-label="breadcrumb" class="pt-8 w-full" >
+  <ol class="w-full breadcrumb flex flex-row justify-center">
+    {{ range $page.Ancestors.Reverse }}
+
+    <li class="breadcrumb-item ">
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </li> <div class="mx-2 text-secondary-300 dark:text-secondary-600 select-none"> / </div>
+    {{ end }}
+    <li class="breadcrumb-item active hidden sm:block" aria-current="page">
+      <strong>
+        {{ $page.Title }}</strong>
+    </li>
+  </ol>
+</nav>

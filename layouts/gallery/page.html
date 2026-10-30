@@ -1,0 +1,11 @@
+{{ define "main" }}
+
+<article class="md:px-8 lg:px-20 2xl:px-36 time-context post text-secondary-500">
+  {{ partial "header/post-header.html" (dict "page" . "large" true) }}
+    <div class="content-wrapper h-max">{{ .Content }}</div>
+
+  <div class="mt-10 flex">
+  {{ partial "terms.html" (dict "taxonomy" "tags" "page" . "withNum" false) }}
+  </div>
+</article>
+{{ end }}

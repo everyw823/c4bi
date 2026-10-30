@@ -7,7 +7,7 @@
   {{- with .Text }}{{ . }}{{ end -}}
 </span>
 {{- else }}
-<a href="{{ .Destination | safeURL }}" class="text-brand-500 dark:text-brand-400 hover:text-accent-500 dark:hover:text-accent-400 underline underline-offset-4 decoration-1 decoration-dashed"
+<a href="{{ .Destination | safeURL }}"
   {{- with .Title }} title="{{ . }}"{{ end -}}
   {{- if $u.IsAbs }} rel="external"{{ end -}}
 >

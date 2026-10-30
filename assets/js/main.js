@@ -1,20 +1,6 @@
-import {
-    createIcons,
-    Menu,
-    ArrowRight,
-    Globe,
-    SquareArrowOutUpRight,
-    PlayingCardsFan,
-    Tags,
-    Clock,
-    Earth,
-    UsersCollaboration,
-    Brush,
-    BookBookmark,
-    MessageCircleQuestionMark,
-    Sparkles,
-} from 'js/lucide.min.js';
+
 // import { updateOverlaySize } from './modules/overlay.js';
+import { importAllLucides } from './modules/lucide-importer.js';
 import { tintSVG } from './modules/svg.js';
 import { ParseThisTimeInterval } from './modules/time.js';
 import { initImagePreviews } from './modules/image-preview.js';
@@ -31,7 +17,7 @@ globalThis.brand = {};
 globalThis.accent = {}
 
 document.addEventListener('DOMContentLoaded', function (e) {
-    
+
     b.forEach(a => {
         globalThis.primary[a] = getComputedStyle(document.documentElement).getPropertyValue(`--color-primary-${a}`).trim();
         globalThis.secondary[a] = getComputedStyle(document.documentElement).getPropertyValue(`--color-secondary-${a}`).trim();
@@ -46,21 +32,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
     // updateOverlaySize();
     // globalThis.borderOverlay.style.display = 'fixed';
 
-    const svgpromise = SVGInject(document.querySelectorAll('img.injectable'));
-
-    svgpromise.then(() => {
-        document.querySelectorAll("svg.tint").forEach(el => {
-            let media = window.matchMedia("(prefers-color-scheme: dark)");
-            thematicColorChange(media, globalThis.primary); // Initial call to set the initial theme
-
-            if (typeof media.addEventListener === 'function') {
-                media.addEventListener('change', e => thematicColorChange(e, globalThis.primary));
-            } else if (typeof media.addListener === 'function') {
-                media.addListener(thematicColorChange(function (e_) { thematicColorChange(e_, globalThis.primary); }));
-            }
-
-        });
-    });
+    SVGInject(document.querySelectorAll('img.injectable')).then(addColorChangeListener);
 
     window.addEventListener('load', initImagePreviews);
 
@@ -72,26 +44,26 @@ document.addEventListener('DOMContentLoaded', function (e) {
     // const re = /\s*:\/\//;
 
 
-    function UpdateTimerDisplay(Date, DatePrior,display) {
-    const timeString = ParseThisTimeInterval(Date, DatePrior);
-    display.innerText = timeString;
-}
+    function UpdateTimerDisplay(Date, DatePrior, display) {
+        const timeString = ParseThisTimeInterval(Date, DatePrior);
+        display.innerText = timeString;
+    }
 
     const timer = document.querySelectorAll('.timer');
     timer.forEach(timer => {
         const mark = timer.querySelector('.timer-mark');
         const display = timer.querySelector('.timer-display');
-        UpdateTimerDisplay(new Date(mark.getAttribute('datetime')), new Date(),display);
-        setInterval(() => UpdateTimerDisplay(new Date(mark.getAttribute('datetime')), new Date(),display),1000);
+        UpdateTimerDisplay(new Date(mark.getAttribute('datetime')), new Date(), display);
+        setInterval(() => UpdateTimerDisplay(new Date(mark.getAttribute('datetime')), new Date(), display), 1000);
     });
 
-    
+
 
     document.querySelectorAll('.time-context').forEach(el => {
         const times = el.querySelectorAll('time.time-interval');
         const rt = el.querySelector('.root-time');
         const rootTime = new Date(rt.getAttribute("datetime"));
-    
+
         rt.title = rootTime;
         times.forEach(elem => {
             const mytime = new Date(elem.getAttribute("datetime"));
@@ -110,7 +82,18 @@ document.addEventListener('DOMContentLoaded', function (e) {
         el.insertAdjacentElement('beforeBegin', timeMarker);
     });
 
-    
+
+    const dates = document.querySelectorAll('time.date');
+    console.log("woc",dates);
+    dates.forEach(el => {
+        const dateMarker = document.createElement('i');
+        dateMarker.setAttribute('data-lucide', 'calendar-days');
+        dateMarker.setAttribute('width', '16px');
+        dateMarker.setAttribute('height', '16px');
+        dateMarker.setAttribute('class', 'time-icon inline-block');
+        el.insertAdjacentElement('beforeBegin', dateMarker);
+    })
+
     const externalLinks = document.querySelectorAll('a[rel="external"]');
     externalLinks.forEach(link => {
         const extMarker = document.createElement('i');
@@ -125,19 +108,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
     document.querySelectorAll(".tag").forEach(el => hugocounts.push(el.getAttribute('tag-count')));
     const countsMax = Math.max(...hugocounts);
     hugocounts = hugocounts.map(count => count / countsMax);
-
-    const counters = document.querySelectorAll(".counter");
-    counters.forEach(counter => {
-        const value = counter.getAttribute("data-value");
-        if (value > 5000) {
-            counter.classList.add("text-red-500!");
-        } else if (value > 1000) {
-            counter.classList.add("text-orange-500!");
-        } else if (value > 500) {
-            counter.classList.add("text-yellow-500!");
-        }
-    });
-
 
     const nav = document.querySelector('nav.fixed');
     console.log(nav);
@@ -177,35 +147,28 @@ document.addEventListener('DOMContentLoaded', function (e) {
             };
         })
     }
-
+    importAllLucides();
+});
     // let uc = document.querySelectorAll(".under-construction");
     // uc.forEach(el => {
     //     let raf;
     //     el.addEventListener("mouseover", e => {
     //         raf = requestAnimationFrame(frame => {
-                
+
     //         })
     // })
 
-    createIcons({
-        icons: {
-            Menu,
-            ArrowRight,
-            Globe,
-            SquareArrowOutUpRight,
-            PlayingCardsFan,
-            Tags,
-            Clock,
-            Earth,
-            UsersCollaboration,
-            Brush,
-            BookBookmark,
-            MessageCircleQuestionMark,
-            Sparkles,
-        }
-    });
-});
 
+function addColorChangeListener() {
+    let media = window.matchMedia("(prefers-color-scheme: dark)");
+    thematicColorChange(media, globalThis.primary); // Initial call to set the initial theme
+
+    if (typeof media.addEventListener === 'function') {
+        media.addEventListener('change', e => thematicColorChange(e, globalThis.primary));
+    } else if (typeof media.addListener === 'function') {
+        media.addListener(thematicColorChange(function (e_) { thematicColorChange(e_, globalThis.primary); }));
+    }
+}
 
 function thematicColorChange(event) {
 
@@ -219,18 +182,20 @@ function thematicColorChange(event) {
     svgflood.setAttribute("flood-color", globalThis.primary[preferredTheme ? 600 : 500]);
 
     const tintmatrix = document.getElementById("tintmatrix");
-    const nsecondary = Hex2NormalizedRGB(globalThis.secondary[preferredTheme? 900 : 400]);
-    const l = (Math.max(...nsecondary) + Math.min(...nsecondary))/2;
-    const blend = 0.4;
+    const nprimary = Hex2NormalizedRGB(globalThis.primary[preferredTheme ? 700 : 500]);
+    const l = (Math.max(...nprimary) + Math.min(...nprimary)) / 2;
+    const blend = 0.6;
+
     console.log(l);
 
-    tintmatrix.setAttribute("values",`${l*blend} ${l*blend} ${l*blend} 0 ${nsecondary[0]*(1-blend)}
-${l*blend} ${l*blend} ${l*blend} 0 ${nsecondary[1]*(1-blend)}
-${l*blend} ${l*blend} ${l*blend} 0 ${nsecondary[2]*(1-blend)}
+    tintmatrix.setAttribute("values", `${l * blend} ${l * blend} ${l * blend} 0 ${nprimary[0] * (1 - blend)}
+${l * blend} ${l * blend} ${l * blend} 0 ${nprimary[1] * (1 - blend)}
+${l * blend} ${l * blend} ${l * blend} 0 ${nprimary[2] * (1 - blend)}
 0 0 0 1 0`)
 }
 
 window.addEventListener("load", function () {
+
     const s = document.querySelectorAll(".scattered");
     console.log(s);
     s.forEach(el => {
@@ -242,23 +207,23 @@ window.addEventListener("load", function () {
     imgcs.forEach(el => {
         console.log("img:")
         const i = el.querySelector("img");
-        if(i.clientHeight > i.clientWidth * 1.5){
+        if (i.clientHeight > i.clientWidth * 1.5) {
             i.classList.add("aspect-square");
             i.classList.add("object-cover");
             i.classList.add("object-top");
-            el.insertAdjacentHTML('beforeEnd',`<div data-status="closed" class="text-center expander border-dotted border-4 text-globalThis.secondary-500 bg-globalThis.secondary-50 dark:bg-globalThis.secondary-900 border-globalThis.secondary-200 hover:bg-globalThis.secondary-100 hover:dark:bg-globalThis.secondary-800 dark:border-globalThis.secondary-600 h-12 p-2 w-full">点这里展开图片</div>`);
-            
+            el.insertAdjacentHTML('beforeEnd', `<div data-status="closed" class="text-center expander border-dotted border-4 text-secondary-500 bg-secondary-50 dark:bg-secondary-900 border-secondary-200 hover:bg-secondary-100 hover:dark:bg-secondary-800 dark:border-secondary-600 h-12 p-2 w-full">点这里展开图片</div>`);
+
             const expander = el.querySelector(".expander");
-            
-            expander.addEventListener("click",() => {
-                if(expander.getAttribute("data-status") === "closed"){
+
+            expander.addEventListener("click", () => {
+                if (expander.getAttribute("data-status") === "closed") {
                     i.classList.remove("aspect-square");
-                    expander.setAttribute("data-status","opened");
+                    expander.setAttribute("data-status", "opened");
                     expander.innerText = "点这里收起图片";
-                    
-                }else{
+
+                } else {
                     i.classList.add("aspect-square");
-                    expander.setAttribute("data-status","closed");
+                    expander.setAttribute("data-status", "closed");
                     expander.innerText = "点这里展开图片";
                 }
                 window.scrollTo(0, i.offsetTop);

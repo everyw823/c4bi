@@ -5,16 +5,30 @@ Renders pagination controls for paginated content.
 
 @example: {{ partial "pagination.html" . }}
 */}}
-
-{{ if .Paginator.HasPrev }}
-  <a href="{{ .Paginator.Prev.URL }}" class="text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">← Previous</a>
+<div class="flex justify-center w-full mt-5">
+<ul class="flex">
+  {{ if .Paginator.HasPrev }}
+<li class="px-2">
+  <a href="{{ .Paginator.Prev.URL }}" class="text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">← 上一页</a>
+</li>
 {{ end }}
 
+
+{{ $p := .Paginator }}
 {{- range .Paginator.Pagers }}
-<span>
-  {{ .PageNumber }}
-</span>
+<li class="px-2 hidden sm:block">
+  
+  {{- if eq $p.PageNumber .PageNumber }}
+  <a aria-disabled="true" class="text-secondary-500 dark:text-secondary-400 ">{{ .PageNumber }}</a>
+  {{- else }}
+  <a href="{{ .URL }}" class="">{{ .PageNumber }}</a>
+  {{- end }}
+</li>
 {{- end }}
+
 {{ if .Paginator.HasNext }}
-  <a href="{{ .Paginator.Next.URL }}" class="text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">Next →</a>
+<li class="px-2">
+  <a href="{{ .Paginator.Next.URL }}" class="text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">下一页 →</a>
+</li>
 {{ end }}
+</ul></div>

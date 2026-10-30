@@ -14,9 +14,6 @@ Renders a menu for the given menu ID.
 {{- with index site.Menus $menuID }}
 
 
-  {{- if eq $page.RelPermalink "/"}}
-
-
     <ul class="
     lg:flex lg:flex-row flex-wrap justify-center xl:flex-nowrap
     grid md:grid-cols-6 sm:grid-cols-3 grid-cols-2
@@ -28,17 +25,6 @@ Renders a menu for the given menu ID.
 
     </ul>
 
-  {{- else }}
-
-  <div class="flex pb-4 xl:pb-0 flex-auto justify-center 2xl:justify-end">
-    <ul class="flex flex-row justify-center flex-nowrap">
-
-      {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
-
-    </ul>
-  </div>
-
-{{- end }}
 
 {{- end }}
 
@@ -67,7 +53,7 @@ Renders a menu for the given menu ID.
       >
 
         <img style="image-rendering:pixelated;" src="{{ $attrs.pre }}" aria-hidden="false" class="flooder block tint w-[max(28vw,14vh)] md:w-[96px]" draggable="false" />
-        <label class="block nav-link text-3xl sm:text-xl
+        <label class="block nav-link text-2xl sm:text-lg
      underline decoration-dashed decoration-1
      text-primary-400 dark:text-primary-300 hover:text-accent-500 dark:hover:text-accent-400
      cursor-pointer

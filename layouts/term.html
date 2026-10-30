@@ -1,13 +1,21 @@
 {{ define "main" }}
+{{ $page := . }}
+<div class="mb-15">
+<h1 class="text-center mb-2">{{ .Title }}</h1>
 
-<h1 class="text-center text-4xl font-bold text-primary-500 dark:text-primary-400 mt-15 mb-2">{{ .Title }}</h1>
-{{ .Content }}
+{{- if eq .Paginator.PageNumber 1 }}
+{{ $page.Content }}
 
 <div class="text-secondary-400 dark:text-secondary-500 text-center mt-5 mb-10 text-sm">找到 {{ len .Pages }} 个结果</div>
-<div class="grid grid-cols-1 xl:grid-cols-2  gap-2">
+{{- end }}
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3  gap-2">
 	
-	{{- range ( .Paginate .Pages 10 ).Pages }}
-	{{ partial "post-preview.html" (dict "page" . "summaryLength" 200) }}
+	{{- range ( .Paginate .Pages 12 ).Pages }}
+
+
+	{{ partial "preview/post.html" (dict "page" . "summaryLength" 200) }}
 	{{- end }}
 	
 </div>

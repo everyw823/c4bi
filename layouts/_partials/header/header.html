@@ -1,30 +1,17 @@
-
-
-{{- if eq .RelPermalink "/" }}
-<a class="pt-0 backdrop-blur-[2px] md:flex-1 flex justify-center h-fit" href="/" id="logo-container">
+<div class="w-full flex flex-wrap">
+<a class="w-full pt-0 backdrop-blur-[2px] md:flex-1 flex h-fit  justify-center 2xl:justify-normal" href="/" id="logo-container">
   <div class="h-fit sm:w-full w-[70vw] sm:min-w-[400px] max-w-[500px] py-8">
   <img src="/logo.svg" class="injectable tint" ></img>
 </div>
 </a>
 <div class=" hidden 2xl:block flex-1 "></div>
-{{- else }}
-<a class="pt-8 pb-2 backdrop-blur-[2px] md:flex-1 flex justify-center h-fit" href="/" id="logo-container">
-  <div class="h-fit sm:w-full w-[70vw] sm:min-w-[400px] max-w-[500px]">
-  <img src="/logo.svg" class="injectable tint" ></img>
-</div>
-</a>
-{{- end }}
 
-
-  
-  {{- if eq .RelPermalink "/" }}
-  <section class="w-full 2xl:w-auto flex flex-col">
+  <div class="w-full 2xl:w-auto flex flex-col">
     <nav class="font-pixeloid h-fit overflow-hidden flex sm:px-20 md:px-0 lg:py-0 py-4 pb-12 xl:pb-0 flex-auto lg:grow xl:shrink-0 2xl:justify-end justify-center flex-wrap">
 {{ partial "menu/main_menu.html" (dict "menuID" "main" "page" .) }}
 
 </nav>
       <div class="timer text-center text-secondary-500 dark:text-secondary-400">
-        距离 <time class="timer-mark time" datetime="2028-06-17T00:00:00+08:00"><a >饿死</a></time> 还剩下 <time class="timer-display time-interval" datetime="{{ time.Now | time.Format "2006-01-02T15:04:05+08:00" }}">-3-</time>&nbsp;
-</div></section>
-{{- end }}
-  
+        距离 <time class="timer-mark time" datetime="2028-06-17T00:00:00+08:00">饿死</time> 还剩下 <time class="timer-display time-interval" datetime="{{ time.Now | time.Format "2006-01-02T15:04:05+08:00" }}">-3-</time>&nbsp;
+</div></div>
+</div>

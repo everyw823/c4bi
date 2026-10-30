@@ -5,14 +5,13 @@
   justify-center pointer-events-auto animate-slide-up ">
   
   <div class="sm:hidden w-full h-full bg-thingie bg-primary-400 dark:bg-primary-700 px-4 flex z-1000 rounded-b-xl border-b-2 border-b-primary-800 dark:border-b-primary-900 shadow-primary-500 dark:shadow-primary-900 shadow-sm items-center justify-center 
-  text-xl   text-brand-100  dark:text-brand-300  underline underline-offset-4 decoration-1 decoration-dashed">
-    {{ partial "menu/simple.html" (dict "menuID" "main" "page" $page "isMinimal" true "class" "hover:text-accent-200 dark:hover:text-accent-200") }}
+  text-xl">
+    {{ partial "menu/simple.html" (dict "menuID" "main" "page" $page "isMinimal" true  "class" "text-brand-100 dark:text-brand-200 hover:text-accent-500 dark:hover:text-accent-700") }}
 </div>
 
 <div class="hidden w-fit h-full bg-thingie bg-primary-400 dark:bg-primary-700 px-4 sm:flex z-1000 rounded-b-3xl border-b-2 border-b-primary-800 dark:border-b-primary-900 shadow-primary-500 dark:shadow-primary-900 shadow-sm
-items-center justify-center
- text-xl  text-brand-100  dark:text-brand-300  underline underline-offset-4 decoration-1 decoration-dashed">
-    {{ partial "menu/simple.html" (dict "menuID" "main" "page" $page "isMinimal" false "class" "hover:text-accent-200 dark:hover:text-accent-200") }}
+items-center justify-center">
+    {{ partial "menu/simple.html" (dict "menuID" "main" "page" $page "isMinimal" false "class" "text-brand-100 dark:text-brand-200 hover:text-accent-500 dark:hover:text-accent-700") }}
 </div>
 
 

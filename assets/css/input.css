@@ -2,6 +2,7 @@
 
 @import "tailwindcss";
 
+@layer theme, base, components, utilities;
 
 *,
 ::before,
@@ -22,7 +23,7 @@
 
 
 @theme static {
-
+  
   --text-sm:0.75em;
   --text-base:1em;
   --text-lg:1.25em;
@@ -125,6 +126,8 @@
     }
   }
 
+
+  
 }
 
 
@@ -151,13 +154,15 @@
 }
 
 
+@layer base {
 
 a{
+  @apply text-brand-500 dark:text-brand-500 hover:text-accent-500 dark:hover:text-accent-400 underline underline-offset-4 decoration-1 decoration-dashed ;
   cursor: pointer;
 }
+
 h1, h2, h3, h4, h5, h6 {
-  @apply text-primary-500 dark:text-primary-400 font-pixeloid font-bold break-before-all;
-  line-break: anywhere;
+  @apply text-primary-500 dark:text-primary-400 font-pixeloid font-bold pb-2 break-all;
 }
 
 h1{
@@ -177,11 +182,18 @@ h5{
 }
 
 time, .time-icon{
-  @apply text-secondary-400 dark:text-secondary-500 font-pixeloid select-none;
+  @apply text-secondary-400 dark:text-secondary-500 font-pixeloid select-none 
 }
 
-time.time-interval{
-  @apply mt-5
+.time-icon{
+  @apply inline-block;
+}
+
+details{
+  @apply my-4;
+  summary {
+  @apply mb-4 border-2 text-center border-dotted text-secondary-500 bg-secondary-50 dark:bg-secondary-900 border-secondary-200 hover:bg-secondary-100 hover:dark:bg-secondary-800 dark:border-secondary-600 p-2 w-full;
+  }
 }
 
 
@@ -209,7 +221,24 @@ hr {
 }
 
 
-.font-pixel {
+p{
+  @apply mb-2;
+}
+
+}
+
+@layer components {
+
+  .tag{
+    @apply relative rounded-r-md rounded-l-3xl pl-5 pr-2;
+    }
+  
+  .tag::before{
+      content: "";
+      @apply rounded-full w-2 h-2  bg-white dark:bg-primary-950 inline-block absolute left-2 top-1/2 -translate-y-1/2;
+    }
+
+  .font-pixel {
   letter-spacing: 0.05em;
   transform: translateX(.1em) translateY(.1em);
 }
@@ -221,11 +250,8 @@ hr {
 }
 
 
-p{
-  @apply mb-2;
+.link-caution{
+  @apply text-sm sm:hidden;
 }
 
-img{
-  @apply transition hover:shadow-md shadow-secondary-200 dark:shadow-secondary-400
 }
-

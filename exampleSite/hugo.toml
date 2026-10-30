@@ -88,3 +88,8 @@ hasCJKLanguage = true
   year = 'years'
   category = 'categories'
   source = 'sources'
+
+[pagination]
+  disableAliases = false
+  pagerSize = 12
+  path = 'page'

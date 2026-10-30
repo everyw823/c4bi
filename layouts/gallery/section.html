@@ -1,0 +1,34 @@
+{{ define "main" }}
+{{ $page := . }}
+<div class="mb-15">
+<h1 class="text-center mb-2">{{ .Title }}</h1>
+
+{{- if eq .Paginator.PageNumber 1 }}
+{{ $page.Content }}
+
+<div class="text-secondary-400 dark:text-secondary-500 text-center mt-5 mb-10 text-sm">找到 {{ len .Pages }} 个结果</div>
+{{- end }}
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-5  gap-2">
+	
+	{{$g := hugo.Data.gallery.volume }}
+	{{- range $g }}
+
+	<div class="w-full">
+
+
+		
+	</div>
+
+
+		{{ .title }}
+	{{- end }}
+	
+</div>
+
+<div class="flex">
+	{{ partial "pagination.html" . }}
+</div>
+
+{{ end }}

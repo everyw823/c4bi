@@ -5,44 +5,46 @@
   {{ partial "head.html" . }}
 </head>
 
-<body class=" text-base text-secondary-500 bg-thingie bg-primary-700 dark:bg-primary-900 flex flex-col">
+<body class=" text-base text-secondary-400 dark:text-secondary-500 bg-thingie bg-primary-700 dark:bg-primary-900 flex flex-col">
 
   {{ partial "svg/filter.html" . }}
 
   {{- if not (eq .RelPermalink "/") }}
-{{ partial "header/nav.html" (dict "page" .) }}
-{{- end }}
+  {{ partial "header/nav.html" (dict "page" .) }}
 
-  <!-- <div class="border-overlay fixed pointer-events-none h-full z-10 border-dotted xl:border-x-[60px] md:border-x-[40px] border-x-[7vw] border-primary-200 dark:border-primary-800 sm:border-primary-700 dark:sm:border-primary-900 bg-transparent"></div> -->
- 
-  
+  {{- end }}
+
 
   <div id="real-container" class=" relative overflow-x-hidden container bg-blend-multiply  mx-auto
-  2xl:px-36 xl:px-24 lg:px-18 md:px-10 sm:px-4 px-2 py-8 text-secondary-500 dark:text-secondary-400
+  2xl:px-36 xl:px-24 lg:px-18 md:px-10 sm:px-4 px-2 py-8 
   
   ">
 
 
-<div id="real-container-inner" class="h-fit sm:h-auto relative justify-center md:justify-normal">
+    <div id="real-container-inner" class="h-fit sm:h-auto relative justify-center md:justify-normal">
 
-    <header class="sm:pt-10 w-full flex flex-row flex-wrap 2xl:flex-nowrap items-center justify-center lg:justify-normal">
-      {{ partial "header/header.html" . }}
-</header>
-     
-  
-  <main class=" px-8 pb-24 bg-white dark:bg-primary-900 my-4  border-y-4 border-secondary-200 dark:border-secondary-700 border-dotted">
-    {{ block "main" . }}{{ end }}
-  </main>
-
-  <footer>
-    {{ partial "footer.html" . }}
-  </footer>
+      <header class="w-full flex flex-row flex-wrap 2xl:flex-nowrap items-center">
+        {{- if eq .RelPermalink "/" }}
+        {{ partial "header/header.html" . }}
+        {{- else }}
+        {{ partial "header/breadcrumb.html" (dict "page" .)}}
+        {{- end }}
+      </header>
 
 
-</div>
-</div>
+      <main
+        class=" px-8 py-12 bg-white dark:bg-primary-950 my-4  border-y-4 border-secondary-200 dark:border-secondary-700 border-dotted">
+        {{ block "main" . }}{{ end }}
+      </main>
+
+      <footer>
+        {{ partial "footer.html" . }}
+      </footer>
+
+
+    </div>
   </div>
-<div class="h-24"></div>
+  </div>
 
 </body>
 
