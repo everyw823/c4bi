@@ -16,3 +16,14 @@
   {{- end }}
   {{- end}}
 {{- end }}
+
+{{- /* Strings the JS bundle reads at runtime; keep keys in sync with assets/js/main.js. */ -}}
+<script id="i18n-data" type="application/json">
+  {{- dict
+    "time_unit_day"       (i18n "time_unit_day")
+    "time_unit_hour"      (i18n "time_unit_hour")
+    "time_unit_minute"    (i18n "time_unit_minute")
+    "time_unit_second"    (i18n "time_unit_second")
+    "main_thread_format"  (i18n "main_thread_format")
+    | jsonify | safeJS -}}
+</script>

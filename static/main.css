@@ -880,9 +880,7 @@ hr {
 .font-pixel {
   transform: translateX(.1em) translateY(.1em);
 }
-.flooder {
-  filter: url(#flood);
-}
+
 @property --tw-rotate-x {
   syntax: "*";
   inherits: false;

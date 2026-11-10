@@ -1,23 +1,37 @@
 {{ define "main" }}
-{{ $page := . }}
+{{- $page := . }}
+{{- $color := "primary"}}
 <div class="mb-15">
-<h1 class="text-center mb-2">{{ .Title }}</h1>
+	{{- if ( T .Title )}}
 
-{{- if eq .Paginator.PageNumber 1 }}
-{{ $page.Content }}
+	{{- with .Params.color }}
+        {{- $color = . }}
+    {{- end }}
+	<h1 class="tag bg-{{ $color }}-500 dark:bg-{{ $color }}-600 text-center mb-2">
+		{{ T .Title }}
+	</h1>
+	{{- else }}
+	<h1 class="text-center mb-2">
+		{{ $page.Title }}
+	</h1>
 
-<div class="text-secondary-400 dark:text-secondary-500 text-center mt-5 mb-10 text-sm">找到 {{ len .Pages }} 个结果</div>
-{{- end }}
+	{{- end }}
+	</h1>
+
+	{{- if eq .Paginator.PageNumber 1 }}
+	<div class="text-center">{{ $page.Content }}</div>
+
+	<div class="text-secondary-400 dark:text-secondary-500 text-center mt-5 mb-10 text-sm">{{ T "found_with_count" (len
+		.Pages) }}</div>
+	{{- end }}
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3  gap-2">
-	
-	{{- range ( .Paginate .Pages 12 ).Pages }}
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2">
 
-
-	{{ partial "preview/post.html" (dict "page" . "summaryLength" 200) }}
+	{{- range ( .Paginate .Pages ).Pages }}
+	{{ partial "preview/post.html" (dict "page" . "summaryLength" 200 ) }}
 	{{- end }}
-	
+
 </div>
 
 <div class="flex">

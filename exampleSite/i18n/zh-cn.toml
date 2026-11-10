@@ -1,0 +1,27 @@
+zh-cn = '尚未翻译'
+archive = '存档'
+tbo = '待整理'
+
+
+#use 'years' subtaxonomy in front matter
+2019 = '2019'
+2020 = '2020'
+2021 = '2021'
+2022 = '2022'
+2023 = '2023'
+2024 = '2024'
+2025 = '2025'
+2026 = '2026'
+
+
+#use 'appearances' subtaxonomy in front matter 
+anthro = '直立兽'
+feral = '四足兽'
+thingie = '其他东西'
+omnimedia = '纸绘电绘均可'
+glitch-energy = '纸绘难度大'
+anti-glitch-energy = '电绘难度大'
+
+#use 'worlds' subtaxonomy in front matter
+1011 = '井然世界'
+1101 = '斑驳空腔'

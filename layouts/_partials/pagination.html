@@ -6,17 +6,18 @@ Renders pagination controls for paginated content.
 @example: {{ partial "pagination.html" . }}
 */}}
 <div class="flex justify-center w-full mt-5">
-<ul class="flex">
+
   {{ if .Paginator.HasPrev }}
-<li class="px-2">
-  <a href="{{ .Paginator.Prev.URL }}" class="text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">← 上一页</a>
-</li>
+  <a href="{{ .Paginator.Prev.URL }}" class="mx-2 text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">← 上一页</a>
 {{ end }}
 
-
+<ul class=" hidden sm:flex px-2">
 {{ $p := .Paginator }}
-{{- range .Paginator.Pagers }}
-<li class="px-2 hidden sm:block">
+{{- if le .Paginator.TotalPages 6 }}
+
+
+{{- range .Paginator.Pagers | first 3 }}
+<li class="px-2 ">
   
   {{- if eq $p.PageNumber .PageNumber }}
   <a aria-disabled="true" class="text-secondary-500 dark:text-secondary-400 ">{{ .PageNumber }}</a>
@@ -24,11 +25,63 @@ Renders pagination controls for paginated content.
   <a href="{{ .URL }}" class="">{{ .PageNumber }}</a>
   {{- end }}
 </li>
+
+
 {{- end }}
 
-{{ if .Paginator.HasNext }}
+{{- else }}
+
+
+
+{{- if .Paginator.PageNumber }}
+
+{{- if ge $p.PageNumber 4}}
+ {{- with index $p.Pagers 0}}
+ <li class="px-2 ">
+  <a href="{{ .URL }}">{{ .PageNumber }}</a>
+  </li>
+  <li class="px-2 ">
+    ...
+  </li>
+  {{- end }}
+  {{- end }}
+
+{{- range seq (math.Sub $p.PageNumber 3) (math.Add $p.PageNumber 1) }}
+
+{{- with index $p.Pagers . }}
+ 
 <li class="px-2">
-  <a href="{{ .Paginator.Next.URL }}" class="text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">下一页 →</a>
+ 
+  
+  {{- if eq $p.PageNumber .PageNumber }}
+  <a aria-disabled="true" >{{ .PageNumber }}</a>
+  {{- else }}
+  <a href="{{ .URL }}">{{ .PageNumber }}</a>
+  {{- end }}
 </li>
+{{- end }}
+
+{{- end }}
+
+{{- if le $p.PageNumber (math.Sub $p.TotalPages 3)}}
+
+ {{- with index $p.Pagers (math.Sub $p.TotalPages 1)}}
+  <li class="px-2 ">
+    ...
+  </li>
+  <li class="px-2 ">
+  <a href="{{ .URL }}" class="">{{ .PageNumber }}</a>
+  </li>
+  {{- end }}
+  {{- end }}
+
+
+{{- end }}
+
+
+{{- end }}</ul>
+{{ if .Paginator.HasNext }}
+
+  <a href="{{ .Paginator.Next.URL }}" class="mx-2 text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">下一页 →</a>
 {{ end }}
-</ul></div>
+</div>

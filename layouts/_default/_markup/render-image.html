@@ -2,7 +2,7 @@
 
 <figure class="img-container overflow-hidden w-fit flex flex-col mx-auto items-center justify-center p-5">
     <div class="relative">
-  <img loading="lazy" data-origin="md" class="dark:brightness-75 rounded-md" src="{{ .Destination | safeURL  }}" alt="{{ .PlainText }}"
+  <img loading="lazy" data-origin="md" class="{{- with index .Attributes "class" -}}{{print . " "}}{{- end -}} rounded-md" src="{{ .Destination | safeURL  }}" alt="{{ .PlainText }}"
       {{- /* 设置图片Title, 鼠标滑上去的时候会显示文字 */ -}}
       {{- with .Title }}
         title="{{ . }}"
@@ -18,9 +18,20 @@
         height="{{ . }}"
       {{- end -}}
     >
-    <a target="_blank" href="{{ .Destination | safeURL  }}" class="w-6 h-6 opacity-85 lg:opacity-50 hover:opacity-85 transition-opacity bg-primary-50 border border-primary-500 rounded-md absolute top-2 right-2 p-1">
+
+  <div class="absolute top-2 right-2  flex flex-row">
+    <a target="_blank" href="{{ .Destination | safeURL  }}" class="ml-2 p-1 w-6 h-6 opacity-85 lg:opacity-50 hover:opacity-85 transition-opacity bg-primary-50 border border-primary-500 rounded-md ">
       <i data-lucide="zoom-in" width="14px" height="14px"></i>
   </a>
+
+  {{- with index .Attributes "credit" -}}
+    <a target="_blank" href="{{ . }}" >
+      <div class="flex items-center h-6 ml-2 py-0.5 px-1 opacity-85 lg:opacity-50 hover:opacity-85 transition-opacity bg-primary-50 border border-primary-500 rounded-md ">
+      <i data-lucide="book-open-check" width="14px" height="14px"></i><div class="text-sm">&nbsp;画师</div></div>
+  </a>
+</div>
+  {{- end -}}
+
     </div>
     {{- /* 设置figure标题 */ -}}
     {{- with index .Attributes "caption" -}}

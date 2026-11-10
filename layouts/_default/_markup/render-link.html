@@ -2,11 +2,6 @@
 
 
 
-{{- if eq .Destination "wk" }}
-<span class="under-construction text-olive-500 hover:text-olive-600">
-  {{- with .Text }}{{ . }}{{ end -}}
-</span>
-{{- else }}
 <a href="{{ .Destination | safeURL }}"
   {{- with .Title }} title="{{ . }}"{{ end -}}
   {{- if $u.IsAbs }} rel="external"{{ end -}}
@@ -14,5 +9,4 @@
   {{- with .Text }}{{ . }}{{ end -}}
 </a>
 
-{{- end }}
 {{- /* chomp trailing newline */ -}}

@@ -11,3 +11,20 @@ export function Hex2NormalizedRGB(hs){
     let b = parseInt(hex[3],16) / 256;
     return [r,g,b]
 }
+
+// Strings handed over from Hugo in the <script id="i18n-data"> island.
+// Read lazily once and cached, so this works regardless of load order.
+let translations = null;
+
+export function i18n(key, fallback = '') {
+    if (translations === null) {
+        const el = document.getElementById('i18n-data');
+        try {
+            translations = el ? JSON.parse(el.textContent) : {};
+        } catch (e) {
+            console.warn('i18n: could not parse #i18n-data', e);
+            translations = {};
+        }
+    }
+    return (translations[key] != null) ? translations[key] : fallback;
+}

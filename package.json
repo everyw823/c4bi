@@ -17,10 +17,16 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "@puppeteer/browsers": "^3.2.6",
+    "@tailwindcss/cli": "^4.3.3",
+    "@tailwindcss/typography": "^0.5.20",
     "tailwindcss": "^4.3.3"
   },
   "dependencies": {
-    "@tailwindcss/cli": "^4.3.3",
     "lucide": "^1.57.0"
+  },
+
+  "imports": {
+    "#input.css": "/assets/css/input.css"
   }
 }

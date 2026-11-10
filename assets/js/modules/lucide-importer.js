@@ -15,6 +15,7 @@ import {
     Sparkles,
     CalendarDays,
     ZoomIn,
+    BookOpenCheck,
 } from 'js/lucide.min.js';
 
 export function importAllLucides(){
@@ -35,7 +36,8 @@ export function importAllLucides(){
                 MessageCircleQuestionMark,
                 Sparkles,
                 CalendarDays,
-                ZoomIn
+                ZoomIn,
+                BookOpenCheck,
             }
         });
     

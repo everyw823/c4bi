@@ -1,0 +1,113 @@
+{{ define "main" }}
+<script src="filter.js" type="text/javascript" defer></script>
+
+<div class="lg:grid grid-cols-[240px_1fr] gap-5 lg:my-10">
+<aside id="filter-aside" class="sticky left-0 top-0 rounded-xl
+p-4 border card-gradient dark:card-gradient-dark  text-secondary-500 dark:text-secondary-400 border-secondary-300 dark:border-secondary-700
+mb-5 lg:mt-0 h-fit ">
+<details>
+<summary><a class="font-pixeloid">Filter characters</a></summary>
+<div class="filter flex flex-col" data-filter="character">
+    <span class="font-sans mt-2 text-sm">Select Mode</span>
+       
+    <div class="border p-2 rounded-lg border-secondary-200 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-950">
+     <ul id="mode-selector" class="h-full flex flex-row flex-wrap justify-start lg:justify-center">
+        <li class="mx-1"><input class="mx-1" type="radio" name="mode" checked="true" data-mode="0"><label title="The article must have all the selected tags in order to be included.">AND</label>
+        <div class="text-sm block lg:hidden">The article must have all the selected tags in order to be included.</div></li>
+            <li class="mx-1"><input class="mx-1" type="radio" name="mode" data-mode="1"><label title="The article need to have at least one selected tags in order to be included.">OR</label>
+            <div class="text-sm block lg:hidden">The article need to have at least one selected tags in order to be included.</div></li>
+            <li class="mx-1"><input class="mx-1" type="radio" name="mode" data-mode="2"><label title="The article must NOT have all the selected tags in order to be included.">NAND</label>
+            <div class="text-sm block lg:hidden">The article must NOT have all the selected tags in order to be included.</div></li>
+        </ul>
+       </div>    
+
+
+    </div>
+    <hr>
+    <h5 class="pb-0">Filtering Criteria</h5>
+    <span class="font-sans mt-2 text-sm">Years</span>
+    <div class="border p-2 rounded-lg border-secondary-200 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-950">
+        {{- with (partial "terms_selection.html" (dict "taxonomy" "tags" "site" .Site "sub" "years") .)}}
+    {{ . }}
+    {{- end }}
+    </div>
+    <span class="font-sans mt-2 text-sm">Appearances</span>
+    <div class="border p-2 rounded-lg border-secondary-200 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-950">
+        {{- with (partial "terms_selection.html" (dict "taxonomy" "tags" "site" .Site "sub" "appearances") .)}}
+    {{ . }}
+    {{- end }}
+    </div>
+    <span class="font-sans mt-2 text-sm">Worlds</span>
+    <div class="border p-2 rounded-lg border-secondary-200 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-950">
+{{- with (partial "terms_selection.html" (dict "taxonomy" "tags" "site" .Site "sub" "worlds") .)}}    {{ . }}
+    {{- end }}
+    </div>
+
+
+
+    <span class="font-sans mt-2 text-sm">Keywords</span>
+    <div class="border p-2 rounded-lg border-secondary-200 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-950">
+{{- with (partial "terms_selection.html" (dict "taxonomy" "tags" "site" .Site "sub" "keywords") .)}}    {{ . }}
+    {{- end }}
+    </div>
+
+   <span class="font-sans mt-2 text-sm ">Image Count</span>
+    <div class="   border p-2 rounded-lg border-secondary-200 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-950">
+        
+     <ul id="img-mode-selector" class=" flex flex-row justify-center">
+            <li class="mx-1"><input class="mx-1" type="radio" name="img-mode" checked="true" data-mode="0"><span>&gt;</span></li>
+            <li class="mx-1"><input class="mx-1" type="radio" name="img-mode" data-mode="1"><span>&lt;</span></li>
+            <li class="mx-1"><input class="mx-1" type="radio" name="img-mode" data-mode="2"><span>=</span></li>
+        </ul>
+<div class="slider flex flex-wrap">
+        <input id="img-counter" type="range" value="-1" class="min-w-0 flex-1" min="-1" max="10"
+data-threshold="-1" data-out-of-threshold="N/A">
+<label class="text-center ml-3 text-sm block relative px-2  rounded-md pointer-events-none border border-secondary-300 bg-secondary-50 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-950 " id="tooltip"></label>
+</div>
+</div>
+
+
+
+<!-- 
+   <span class="font-sans mt-2 text-sm ">按字数</span>
+    <div class="   border p-2 rounded-lg border-secondary-200 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-950">
+        
+     <ul class=" flex flex-row justify-center">
+            <li><input class="mx-1" type="radio" name="text-mode" checked="true"><span>小于</span></li>
+            <li><input class="mx-1" type="radio" name="text-mode"><span>大于</span></li>
+        </ul>
+<div class="slider flex flex-wrap">
+        <input id="img-counter" type="range" value="0" class="min-w-0 flex-1" min="0" max="5000"
+data-threshold="0" data-out-of-threshold="不限制" step="100">
+
+<label class="text-center ml-3 text-sm block relative px-2  rounded-md pointer-events-none border border-secondary-300 bg-secondary-50" id="tooltip"></label>
+
+
+
+</div>
+</div> -->
+
+
+    <button onclick="fire()" class="transition-all cursor-pointer border border-primary-700 bg-primary-500 text-secondary-200 w-full p-2 mt-4 rounded-2xl hover:bg-primary-600 active:bg-primary-700 active:translate-y-px">・3・</button>
+
+</details>
+</aside>
+<section class="flex flex-col justify-start h-full">
+<!-- <div class="items-center ">
+{{ .Content }}
+</div> -->
+<template id="unfiltered">
+		{{- range ( .Paginate .Pages ).Pages }}
+	{{ partial "preview/character.html" (dict "page" . "summaryLength" 200 ) }}
+	{{- end }}
+
+</template>
+
+<div id="filtered-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-2">
+
+</div>
+</section>
+</div>
+
+
+{{- end }}

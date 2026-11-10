@@ -5,7 +5,7 @@
   {{ partial "head.html" . }}
 </head>
 
-<body class=" text-base text-secondary-400 dark:text-secondary-500 bg-thingie bg-primary-700 dark:bg-primary-900 flex flex-col">
+<body class=" text-base text-secondary-400 dark:text-secondary-500 bg-thingie bg-primary-700 dark:bg-primary-950 flex flex-col">
 
   {{ partial "svg/filter.html" . }}
 
@@ -15,9 +15,8 @@
   {{- end }}
 
 
-  <div id="real-container" class=" relative overflow-x-hidden container bg-blend-multiply  mx-auto
+  <div class=" relative overflow-x-hidden container bg-blend-multiply  mx-auto
   2xl:px-36 xl:px-24 lg:px-18 md:px-10 sm:px-4 px-2 py-8 
-  
   ">
 
 
@@ -33,7 +32,7 @@
 
 
       <main
-        class=" px-8 py-12 bg-white dark:bg-primary-950 my-4  border-y-4 border-secondary-200 dark:border-secondary-700 border-dotted">
+        class=" px-8 py-12 bg-white dark:bg-primary-950  my-4  border-y-4 border-secondary-200 dark:border-secondary-700 border-dotted">
         {{ block "main" . }}{{ end }}
       </main>
 

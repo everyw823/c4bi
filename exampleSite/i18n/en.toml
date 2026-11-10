@@ -1,0 +1,26 @@
+zh-cn = 'Chinese only' 
+archive = 'archive'
+tbo = 'TBO'
+
+#use 'years' subtaxonomy in front matter
+2019 = '2019'
+2020 = '2020'
+2021 = '2021'
+2022 = '2022'
+2023 = '2023'
+2024 = '2024'
+2025 = '2025'
+2026 = '2026'
+
+
+#use 'appearances' subtaxonomy in front matter 
+anthro = 'Anthro'
+feral = 'Feral'
+thingie = 'Other Form'
+omnimedia = 'all media friendly'
+glitch-energy = 'traditional art friendly'
+anti-glitch-energy = 'digital art friendly'
+
+#use 'worlds' subtaxonomy in front matter
+1011 = '▙'
+1101 = '▜'

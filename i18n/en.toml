@@ -1,0 +1,21 @@
+newest_article = 'Newest Article'
+newest_art = 'Newest Art'
+random_article = 'Random Article'
+tag_list = 'Tag List'
+c4bi = 'C4binet'
+t-c4bi = 'Tech'
+js-license = 'JavaScript License'
+
+# Suffixes used by the live countdown (main.js: UpdateTimerDisplay).
+time_unit_day = 'd '
+time_unit_hour = 'h '
+time_unit_minute = 'm '
+time_unit_second = 's'
+main_thread_format = '{time} after main thread'
+
+text_count = 'Text Count'
+
+[found_with_count]
+zero = 'No matching item was found'
+one = 'Found {{ . }} matching item'
+other = 'Found {{ . }} matching items'

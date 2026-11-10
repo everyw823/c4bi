@@ -1,0 +1,20 @@
+newest_article = '最新文章'
+newest_art = '最新画作'
+random_article = '随机文章'
+tag_list = '标签列表'
+c4bi = '四只柜子'
+t-c4bi = 'hika.me'
+js-license = 'JavaScript 许可证'
+
+# 倒计时使用的单位后缀（main.js: UpdateTimerDisplay）。
+time_unit_day = '天'
+time_unit_hour = '小时'
+time_unit_minute = '分'
+time_unit_second = '秒'
+main_thread_format = '主贴 {time} 后'
+
+text_count = '全文字数'
+
+[found_with_count]
+zero = '没有找到任何结果'
+other = '找到了 {{ . }} 个结果'

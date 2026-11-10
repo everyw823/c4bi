@@ -1,4 +1,13 @@
-export function ParseThisTimeInterval(time, rootTime, units = { d: 'd ', h: 'h ', m: 'm ', s: 's' }) {
+import { i18n } from "./utils";
+
+export function ParseThisTimeInterval(time, rootTime) {
+    const units = {
+            d: i18n('time_unit_day', 'd '),
+            h: i18n('time_unit_hour', 'h '),
+            m: i18n('time_unit_minute', 'm '),
+            s: i18n('time_unit_second', 's'),
+        };
+
     const timeDiff = time - rootTime;
     const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));

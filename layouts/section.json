@@ -1,0 +1,13 @@
+{{- $.Scratch.Add "index" slice -}}
+{{- range .Pages -}}
+{{- $page := . }}
+{{- $filepath := print "/content" $page.RelPermalink }}
+{{- $imgs := slice }}
+{{- range readDir $filepath }}
+{{- if findRE "(?i)\\.(gif|jpg|jpeg|tiff|png|bmp|webp|avif|jxl)$" .Name }}
+{{ $imgs = $imgs | append .Name }}
+{{- end }}
+{{- end }}
+{{- $.Scratch.Add "index" (dict "title" .Title "permalink" .RelPermalink "tags" .Params.tags "date" (.Date.Format "2006-01-02") "imgs" $imgs "img_count"  (len $imgs)  "wordcount" ($page.WordCount) ) -}}
+{{- end -}}
+{{- $.Scratch.Get "index" | jsonify -}}

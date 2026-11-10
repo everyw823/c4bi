@@ -1,0 +1,125 @@
+[en]
+  locale = 'en-US'
+  direction = 'ltr'
+  label = 'English'
+  weight = 1
+  title = 'C4binet'
+  hasCJKLanguage = false
+  
+  [en.menu]
+    [[en.menu.main]]
+        contentDir = 'content/en'
+        name = 'World'
+        pre = "/menu/world.png"
+        post = "earth"
+        pageRef = '/posts'
+        weight = 20
+
+    [[en.menu.main]]
+        name = 'Characters'
+        pre = "/menu/character.png"
+        post = "users-collaboration"
+        pageRef = '/characters'
+        weight = 30
+
+    [[en.menu.main]]
+        name = 'Arts'
+        pre = "/menu/art.png"
+        post = "brush"
+        pageRef = '/tags'
+        weight = 40
+
+    [[en.menu.main]]
+        name = 'Stories'
+        pre = "/menu/writing.png"
+        post = "book-bookmark"
+        pageRef = '/tags'
+        weight = 50
+
+    [[en.menu.main]]
+        name = 'About'
+        post = "message-circle-question-mark"
+        pre = "/menu/about.png"
+        pageRef = '/'
+        weight = 60
+
+    [[en.menu.main]]
+        name = 'Misc'
+        pre = "/menu/misc.png"
+        post = "message-circle-question-mark"
+        pageRef = '/categories/miscellaneous'
+        weight = 10
+
+
+    [[en.menu.subsite]]
+        name = 'C4bi'
+        pageRef = '/'
+        weight = 10
+
+    [[en.menu.subsite]]
+        name = 'Tech'
+        url = 'https://t.c4bi.net'
+        weight = 20
+
+[zh-cn]
+  locale = 'zh-CN'
+  direction = 'ltr'
+  label = '中文'
+  weight = 2
+  title = '四只柜子'
+  hasCJKLanguage = true
+
+  [zh-cn.menu]
+    [[zh-cn.menu.main]]
+    name = '世界观'
+    pre = "/menu/world.png"
+    post = "earth"
+    pageRef = '/posts'
+    weight = 20
+
+  [[zh-cn.menu.main]]
+    name = '角色'
+    pre = "/menu/character.png"
+    post = "users-collaboration"
+    pageRef = '/characters'
+    weight = 30
+
+    [[zh-cn.menu.main]]
+    name = '画作'
+    pre = "/menu/art.png"
+    post = "brush"
+    pageRef = '/tags'
+    weight = 40
+
+  [[zh-cn.menu.main]]
+    name = '故事'
+    pre = "/menu/writing.png"
+    post = "book-bookmark"
+    pageRef = '/tags'
+    weight = 50
+
+  [[zh-cn.menu.main]]
+    name = '关于我'
+    post = "message-circle-question-mark"
+    pre = "/menu/about.png"
+    pageRef = '/about'
+    weight = 60
+
+  [[zh-cn.menu.main]]
+    name = '杂记'
+    pre = "/menu/misc.png"
+    post = "message-circle-question-mark"
+    pageRef = '/categories/miscellaneous'
+    weight = 10
+
+
+  [[zh-cn.menu.subsite]]
+    name = '四只柜子'
+    pageRef = '/'
+    weight = 10
+
+  [[zh-cn.menu.subsite]]
+    name = '技术站'
+    url = 'https://t.c4bi.net'
+    weight = 20
+  

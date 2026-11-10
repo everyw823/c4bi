@@ -156,8 +156,9 @@ title = 'Miscellaneous""" + thread.create_time.strftime("%Y-%m-%d") + """'
 author = 'Home'
 date = """ + thread.create_time.strftime("%Y-%m-%dT%H:%M:%S+08:00") + """
 categories = ['Miscellaneous']
-tags = ['archive']""" + """
+tags = ['archive','zh-cn','tbo']""" + """
 sources = ['""" + root_id + """']
+cover = q
 +++
 
 """
