@@ -27,8 +27,11 @@ Renders a post preview card with image, summary, and metadata.
   <div class="w-full">
 
     <div class=" title-wrapper flex items-center  flex-wrap justify-between">
-       <div class=" text-sm mb-4">  {{ partial "terms.html" (dict "taxonomy" "tags" "page" $page "style" "simple" ) }} </div>
-      <h2 class="break-all"><a href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h2>
+      <div class="w-full flex flex-nowrap"> <div class=" text-sm mb-4">  {{ partial "terms.html" (dict "taxonomy" "tags" "page" $page "style" "simple" ) }} </div>
+      {{- /* 空位撒一层随机小几何图形，渲染逻辑见 assets/js/modules/decor-shapes.js。
+             data-seed 用固定链接做种子，同一篇文章每次刷新图案一致。 */}}
+      </div>
+       <h2 class="break-all"><a href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h2>
       
     </div>
 

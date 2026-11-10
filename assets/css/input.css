@@ -1,4 +1,3 @@
-
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @source "hugo_stats.json";
@@ -24,35 +23,37 @@
 }
 
 
-@custom-variant thumb{
-  &::-moz-range-thumb{
+@custom-variant thumb {
+  &::-moz-range-thumb {
     @slot;
-  }  
-  &::-webkit-slider-thumb{
+  }
+
+  &::-webkit-slider-thumb {
     -webkit-appearance: none;
     @slot;
   }
 }
 
-@custom-variant track{
-  &::-moz-range-track{
+@custom-variant track {
+  &::-moz-range-track {
     @slot;
   }
-  &::-webkit-slider-runnable-track{
+
+  &::-webkit-slider-runnable-track {
     -webkit-appearance: none;
     @slot;
   }
 }
 
 @theme static {
-  
-  --text-sm:0.75em;
-  --text-base:1em;
-  --text-lg:1.25em;
-  --text-xl:1.5em;
-  --text-2xl:1.75em;
-  --text-3xl:2em;
-  --text-4xl:2.25em;
+
+  --text-sm: 0.75em;
+  --text-base: 1em;
+  --text-lg: 1.25em;
+  --text-xl: 1.5em;
+  --text-2xl: 1.75em;
+  --text-3xl: 2em;
+  --text-4xl: 2.25em;
 
   --color-white: #ffffff;
 
@@ -106,7 +107,7 @@
 
 
   --font-sans: ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Noto Serif CJK SC","Songti SC", "SimSun", "Noto Serif SC","Source Han Serif CN", "Source Han Serif CN" ,ui-serif, Georgia, serif;
+  --font-serif: "Noto Serif CJK SC", "Songti SC", "SimSun", "Noto Serif SC", "Source Han Serif CN", "Source Han Serif CN", ui-serif, Georgia, serif;
   --font-mono: ui-monospace, SFMono-Regular;
   --font-display: Oswald;
   --font-body: "Open Sans";
@@ -128,6 +129,7 @@
       opacity: 1;
     }
   }
+
   @keyframes slideInFromUp {
     0% {
       transform: translateY(-100%);
@@ -139,8 +141,11 @@
   }
 
   --animate-wiggle: wiggle 4s ease-in-out infinite;
+
   @keyframes wiggle {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: rotate(-3deg);
     }
 
@@ -150,7 +155,7 @@
   }
 
 
-  
+
 }
 
 
@@ -179,110 +184,112 @@
 
 @layer base {
 
-:root{
-  --color-primary-50: #eff0f6;
-  --color-primary-100: #dde0ee;
-  --color-primary-200: #b7bfe1;
-  --color-primary-300: #93a0d2;
-  --color-primary-400: #6f80c3;
-  --color-primary-500: #4b60b4;
-  --color-primary-600: #3c4d90;
-  --color-primary-700: #2d3a6c;
-  --color-primary-800: #1e2648;
-  --color-primary-900: #141829;
-  --color-primary-950: #0b0d14;
+  :root {
+    --color-primary-50: #eff0f6;
+    --color-primary-100: #dde0ee;
+    --color-primary-200: #b7bfe1;
+    --color-primary-300: #93a0d2;
+    --color-primary-400: #6f80c3;
+    --color-primary-500: #4b60b4;
+    --color-primary-600: #3c4d90;
+    --color-primary-700: #2d3a6c;
+    --color-primary-800: #1e2648;
+    --color-primary-900: #141829;
+    --color-primary-950: #0b0d14;
 
-  --color-secondary-50: #f8fafc;
-  --color-secondary-100: #f1f5f9;
-  --color-secondary-200: #e2e8f0;
-  --color-secondary-300: #cbd5e1;
-  --color-secondary-400: #94a3b8;
-  --color-secondary-500: #64748b;
-  --color-secondary-600: #475569;
-  --color-secondary-700: #334155;
-  --color-secondary-800: #1e293b;
-  --color-secondary-900: #0f172a;
-  --color-secondary-950: #020617;
+    --color-secondary-50: #f8fafc;
+    --color-secondary-100: #f1f5f9;
+    --color-secondary-200: #e2e8f0;
+    --color-secondary-300: #cbd5e1;
+    --color-secondary-400: #94a3b8;
+    --color-secondary-500: #64748b;
+    --color-secondary-600: #475569;
+    --color-secondary-700: #334155;
+    --color-secondary-800: #1e293b;
+    --color-secondary-900: #0f172a;
+    --color-secondary-950: #020617;
 
-  --color-accent-50: #fdfff5;
-  --color-accent-100: #fbffe6;
-  --color-accent-200: #f7ffcc;
-  --color-accent-300: #f1ffa4;
-  --color-accent-400: #e3fe48;
-  --color-accent-500: #adcb01;
-  --color-accent-600: #8ea701;
-  --color-accent-700: #687a01;
-  --color-accent-800: #3c4700;
-  --color-accent-900: #1e2400;
-  --color-accent-950: #111400;
+    --color-accent-50: #fdfff5;
+    --color-accent-100: #fbffe6;
+    --color-accent-200: #f7ffcc;
+    --color-accent-300: #f1ffa4;
+    --color-accent-400: #e3fe48;
+    --color-accent-500: #adcb01;
+    --color-accent-600: #8ea701;
+    --color-accent-700: #687a01;
+    --color-accent-800: #3c4700;
+    --color-accent-900: #1e2400;
+    --color-accent-950: #111400;
 
-  --color-brand-50: #eef2ff;
-  --color-brand-100: #e0e7ff;
-  --color-brand-200: #c7d2fe;
-  --color-brand-300: #a5b4fc;
-  --color-brand-400: #818cf8;
-  --color-brand-500: #6366f1;
-  --color-brand-600: #4f46e5;
-  --color-brand-700: #4338ca;
-  --color-brand-800: #3730a3;
-  --color-brand-900: #312e81;
-  --color-brand-950: #1e1b4e;
-}
+    --color-brand-50: #eef2ff;
+    --color-brand-100: #e0e7ff;
+    --color-brand-200: #c7d2fe;
+    --color-brand-300: #a5b4fc;
+    --color-brand-400: #818cf8;
+    --color-brand-500: #6366f1;
+    --color-brand-600: #4f46e5;
+    --color-brand-700: #4338ca;
+    --color-brand-800: #3730a3;
+    --color-brand-900: #312e81;
+    --color-brand-950: #1e1b4e;
+  }
 
 
-*[title]{
-  @apply underline underline-offset-2 decoration-1 decoration-dotted hover:decoration-0;
-}
+  *[title] {
+    @apply underline underline-offset-2 decoration-1 decoration-dotted hover:decoration-0;
+  }
 
-a{
-  @apply text-brand-500 dark:text-brand-500 hover:text-accent-500 dark:hover:text-accent-400 underline underline-offset-2 decoration-1 decoration-dashed;
-  cursor: pointer;
-}
+  a {
+    @apply text-brand-500 dark:text-brand-500 hover:text-accent-500 dark:hover:text-accent-400 underline underline-offset-2 decoration-1 decoration-dashed;
+    cursor: pointer;
+  }
 
-a[aria-disabled=true]{
-  @apply text-olive-500 hover:text-olive-600
-}
+  a[aria-disabled=true] {
+    @apply text-olive-500 hover:text-olive-600
+  }
 
-h1, h2, h3, h4, h5, h6 {
-  @apply text-primary-500 dark:text-primary-400 font-bold font-pixeloid pb-2;
-}
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-primary-500 dark:text-primary-400 font-bold font-pixeloid pb-2;
+  }
 
-h1{
-  @apply text-4xl;
-}
-h2{
-  @apply text-3xl;
-}
-h3{
-  @apply text-2xl;
-}
-h4{
-  @apply text-xl;
-}
-h5{
-  @apply text-lg;
-}
+  h1 {
+    @apply text-4xl;
+  }
 
-input[type="range"]{
-  @apply appearance-none bg-transparent
-track:h-1 track:bg-primary-500 track:rounded-full
-thumb:size-4 thumb:rounded-full thumb:bg-primary-500 thumb:border-2 thumb:-mt-1.5 thumb:border-white;
+  h2 {
+    @apply text-3xl;
+  }
 
-}
+  h3 {
+    @apply text-2xl;
+  }
 
-label{
-  @apply whitespace-nowrap
-}
+  h4 {
+    @apply text-xl;
+  }
 
-time, .time-icon{
-  @apply text-secondary-400 dark:text-secondary-500 font-pixeloid select-none 
-}
+  h5 {
+    @apply text-lg;
+  }
 
-.time-icon{
-  @apply inline-block;
-}
+  input[type="range"] {
+    @apply appearance-none bg-transparent track:h-1 track:bg-primary-500 track:rounded-full thumb:size-4 thumb:rounded-full thumb:bg-primary-500 thumb:border-2 thumb:-mt-1.5 thumb:border-white;
 
-/* details.image-shrinker{
+  }
+
+  label {
+    @apply whitespace-nowrap
+  }
+
+  time, .time-icon {
+    @apply text-secondary-400 dark:text-secondary-500 font-pixeloid select-none
+  }
+
+  .time-icon {
+    @apply inline-block;
+  }
+
+  /* details.image-shrinker{
   @apply my-4;
   summary {
   @apply mb-4 border-2 text-center border-dotted text-secondary-500 bg-secondary-50 dark:bg-secondary-900 border-secondary-200 hover:bg-secondary-100 hover:dark:bg-secondary-800 dark:border-secondary-600 p-2 w-full;
@@ -291,25 +298,25 @@ time, .time-icon{
 
 
 
-hr {
-  @apply border-secondary-400 dark:border-secondary-600 border-t-[0.2em] border-dotted my-[1em] border-0 w-full;
-}
-
-.container {
-  background: url('../contour.png') var(--color-white);
-}
-
-@media (prefers-color-scheme: dark) {
+  hr {
+    @apply border-secondary-400 dark:border-secondary-600 border-t-[0.2em] border-dotted my-[1em] border-0 w-full;
+  }
 
   .container {
-    background: radial-gradient(var(--color-primary-800) 0%, var(--color-primary-900) 20%, var(--color-primary-900) 60%,var(--color-black) 100%);
+    background: url('../contour.png') var(--color-white);
   }
-}
+
+  @media (prefers-color-scheme: dark) {
+
+    .container {
+      background: radial-gradient(var(--color-primary-800) 0%, var(--color-primary-900) 20%, var(--color-primary-900) 60%, var(--color-black) 100%);
+    }
+  }
 
 
-p{
-  @apply mb-2;
-}
+  p {
+    @apply mb-2;
+  }
 
 
 }
@@ -317,81 +324,85 @@ p{
 @layer components {
 
   /* 1. 隐藏默认箭头并设置相对定位 */
-summary {
-  list-style: none;
-  position: relative;
-  padding-left: 20px; /* 为自定义箭头留出空间 */
-  cursor: pointer;
-  font-weight: bold;
-}
-summary::-webkit-details-marker {
-  display: none;
-}
+  summary {
+    list-style: none;
+    position: relative;
+    padding-left: 20px;
+    /* 为自定义箭头留出空间 */
+    cursor: pointer;
+    font-weight: bold;
+  }
 
-/* 2. 用伪元素绘制自定义箭头（以普通的“>”或三角形为例） */
-summary::after {
-  content: "→"; 
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: transform 0.2s ease; /* 添加平滑旋转动画 */
-  font-size: 0.8em;
-  color: #666;
-}
+  summary::-webkit-details-marker {
+    display: none;
+  }
 
-/* 3. 当开启时，让箭头旋转 90 度 */
-details[open] summary::after {
-  transform: translateY(-50%) rotate(90deg);
-}
+  /* 2. 用伪元素绘制自定义箭头（以普通的“>”或三角形为例） */
+  summary::after {
+    content: "→";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.2s ease;
+    /* 添加平滑旋转动画 */
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  /* 3. 当开启时，让箭头旋转 90 度 */
+  details[open] summary::after {
+    transform: translateY(-50%) rotate(90deg);
+  }
 
 
-.btn-checkbox input[type="checkbox"] {
-  display: none;
-}
+  .btn-checkbox input[type="checkbox"] {
+    display: none;
+  }
 
-.btn-checkbox span {
+  .btn-checkbox span {
 
-  @apply transition-all  border border-dashed border-secondary-400 dark:border-secondary-600 hover:bg-secondary-50 dark:hover:bg-secondary-900 active:translate-y-1 rounded-lg active:rounded-md active:bg-brand-400 active:text-secondary-200 px-1 inline-block cursor-pointer select-none;
+    @apply transition-all border border-dashed border-secondary-400 dark:border-secondary-600 hover:bg-secondary-50 dark:hover:bg-secondary-900 active:translate-y-1 rounded-lg active:rounded-md active:bg-brand-400 active:text-secondary-200 px-1 inline-block cursor-pointer select-none;
 
-}
+  }
 
-.btn-checkbox input[type="checkbox"]:checked + span {
+  .btn-checkbox input[type="checkbox"]:checked+span {
 
-  @apply border-solid  border-primary-700 dark:border-primary-400 bg-brand-500 active:bg-transparent active:border-dotted active:text-inherit text-secondary-200 translate-y-px rounded-sm  active:translate-y-0.5 active:rounded-md active:bg-inherit;
+    @apply border-solid border-primary-700 dark:border-primary-400 bg-brand-500 active:bg-transparent active:border-dotted active:text-inherit text-secondary-200 translate-y-px rounded-sm active:translate-y-0.5 active:rounded-md active:bg-inherit;
 
-}
+  }
 
-  .tag{
+  .tag {
     @apply relative rounded-r-md rounded-l-3xl pl-5 pr-2 font-bold mx-1 py-1 text-secondary-200 dark:text-secondary-300;
-    }
-  
-  .tag::before{
-      content: "";
-      @apply rounded-full w-2 h-2  bg-white dark:bg-primary-950 inline-block absolute left-2 top-1/2 -translate-y-1/2;
-    }
+  }
+
+  .tag::before {
+    content: "";
+    @apply rounded-full w-2 h-2 bg-white dark:bg-primary-950 inline-block absolute left-2 top-1/2 -translate-y-1/2;
+  }
+
 
   .font-pixel {
-  letter-spacing: 0.05em;
-  transform: translateX(.1em) translateY(.1em);
-}
+    letter-spacing: 0.05em;
+    transform: translateX(.1em) translateY(.1em);
+  }
 
 
 
-img.tint {
-  filter: url(#flood);
-}
+  img.tint {
+    filter: url(#flood);
+  }
 
-/* Injected logo: the source artwork carries absolute width/height, which
+  /* Injected logo: the source artwork carries absolute width/height, which
    main.js strips after injection. With only the viewBox left, width:100%
    plus height:auto scales the mark to whatever the parent gives it. */
-svg.logo-responsive {
-  @apply block w-full h-auto;
-}
+  svg.logo-responsive {
+    @apply block w-full h-auto;
+  }
 
-.link-caution{
-  @apply text-sm sm:hidden;
-}
+  .link-caution {
+    @apply text-sm sm:hidden;
+  }
 
 }
 

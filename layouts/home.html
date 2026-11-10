@@ -27,7 +27,7 @@ justify-center w-full
   <div class="w-full flex mb-6">
    
     
-    <h1 class="">{{ T "newest_article" }}</h1><div class="flex-1"></div><div class="border border-secondary-300 dark:border-secondary-600 text-brand-300 w-[3em] rounded-sm h-[3em] flex justify-center items-center scattered"><i class="block" data-lucide="sparkles"  width="32" height="32" ></i></div></div>
+    <h1 class="">{{ T "newest_article" }}</h1><div class="flex-1 decor-shapes"></div><div class="border border-secondary-300 dark:border-secondary-600 text-brand-300 w-[3em] rounded-sm h-[3em] flex justify-center items-center scattered"><i class="block" data-lucide="sparkles"  width="32" height="32" ></i></div></div>
     {{- with index $posts.ByDate.Reverse 0 }}
     {{ partial "preview/post.html" (dict "page" . "summaryLength" 150) }}
     {{- end }}
@@ -40,7 +40,8 @@ justify-center w-full
 
 <section class="sm:px-5 py-5 w-full h-full">
  
-  <h1 class="mb-6">{{ T "random_article" }}</h1>
+     <div class="w-full flex mb-6">
+      <h1 class="">{{ T "random_article" }}</h1><div class="flex-1 decor-shapes"></div><div class="border border-secondary-300 dark:border-secondary-600 text-brand-300 w-[3em] rounded-sm h-[3em] flex justify-center items-center scattered"><i class="block" data-lucide="sparkles"  width="32" height="32" ></i></div></div>
      
     {{- $random := int (math.Rand | mul (site.RegularPages.Len) | math.Floor)}}
     {{- with (index $posts $random) }}
@@ -52,7 +53,7 @@ justify-center w-full
 <div class="flex flex-col">
 <section class="sm:px-5 py-5 w-full h-full">
    <div class="w-full flex mb-6">
-   <h1 class="">{{ T "newest_art" }}</h1><div class="flex-1"></div><div class="border border-secondary-300 dark:border-secondary-600 text-brand-300 w-[3em] rounded-sm h-[3em] flex justify-center items-center scattered"><i class="block" data-lucide="brush"  width="32" height="32" ></i></div></div>
+      <h1 class="">{{ T "newest_art" }}</h1><div class="flex-1 decor-shapes"></div><div class="border border-secondary-300 dark:border-secondary-600 text-brand-300 w-[3em] rounded-sm h-[3em] flex justify-center items-center scattered"><i class="block" data-lucide="sparkles"  width="32" height="32" ></i></div></div>
    
    <div class="grid grid-cols-3">
     {{- range seq 1 5}}

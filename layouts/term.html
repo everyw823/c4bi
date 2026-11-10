@@ -7,9 +7,15 @@
 	{{- with .Params.color }}
         {{- $color = . }}
     {{- end }}
-	<h1 class="tag bg-{{ $color }}-500 dark:bg-{{ $color }}-600 text-center mb-2">
+<div class="flex flex-nowrap mb-3">
+		<div class="hidden md:block decor-shapes flex-1" aria-hidden="true"
+           data-seed="{{ $page.RelPermalink }}" data-max="14" data-density="1.1"></div>
+<h1 class=" scattered py-2 tag bg-{{ $color }}-500 dark:bg-{{ $color }}-600 text-center mb-2">
 		{{ T .Title }}
 	</h1>
+<div class="decor-shapes flex-1 -scale-x-100" aria-hidden="true"
+           data-seed="{{ $page.RelPermalink }}" data-max="14" data-density="1.1"></div></div>
+	
 	{{- else }}
 	<h1 class="text-center mb-2">
 		{{ $page.Title }}

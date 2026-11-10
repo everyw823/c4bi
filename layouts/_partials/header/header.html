@@ -13,10 +13,11 @@
 <div class=" hidden 2xl:block flex-1 "></div>
 
   <div class="w-full 2xl:w-auto flex flex-col">
-    <nav class="font-pixeloid h-fit overflow-hidden flex sm:px-20 md:px-0 lg:py-0 py-4 pb-12 xl:pb-0 flex-auto lg:grow xl:shrink-0 2xl:justify-end justify-center flex-wrap items-center">
-{{ partial "menu/main_menu.html" (dict "menuID" "main" "page" .) }}
 
-</nav>
+    <nav class="font-pixeloid h-fit overflow-hidden flex sm:px-20 md:px-0 lg:py-0 py-4 pb-12 xl:pb-0 flex-auto lg:grow xl:shrink-0 2xl:justify-end justify-center flex-wrap items-center">
+{{ partial "menu/main_menu.html" (dict "menuID" "main" "page" .) }}</nav>
+
+
       <div class="timer text-center text-secondary-500 dark:text-secondary-400">
         {{ partial (printf "motto.%s.html" .Lang) . }}
 </div>

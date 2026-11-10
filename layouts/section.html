@@ -1,8 +1,12 @@
 {{ define "main" }}
 {{ $page := . }}
 <div class="mb-15">
+	<div class="flex flex-nowrap mb-3">
+	<div class="hidden md:block decor-shapes flex-1" aria-hidden="true"
+           data-seed="{{ $page.RelPermalink }}" data-max="14" data-density="1.1"></div>
 <h1 class="text-center mb-2">{{ .Title }}</h1>
-
+<div class="decor-shapes flex-1 -scale-x-100" aria-hidden="true"
+           data-seed="{{ $page.RelPermalink }}" data-max="14" data-density="1.1"></div></div>
 {{- if eq .Paginator.PageNumber 1 }}
 {{ $page.Content }}
 
