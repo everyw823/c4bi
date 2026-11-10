@@ -37,8 +37,6 @@
     --radius-xl: 0.75rem;
     --radius-2xl: 1rem;
     --radius-3xl: 1.5rem;
-    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-    --blur-2xl: 40px;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
@@ -437,8 +435,14 @@
   .w-1\/2 {
     width: calc(1 / 2 * 100%);
   }
+  .w-3\/4 {
+    width: calc(3 / 4 * 100%);
+  }
   .w-6 {
     width: calc(var(--spacing) * 6);
+  }
+  .w-80 {
+    width: calc(var(--spacing) * 80);
   }
   .w-\[2em\] {
     width: 2em;
@@ -967,6 +971,9 @@
     }
     .sm\:ml-3 {
       margin-left: calc(var(--spacing) * 3);
+    }
+    .sm\:block {
+      display: block;
     }
     .sm\:flex {
       display: flex;
@@ -1706,6 +1713,11 @@
   }
   img.tint {
     filter: url(#flood);
+  }
+  svg.logo-responsive {
+    display: block;
+    height: auto;
+    width: 100%;
   }
   .link-caution {
     font-size: var(--text-sm);

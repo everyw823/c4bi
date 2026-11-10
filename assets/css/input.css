@@ -382,6 +382,13 @@ img.tint {
   filter: url(#flood);
 }
 
+/* Injected logo: the source artwork carries absolute width/height, which
+   main.js strips after injection. With only the viewBox left, width:100%
+   plus height:auto scales the mark to whatever the parent gives it. */
+svg.logo-responsive {
+  @apply block w-full h-auto;
+}
+
 .link-caution{
   @apply text-sm sm:hidden;
 }

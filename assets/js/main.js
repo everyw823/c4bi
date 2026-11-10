@@ -1,7 +1,7 @@
 
 // import { updateOverlaySize } from './modules/overlay.js';
 import { importAllLucides } from './modules/lucide-importer.js';
-import { tintSVG } from './modules/svg.js';
+import { tintSVG, makeResponsive } from './modules/svg.js';
 import { ParseThisTimeInterval } from './modules/time.js';
 import { Hex2NormalizedRGB,i18n } from './modules/utils.js';
 
@@ -31,7 +31,10 @@ document.addEventListener('DOMContentLoaded', function (e) {
     // updateOverlaySize();
     // globalThis.borderOverlay.style.display = 'fixed';
 
-    SVGInject(document.querySelectorAll('img.injectable')).then(addColorChangeListener);
+    SVGInject(document.querySelectorAll('img.injectable')).then(() => {
+        // Strip the baked-in px size before the tint pass measures anything.
+        document.querySelectorAll('svg.logo-responsive').forEach(makeResponsive);
+    }).then(addColorChangeListener);
 
 
     // const svgflood = document.getElementById("svgflood");
