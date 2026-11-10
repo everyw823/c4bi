@@ -1,86 +1,84 @@
 {{ define "main" }}
 <script src="filter.js" type="text/javascript" defer></script>
 
-<div class="lg:grid grid-cols-[240px_1fr] gap-5 lg:my-10">
-<aside id="filter-aside" class="sticky left-0 top-0 rounded-xl
-p-4 border card-gradient dark:card-gradient-dark  text-secondary-500 dark:text-secondary-400 border-secondary-300 dark:border-secondary-700
-mb-5 lg:mt-0 h-fit ">
-<details>
-<summary><a class="font-pixeloid">筛选角色</a></summary>
-<div class="filter flex flex-col" data-filter="character">
-    <span class="font-sans mt-2 text-sm">选择模式</span>
-       
-    <div class="border p-2 rounded-lg border-secondary-200 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-950">
-     <ul id="mode-selector" class="h-full flex flex-row flex-wrap justify-start lg:justify-center">
-        <li class="mx-1"><input class="mx-1" type="radio" name="mode" checked="true" data-mode="0"><label title="文章必须有所选的全部标签才可入选">与</label>
-        <div class="text-sm block lg:hidden">必须有所选的全部标签才可入选</div></li>
-            <li class="mx-1"><input class="mx-1" type="radio" name="mode" data-mode="1"><label title="文章只要有所选标签的一部分即可入选">或</label>
-            <div class="text-sm block lg:hidden">只要有所选标签的一部分即可入选</div></li>
-            <li class="mx-1"><input class="mx-1" type="radio" name="mode" data-mode="2"><label title="文章必须【没有】【所选的全部标签】才可入选">与非</label>
-            <div class="text-sm block lg:hidden">必须【没有】所选的全部标签才可入选</div></li> 
+<div class="character-index">
+<aside id="filter-aside" class="filter-panel">
+<details class="filter-panel__details">
+<summary class="filter-panel__summary"><a class="filter-panel__summary-link">筛选角色</a></summary>
+<div class="filter-panel__body" data-filter="character">
+    <span class="filter-panel__legend">选择模式</span>
+
+    <div class="filter-panel__group">
+     <ul id="mode-selector" class="filter-panel__modes">
+        <li class="filter-panel__mode"><input class="filter-panel__radio" type="radio" name="mode" checked="true" data-mode="0"><label class="filter-panel__label" title="文章必须有所选的全部标签才可入选">与</label>
+        <div class="filter-panel__hint">必须有所选的全部标签才可入选</div></li>
+            <li class="filter-panel__mode"><input class="filter-panel__radio" type="radio" name="mode" data-mode="1"><label class="filter-panel__label" title="文章只要有所选标签的一部分即可入选">或</label>
+            <div class="filter-panel__hint">只要有所选标签的一部分即可入选</div></li>
+            <li class="filter-panel__mode"><input class="filter-panel__radio" type="radio" name="mode" data-mode="2"><label class="filter-panel__label" title="文章必须【没有】【所选的全部标签】才可入选">与非</label>
+            <div class="filter-panel__hint">必须【没有】所选的全部标签才可入选</div></li>
         </ul>
-       </div>    
+       </div>
 
 
     </div>
     <hr>
-    <h5 class="pb-0">筛选标准</h5>
-    <span class="font-sans mt-2 text-sm">按年份</span>
-    <div class="border p-2 rounded-lg border-secondary-200 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-950">
+    <h5 class="filter-panel__heading">筛选标准</h5>
+    <span class="filter-panel__legend">按年份</span>
+    <div class="filter-panel__group">
         {{- with (partial "terms_selection.html" (dict "taxonomy" "tags" "site" .Site "sub" "years") .)}}
     {{ . }}
     {{- end }}
     </div>
-    <span class="font-sans mt-2 text-sm">按样貌</span>
-    <div class="border p-2 rounded-lg border-secondary-200 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-950">
+    <span class="filter-panel__legend">按样貌</span>
+    <div class="filter-panel__group">
         {{- with (partial "terms_selection.html" (dict "taxonomy" "tags" "site" .Site "sub" "appearances") .)}}
     {{ . }}
     {{- end }}
     </div>
-    <span class="font-sans mt-2 text-sm">按世界观</span>
-    <div class="border p-2 rounded-lg border-secondary-200 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-950">
+    <span class="filter-panel__legend">按世界观</span>
+    <div class="filter-panel__group">
 {{- with (partial "terms_selection.html" (dict "taxonomy" "tags" "site" .Site "sub" "worlds") .)}}    {{ . }}
     {{- end }}
     </div>
 
 
 
-    <span class="font-sans mt-2 text-sm">按关键词</span>
-    <div class="border p-2 rounded-lg border-secondary-200 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-950">
+    <span class="filter-panel__legend">按关键词</span>
+    <div class="filter-panel__group">
 {{- with (partial "terms_selection.html" (dict "taxonomy" "tags" "site" .Site "sub" "keywords") .)}}    {{ . }}
     {{- end }}
     </div>
 
-   <span class="font-sans mt-2 text-sm ">按图片数</span>
-    <div class="   border p-2 rounded-lg border-secondary-200 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-950">
-        
-     <ul id="img-mode-selector" class=" flex flex-row justify-center">
-            <li class="mx-1"><input class="mx-1" type="radio" name="img-mode" checked="true" data-mode="0"><span>&gt;</span></li>
-            <li class="mx-1"><input class="mx-1" type="radio" name="img-mode" data-mode="1"><span>&lt;</span></li>
-            <li class="mx-1"><input class="mx-1" type="radio" name="img-mode" data-mode="2"><span>=</span></li>
+   <span class="filter-panel__legend">按图片数</span>
+    <div class="filter-panel__group">
+
+     <ul id="img-mode-selector" class="filter-panel__modes">
+            <li class="filter-panel__mode"><input class="filter-panel__radio" type="radio" name="img-mode" checked="true" data-mode="0"><span>&gt;</span></li>
+            <li class="filter-panel__mode"><input class="filter-panel__radio" type="radio" name="img-mode" data-mode="1"><span>&lt;</span></li>
+            <li class="filter-panel__mode"><input class="filter-panel__radio" type="radio" name="img-mode" data-mode="2"><span>=</span></li>
         </ul>
-<div class="slider flex flex-wrap">
-        <input id="img-counter" type="range" value="-1" class="min-w-0 flex-1" min="-1" max="10"
+<div class="filter-panel__slider" data-slider>
+        <input class="filter-panel__range" id="img-counter" type="range" value="-1" min="-1" max="10"
 data-threshold="-1" data-out-of-threshold="不限制">
-<label class="text-center ml-3 text-sm block relative px-2  rounded-md pointer-events-none border border-secondary-300 bg-secondary-50 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-950 " id="tooltip"></label>
+<label class="filter-panel__tooltip" id="tooltip"></label>
 </div>
 </div>
 
 
 
-<!-- 
-   <span class="font-sans mt-2 text-sm ">按字数</span>
-    <div class="   border p-2 rounded-lg border-secondary-200 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-950">
-        
-     <ul class=" flex flex-row justify-center">
-            <li><input class="mx-1" type="radio" name="text-mode" checked="true"><span>小于</span></li>
-            <li><input class="mx-1" type="radio" name="text-mode"><span>大于</span></li>
+<!--
+   <span class="filter-panel__legend">按字数</span>
+    <div class="filter-panel__group">
+
+     <ul class="filter-panel__modes">
+            <li class="filter-panel__mode"><input class="filter-panel__radio" type="radio" name="text-mode" checked="true"><span>小于</span></li>
+            <li class="filter-panel__mode"><input class="filter-panel__radio" type="radio" name="text-mode"><span>大于</span></li>
         </ul>
-<div class="slider flex flex-wrap">
-        <input id="img-counter" type="range" value="0" class="min-w-0 flex-1" min="0" max="5000"
+<div class="filter-panel__slider" data-slider>
+        <input class="filter-panel__range" id="img-counter" type="range" value="0" min="0" max="5000"
 data-threshold="0" data-out-of-threshold="不限制" step="100">
 
-<label class="text-center ml-3 text-sm block relative px-2  rounded-md pointer-events-none border border-secondary-300 bg-secondary-50" id="tooltip"></label>
+<label class="filter-panel__tooltip" id="tooltip"></label>
 
 
 
@@ -88,12 +86,12 @@ data-threshold="0" data-out-of-threshold="不限制" step="100">
 </div> -->
 
 
-    <button onclick="fire()" class="transition-all cursor-pointer border border-primary-700 bg-primary-500 text-secondary-200 w-full p-2 mt-4 rounded-2xl hover:bg-primary-600 active:bg-primary-700 active:translate-y-px">・3・</button>
+    <button onclick="fire()" class="filter-panel__submit">・3・</button>
 
 </details>
 </aside>
-<section class="flex flex-col justify-start h-full">
-<!-- <div class="items-center ">
+<section class="character-index__results">
+<!-- <div >
 {{ .Content }}
 </div> -->
 <template id="unfiltered">
@@ -103,7 +101,7 @@ data-threshold="0" data-out-of-threshold="不限制" step="100">
 
 </template>
 
-<div id="filtered-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-2">
+<div id="filtered-container" class="character-grid">
 
 </div>
 </section>

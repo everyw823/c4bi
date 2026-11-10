@@ -3,6 +3,7 @@ For a given taxonomy, renders a list of terms assigned to the page.
 
 @context {page} page The current page.
 @context {string} taxonomy The taxonomy.
+@context {string} style Optional - "tag" (default) or "simple".
 
 @example: {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
 */}}
@@ -10,24 +11,20 @@ For a given taxonomy, renders a list of terms assigned to the page.
 {{- $page := .page }}
 {{- $taxonomy := .taxonomy }}
 {{- $style := .style | default "tag" }}
-{{- $class := .class}}
 
 {{- with $page.GetTerms $taxonomy }}
-  {{- $label := (index . 0).Parent.LinkTitle }}
-    <ul class="{{ $class }} flex flex-wrap">
+    <ul class="terms terms--{{ $style }}">
       {{- if ( eq $style "tag" )}}
       {{- range . }}
-        <li class="mr-1"> 
-          <a class=" text-secondary-200 decoration-2 decoration-dotted decoration-accent-600 dark:decoration-accent-500 underline "
-      href="{{ .Page.RelPermalink }}">
-      <div class=" tag inline-block hover:bg-brand-500 dark:hover:bg-brand-600 bg-primary-500 dark:bg-primary-600 font-bold "> {{ T .Page.Title }}</div>
+        <li class="terms__item">
+          <a class="terms__link" href="{{ .Page.RelPermalink }}">
+      <div class="terms__tag tag"> {{ T .Page.Title }}</div>
     </a></li>
       {{- end }}
       {{- else if (eq $style "simple")}}
       {{- range . }}
-        <li class="mr-1"> 
-          <a class="inline-block py-0.5 px-1 my-0.5 opacity-85  hover:opacity-100 transition-opacity bg-primary-100 hover:bg-primary-800 border border-primary-500 rounded-md"
-      href="{{ .Page.RelPermalink }}">
+        <li class="terms__item">
+          <a class="terms__chip" href="{{ .Page.RelPermalink }}">
      {{- if (T .Page.Title)}}{{ T .Page.Title }}{{- else }}{{ .Page.Title }}{{- end }}
     </a></li>
       {{- end }}

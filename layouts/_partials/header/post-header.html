@@ -13,24 +13,22 @@ Renders a post header with title and metadata (date and word count).
 {{ $dateMachine := $page.Date | time.Format "2006-01-02T15:04:05-07:00" }}
 {{ $dateHuman := $page.Date | time.Format ":date_medium"  }}
 
-<div class="mb-10">
-  <div class="title-wrapper flex items-center py-2 flex-wrap {{ if $large }}justify-between{{ end }}">
+<div class="post-header">
+  <div class="post-header__row{{ if $large }} post-header__row--large{{ end }}">
     {{ if $large }}
-    <div>
-      <h1 class="pb-1">{{ $page.Title }}</h1>
-       <time class="root-time date text-secondary-400 dark:text-secondary-500" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
-      <span class="text-secondary-200 dark:text-secondary-700 select-none">|</span>
-       <label class="font-pixeloid text-secondary-400 dark:text-secondary-500">{{ printf "要读 %d 分钟" $page.ReadingTime }}</label>
+    <div class="post-header__main">
+      <h1 class="post-header__title">{{ $page.Title }}</h1>
+       <time class="post-header__date" data-root-time data-date datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+      <span class="post-header__divider" aria-hidden="true">|</span>
+       <label class="post-header__reading-time">{{ printf "要读 %d 分钟" $page.ReadingTime }}</label>
     </div>
-      <div class="flex-1 text-right text-secondary-300 dark:text-secondary-700">{{ T "text_count" }}</div>
-      <label class="mt-5 md:mt-0 counter font-pixel text-center border-dotted border-4 dark:border-secondary-500 border-secondary-200 w-[2em] h-[2em] py-[.33em] text-primary-300 dark:text-primary-500 text-3xl mr-3" data-value="{{ $page.WordCount }}">{{ $page.WordCount }}</label>
-      
-</div>
+      <div class="post-header__count-label">{{ T "text_count" }}</div>
+      <label class="post-header__word-count post-header__word-count--large counter" data-word-count="{{ $page.WordCount }}">{{ $page.WordCount }}</label>
     {{ else }}
-      <h2><a href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h2>
-      <div class="flex-1 text-right dark:text-secondary-400 text-secondary-700">{{ T "text_count" }}</div>
-      <label class="mt-5 md:mt-0 counter font-pixel text-center border-dotted border-4 dark:border-secondary-500 border-secondary-200 w-fit min-w-[2em] h-[2em] p-[.25em] text-primary-300 dark:text-primary-500 text-xl mr-3" data-value="{{ $page.WordCount }}">{{ $page.WordCount }}</label>
+      <h2 class="post-header__title post-header__title--small"><a class="post-header__link" href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h2>
+      <div class="post-header__count-label post-header__count-label--small">{{ T "text_count" }}</div>
+      <label class="post-header__word-count counter" data-word-count="{{ $page.WordCount }}">{{ $page.WordCount }}</label>
     {{ end }}
   </div>
 
- 
+</div>

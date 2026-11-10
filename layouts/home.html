@@ -1,20 +1,12 @@
-
-
 {{ define "main" }}
 {{ $site := .Site }}
 
-<div class="
-lg:grid lg:grid-cols-[1fr_1fr] lg:grid-flow-row-dense
-flex flex-col flex-wrap
-justify-center w-full
+<div class="home">
 
-">
- 
-<section class="md:m-0 sm:px-5 pt-5 pb-5 relative w-full " style="grid-column-start: 1; grid-column-end: 3;">
-    <div class="flex flex-row flex-wrap justify-center items-center">
-      <div
-        class="z-10 w-full  px-4 pt-4 md:px-10 md:py-10 border-secondary-300 dark:border-secondary-600 bg-secondary-50 dark:bg-secondary-900 border-2 border-dashed  text-secondary-500 dark:text-secondary-300">
-        <blockquote class=" text-secondary-500 dark:text-secondary-400">{{ .Content }}</blockquote>
+<section class="home__intro" style="grid-column-start: 1; grid-column-end: 3;">
+    <div class="home__intro-inner">
+      <div class="home__quote-box">
+        <blockquote class="home__quote">{{ .Content }}</blockquote>
       </div>
 
     </div>
@@ -22,12 +14,12 @@ justify-center w-full
 
 </section>
  {{$posts := where .Site.RegularPages "Type" "posts" }}
-<div class="flex flex-col">
-<section class="sm:px-5 py-5 w-full h-full">
-  <div class="w-full flex mb-6">
-   
-    
-    <h1 class="">{{ T "newest_article" }}</h1><div class="flex-1 decor-shapes"></div><div class="border border-secondary-300 dark:border-secondary-600 text-brand-300 w-[3em] rounded-sm h-[3em] flex justify-center items-center scattered"><i class="block" data-lucide="sparkles"  width="32" height="32" ></i></div></div>
+<div class="home__column">
+<section class="panel home__panel">
+  <div class="panel__header">
+
+
+    <h1 class="panel__title">{{ T "newest_article" }}</h1><div class="panel__decor" data-decor-shapes aria-hidden="true"></div><div class="panel__badge" data-scattered><i data-lucide="sparkles"  width="32" height="32" ></i></div></div>
     {{- with index $posts.ByDate.Reverse 0 }}
     {{ partial "preview/post.html" (dict "page" . "summaryLength" 150) }}
     {{- end }}
@@ -38,11 +30,11 @@ justify-center w-full
     {{- end }}
 </section>
 
-<section class="sm:px-5 py-5 w-full h-full">
- 
-     <div class="w-full flex mb-6">
-      <h1 class="">{{ T "random_article" }}</h1><div class="flex-1 decor-shapes"></div><div class="border border-secondary-300 dark:border-secondary-600 text-brand-300 w-[3em] rounded-sm h-[3em] flex justify-center items-center scattered"><i class="block" data-lucide="sparkles"  width="32" height="32" ></i></div></div>
-     
+<section class="panel home__panel">
+
+     <div class="panel__header">
+      <h1 class="panel__title">{{ T "random_article" }}</h1><div class="panel__decor" data-decor-shapes aria-hidden="true"></div><div class="panel__badge" data-scattered><i data-lucide="sparkles"  width="32" height="32" ></i></div></div>
+
     {{- $random := int (math.Rand | mul (site.RegularPages.Len) | math.Floor)}}
     {{- with (index $posts $random) }}
       {{ partial "preview/post.html" (dict "page" . "summaryLength" 150) }}
@@ -50,12 +42,12 @@ justify-center w-full
 </section>
 </div>
 
-<div class="flex flex-col">
-<section class="sm:px-5 py-5 w-full h-full">
-   <div class="w-full flex mb-6">
-      <h1 class="">{{ T "newest_art" }}</h1><div class="flex-1 decor-shapes"></div><div class="border border-secondary-300 dark:border-secondary-600 text-brand-300 w-[3em] rounded-sm h-[3em] flex justify-center items-center scattered"><i class="block" data-lucide="sparkles"  width="32" height="32" ></i></div></div>
-   
-   <div class="grid grid-cols-3">
+<div class="home__column">
+<section class="panel home__panel">
+   <div class="panel__header">
+      <h1 class="panel__title">{{ T "newest_art" }}</h1><div class="panel__decor" data-decor-shapes aria-hidden="true"></div><div class="panel__badge" data-scattered><i data-lucide="sparkles"  width="32" height="32" ></i></div></div>
+
+   <div class="home__gallery">
     {{- range seq 1 5}}
     {{- with index $site.RegularPages.ByDate.Reverse . }}
       {{ partial "preview/post.html" (dict "page" . "summaryLength" 150 "style" "img") }}
@@ -63,7 +55,7 @@ justify-center w-full
   {{- end }}</div>
 </section>
 
-<section class="sm:px-5 py-5 w-full h-full flex flex-col">
+<section class="panel home__panel home__panel--empty">
 
 </section>
 </div>
@@ -71,9 +63,8 @@ justify-center w-full
 
 
 
-  
-</div></section>
-<!-- <section class="md:m-0 sm:px-5 pt-5 pb-5 relative w-full " style="grid-column-start: 1; grid-column-end: 3;"><div class="timer text-center text-secondary-500 dark:text-secondary-400">
+</div>
+<!-- <section class="home__intro" style="grid-column-start: 1; grid-column-end: 3;"><div class="motto" data-timer>
         {{ partial (printf "motto.%s.html" .Lang) . }}
 </div></section> -->
 {{ end }}

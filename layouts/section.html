@@ -1,27 +1,27 @@
 {{ define "main" }}
 {{ $page := . }}
-<div class="mb-15">
-	<div class="flex flex-nowrap mb-3">
-	<div class="hidden md:block decor-shapes flex-1" aria-hidden="true"
+<div class="list-head">
+	<div class="list-head__row">
+	<div class="list-head__decor" data-decor-shapes aria-hidden="true"
            data-seed="{{ $page.RelPermalink }}" data-max="14" data-density="1.1"></div>
-<h1 class="text-center mb-2">{{ .Title }}</h1>
-<div class="decor-shapes flex-1 -scale-x-100" aria-hidden="true"
+<h1 class="list-head__title">{{ .Title }}</h1>
+<div class="list-head__decor list-head__decor--mirrored" data-decor-shapes aria-hidden="true"
            data-seed="{{ $page.RelPermalink }}" data-max="14" data-density="1.1"></div></div>
 {{- if eq .Paginator.PageNumber 1 }}
 {{ $page.Content }}
 
-<div class="text-secondary-400 dark:text-secondary-500 text-center mt-5 mb-10 text-sm">{{ T "found_with_count" (len .Pages) }}</div>{{- end }}
+<div class="list-head__count">{{ T "found_with_count" (len .Pages) }}</div>{{- end }}
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
-	
+<div class="post-list">
+
 	{{- range ( .Paginate .Pages ).Pages }}
 	{{ partial "preview/post.html" (dict "page" . "summaryLength" 200 ) }}
 	{{- end }}
-	
+
 </div>
 
-<div class="flex">
+<div class="list-pager">
 	{{ partial "pagination.html" . }}
 </div>
 

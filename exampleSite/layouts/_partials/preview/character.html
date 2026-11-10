@@ -1,37 +1,33 @@
 {{- /*
-Renders a post preview card with image, summary, and metadata.
+Renders a character preview card with cover image, tags, title and counts.
 
 @context {page} page The current page.
-@context {int} summaryLength Optional - length to truncate summary to (default 200).
 
-@example: {{ partial "post-preview.html" (dict "page" . "summaryLength" 150) }}
+@example: {{ partial "preview/character.html" (dict "page" . ) }}
 */}}
 
 {{- $page := .page }}
-{{- $summaryLength := .summaryLength | default 200 }}
-{{- $style := .style | default "default" }}
 {{- $filepath := print "/content" $page.RelPermalink }}
 
 {{ $dateMachine := $page.Date | time.Format "2006-01-02T15:04:05-07:00" }}
 {{ $dateHuman := $page.Date | time.Format ":date_long" }}
 {{ $cover := ""}}
 {{ $imgs := slice }}
-{{- if eq $style "default" }}
 {{- range readDir $filepath }}
   {{- if findRE "(?i)\\.(gif|jpg|jpeg|tiff|png|bmp|webp|avif|jxl)$" .Name }}
     {{ $imgs = $imgs | append .Name }}
   {{- end }}
 {{- end }}
 
-<article data-img-count="{{ len $imgs }}" date-wordcount="{{ $page.WordCount }}" class="post-preview border border-secondary-300 bg-white sm:card-gradient dark:card-gradient-dark dark:border-secondary-600 overflow-clip grid grid-row-[1fr_3em]">
+<article data-img-count="{{ len $imgs }}" data-word-count="{{ $page.WordCount }}" class="character-card" data-post-preview>
 
-  
-  <div class="w-full">
-  <div class="image-text-preview-wrapper relative" >
-
+  <div class="character-card__inner">
+  <div class="character-card__media">
 
 
-    {{ $cover = ( print $page.RelPermalink .Name )}}
+
+
+    {{ $cover = ( print $page.RelPermalink .Name ) }}
 
 
 
@@ -42,24 +38,22 @@ Renders a post preview card with image, summary, and metadata.
 {{ $cover =( print $page.RelPermalink (index $imgs 0 ))}}
 {{- end }}
 
-        <img class="block img-preview object-cover aspect-square rounded-sm bg-cover w-full   sm:float-right filter-[url(#tint)] hover:filter-none " src="{{ $cover }}" style="image-rendering: pixelated;" alt="{{ $page.Title }}">
-    <div class="absolute top-0 left-0 p-2 text-sm">  {{ partial "terms.html" (dict "taxonomy" "tags" "page" $page "style" "simple" ) }} </div>
+        <img class="character-card__image" data-preview-image src="{{ $cover }}" style="image-rendering: pixelated;" alt="{{ $page.Title }}">
+    <div class="character-card__tags">  {{ partial "terms.html" (dict "taxonomy" "tags" "page" $page "style" "simple" ) }} </div>
 
 
-    <!-- {{ $page.Summary | replaceRE "<figure[^>]*>" "" | replaceRE "<img[^>]*>" "" | safeHTML | truncate $summaryLength }} -->
-      
+    <!-- {{ $page.Summary | replaceRE "<figure[^>]*>" "" | replaceRE "<img[^>]*>" "" | safeHTML }} -->
+
   </div>
-</div><div class="flex flex-col py-3 px-5">
-  <div class=" flex items-end flex-wrap">
-    
-      <h2 class="text-lg break-all pb-0"><a href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h2>
-    <div class="flex-1"></div>
-      <label class="counter font-pixel text-center border-dotted border-4 dark:border-secondary-700 border-secondary-200 w-fit min-w-[2em] h-[2em]  text-primary-200 dark:text-primary-600 text-md">{{ $page.WordCount }}</label>
-         <label class="counter font-pixel text-center border-dotted border-4 dark:border-primary-700 border-primary-200 w-fit min-w-[2em] h-[2em]  text-primary-200 dark:text-primary-600 text-md">{{ len $imgs }}</label>
-    
+</div><div class="character-card__body">
+  <div class=" character-card__head">
+
+      <h2 class="character-card__title"><a class="character-card__link" href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h2>
+    <div class="character-card__spacer"></div>
+      <label class="character-card__count counter">{{ $page.WordCount }}</label>
+         <label class="character-card__count character-card__count--images counter">{{ len $imgs }}</label>
+
     </div>
         </div>
 
 </article>
-
-    {{- end }}

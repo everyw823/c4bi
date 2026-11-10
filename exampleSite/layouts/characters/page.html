@@ -1,10 +1,10 @@
 {{ define "main" }}
 
-<article class="time-context post text-secondary-500">
+<article class="post" data-time-context>
   {{ partial "header/post-header.html" (dict "page" . "large" true) }}
-    <div class="content-wrapper h-max">{{ .Content }}</div>
+    <div class="content-wrapper">{{ .Content }}</div>
 <hr>
-  <div class="mt-10 text-sm flex">
+  <div class="post__terms">
   {{ partial "terms.html" (dict "taxonomy" "tags" "page" . "withNum" false) }}
   </div>
 </article>

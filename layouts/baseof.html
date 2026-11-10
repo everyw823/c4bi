@@ -5,7 +5,7 @@
   {{ partial "head.html" . }}
 </head>
 
-<body class=" text-base text-secondary-400 dark:text-secondary-500 bg-thingie bg-primary-700 dark:bg-primary-950 flex flex-col">
+<body class="page">
 
   {{ partial "svg/filter.html" . }}
 
@@ -15,14 +15,12 @@
   {{- end }}
 
 
-  <div class=" relative overflow-x-hidden container bg-blend-multiply  mx-auto
-  2xl:px-36 xl:px-24 lg:px-18 md:px-10 sm:px-4 px-2 py-8 
-  ">
+  <div class="site-frame">
 
 
-    <div id="real-container-inner" class="h-fit sm:h-auto relative justify-center md:justify-normal">
+    <div id="real-container-inner" class="site-frame__inner">
 
-      <header class="w-full flex flex-row flex-wrap 2xl:flex-nowrap items-center">
+      <header class="site-header">
         {{- if eq .RelPermalink "/" }}
         {{ partial "header/header.html" . }}
         {{- else }}
@@ -31,18 +29,16 @@
       </header>
 
 
-      <main
-        class=" px-8 py-12 bg-white dark:bg-primary-950  my-4  border-y-4 border-secondary-200 dark:border-secondary-700 border-dotted">
+      <main class="site-main">
         {{ block "main" . }}{{ end }}
       </main>
 
-      <footer>
+      <footer class="site-footer">
         {{ partial "footer.html" . }}
       </footer>
 
 
     </div>
-  </div>
   </div>
 
 </body>

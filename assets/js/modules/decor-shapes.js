@@ -4,7 +4,7 @@ import { generateUID } from './utils.js';
  * 在容器里撒一层小几何图形做装饰。
  *
  * 模板里给一个空的定位容器即可：
- *   <div class="decor-shapes flex-1" aria-hidden="true"
+ *   <div data-decor-shapes aria-hidden="true"
  *        data-seed="{{ $page.RelPermalink }}"></div>
  * 然后在 main.js 里调用 initDecorShapes()。
  *
@@ -201,6 +201,6 @@ export function scatterShapes(field) {
 }
 
 /** 初始化页面上所有装饰容器。 */
-export function initDecorShapes(selector = '.decor-shapes') {
+export function initDecorShapes(selector = '[data-decor-shapes]') {
     document.querySelectorAll(selector).forEach(scatterShapes);
 }

@@ -1,24 +1,23 @@
-<div class="w-full flex flex-wrap">
-<a class="w-full pt-0 backdrop-blur-[2px] md:flex-1 flex h-fit  justify-center 2xl:justify-normal" href="/" id="logo-container">
-  <div class="h-fit sm:w-full w-[70vw] sm:min-w-[400px] max-w-[500px] py-4">
-    <figure class="hidden sm:block">
-      <img src="/logo.svg" class="injectable tint logo-responsive" ></img>
+<div class="masthead">
+<a class="masthead__brand" href="/" id="logo-container">
+  <div class="masthead__logo-box">
+    <figure class="masthead__logo masthead__logo--wide">
+      <img class="masthead__logo-image" src="/logo.svg" data-svg-inject data-svg-tint data-logo-responsive alt="">
     </figure>
-    <figure class="flex sm:hidden justify-center">
-      <img src="/logo-sm.svg" class="w-3/4 injectable tint logo-responsive"></img>
+    <figure class="masthead__logo masthead__logo--compact">
+      <img class="masthead__logo-image" src="/logo-sm.svg" data-svg-inject data-svg-tint data-logo-responsive alt="">
     </figure>
-  
-</div>
+  </div>
 </a>
-<div class=" hidden 2xl:block flex-1 "></div>
+<div class="masthead__spacer"></div>
 
-  <div class="w-full 2xl:w-auto flex flex-col">
+  <div class="masthead__aside">
 
-    <nav class="font-pixeloid h-fit overflow-hidden flex sm:px-20 md:px-0 lg:py-0 py-4 pb-12 xl:pb-0 flex-auto lg:grow xl:shrink-0 2xl:justify-end justify-center flex-wrap items-center">
+    <nav class="masthead__nav">
 {{ partial "menu/main_menu.html" (dict "menuID" "main" "page" .) }}</nav>
 
 
-      <div class="timer text-center text-secondary-500 dark:text-secondary-400">
+      <div class="masthead__motto" data-timer>
         {{ partial (printf "motto.%s.html" .Lang) . }}
 </div>
 </div>

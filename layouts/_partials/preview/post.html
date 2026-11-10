@@ -3,8 +3,9 @@ Renders a post preview card with image, summary, and metadata.
 
 @context {page} page The current page.
 @context {int} summaryLength Optional - length to truncate summary to (default 200).
+@context {string} style Optional - "default", "mini" or "img".
 
-@example: {{ partial "post-preview.html" (dict "page" . "summaryLength" 150) }}
+@example: {{ partial "preview/post.html" (dict "page" . "summaryLength" 150) }}
 */}}
 
 {{- $page := .page }}
@@ -17,79 +18,75 @@ Renders a post preview card with image, summary, and metadata.
 
 {{ $dateMachine := $page.Date | time.Format "2006-01-02T15:04:05-07:00" }}
 {{ $dateHuman := $page.Date | time.Format ":date_long" }}
-{{ $class := .class}}
 
 {{- if eq $style "default" }}
 
-<article class="{{ $class }} time-context post-preview border border-secondary-300 bg-white sm:card-gradient dark:card-gradient-dark dark:border-secondary-600 dark: p-5 grid grid-row-[1fr_3em]">
+<article class="post-preview" data-post-preview data-time-context>
 
-  
-  <div class="w-full">
 
-    <div class=" title-wrapper flex items-center  flex-wrap justify-between">
-      <div class="w-full flex flex-nowrap"> <div class=" text-sm mb-4">  {{ partial "terms.html" (dict "taxonomy" "tags" "page" $page "style" "simple" ) }} </div>
+  <div class="post-preview__inner">
+
+    <div class="post-preview__head">
+      <div class="post-preview__tags">  {{ partial "terms.html" (dict "taxonomy" "tags" "page" $page "style" "simple" ) }} </div>
       {{- /* 空位撒一层随机小几何图形，渲染逻辑见 assets/js/modules/decor-shapes.js。
              data-seed 用固定链接做种子，同一篇文章每次刷新图案一致。 */}}
-      </div>
-       <h2 class="break-all"><a href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h2>
-      
+       <h2 class="post-preview__title"><a class="post-preview__link" href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h2>
+
     </div>
 
 
     {{- $source := index ($page.GetTerms "sources") 0 }}
-  <div class="image-text-preview-wrapper " >
+  <div class="post-preview__body" data-preview-body>
 
 {{ $content := $page.Summary | plainify | truncate $summaryLength }}
 {{- range readDir $filepath }}
   {{- if ( findRE "(?i)\\.(gif|jpg|jpeg|tiff|png|bmp|webp|avif|jxl)$" .Name )}}
-    <img class="img-preview float-right object-cover aspect-square rounded-sm bg-cover 
-    w-1/2
-    max-w-[200px] sm:max-w-none sm:w-[min(150px,25vw)] sm:ml-3 mx-auto sm:mx-0 mb-3 sm:float-right filter-[url(#tint)] hover:filter-none " src="{{ print $page.RelPermalink .Name }}" style="image-rendering: pixelated;" alt="{{ $page.Title }}">
+    <img class="post-preview__thumb" data-preview-image src="{{ print $page.RelPermalink .Name }}" style="image-rendering: pixelated;" alt="{{ $page.Title }}">
     {{- break }}
   {{- end }}
 
 {{- end }}
-    
+
 {{ $content}}
-   
+
 
     <!-- {{ $page.Summary | replaceRE "<figure[^>]*>" "" | replaceRE "<img[^>]*>" "" | safeHTML | truncate $summaryLength }} -->
-      
+
   </div>
 </div>
 
-  <div class=" flex items-end ">
-    <div>
-    <time class="root-time date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+  <div class="post-preview__foot">
+    <div class="post-preview__date-box">
+    <time class="post-preview__date" data-root-time data-date datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
     </div>
-    <div class="flex-1"></div>
-      <label class="counter font-pixel text-center border-dotted border-4 dark:border-secondary-700 border-secondary-200 w-fit min-w-[2em] h-[2em] p-[.25em] text-primary-200 dark:text-primary-600 text-xl" data-value="{{ $page.WordCount }}">{{ $page.WordCount }}</label>
+    <div class="post-preview__spacer"></div>
+      <label class="post-preview__count counter" data-word-count="{{ $page.WordCount }}">{{ $page.WordCount }}</label>
          </div>
 </article>
 
-    
+
 
 {{- else if eq $style "mini" }}
-<div class="flex flex-wrap border border-secondary-300 dark:border-secondary-600 my-2 px-5 py-2">
-      <h3 class="pb-0 break-all"><a href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h2>
-    <div class="flex-1"></div>
-    <label class="counter text-lg font-pixel text-center border-dotted border-4 dark:border-secondary-700 border-secondary-200 h-fit min-w-[2em]  px-[.1em] text-primary-200 dark:text-primary-600 " data-value="{{ $page.WordCount }}">{{ $page.WordCount }}</label>
+<div class="post-mini">
+      <h3 class="post-mini__title"><a class="post-mini__link" href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h3>
+    <div class="post-mini__spacer"></div>
+    <label class="post-mini__count counter" data-word-count="{{ $page.WordCount }}">{{ $page.WordCount }}</label>
     </div>
 
 {{- else if eq $style "img"}}      {{- range readDir $filepath }}
   {{- if ( findRE "(?i)\\.(gif|jpg|jpeg|tiff|png|bmp|webp|avif|jxl)$" .Name )}}
-<article class="post-preview m-1 overflow-clip">
-     <a href="{{ $page.RelPermalink }}">
+<article class="post-thumb">
+     <a class="post-thumb__link" href="{{ $page.RelPermalink }}">
 
 
 
-    <img class="img-preview object-cover aspect-square rounded-sm bg-cover w-full h-full sm:float-right filter-[url(#tint)] hover:filter-none" src="{{ print $page.RelPermalink .Name }}" alt="{{ $page.Title }}">
-     
+    <img class="post-thumb__image" src="{{ print $page.RelPermalink .Name }}" alt="{{ $page.Title }}">
 
-    
+
+
 </a>
-       
-    </article>    
+
+    </article>
     {{- break }}
   {{- end }}
 {{- end }}

@@ -14,13 +14,7 @@ Renders a menu for the given menu ID.
 {{- with index site.Menus $menuID }}
 
 
-    <ul class="
-    lg:flex lg:flex-row flex-wrap justify-center xl:flex-nowrap
-    grid md:grid-cols-6 sm:grid-cols-3 grid-cols-2
-    xl:w-[100%]
-     2xl:w-auto
-     h-fit
-    ">
+    <ul class="menu">
 
       {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
 
@@ -31,13 +25,13 @@ Renders a menu for the given menu ID.
 
 {{- define "_partials/inline/menu/walk.html" }}
   {{- $page := .page }}
-  
+
   {{- range .menuEntries }}
     {{- $attrs := dict "href" .URL "pre" .Pre}}
     {{- if $page.IsMenuCurrent .Menu . }}
-      {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
+      {{- $attrs = merge $attrs (dict "aria-current" "page") }}
     {{- else if $page.HasMenuCurrent .Menu .}}
-      {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
+      {{- $attrs = merge $attrs (dict "aria-current" "true") }}
     {{- end }}
     {{- $name := .Name }}
     {{- with .Identifier }}
@@ -47,28 +41,21 @@ Renders a menu for the given menu ID.
     {{- end }}
 
 
-    <li class="h-fit">
-    
-  <a class="w-full flex sm:py-2  flex-col items-center justify-center cursor-pointer rounded-md"
-        href="{{ $attrs.href }}"
-      >
+    <li class="menu__item">
 
-        <img style="image-rendering:pixelated;" src="{{ $attrs.pre }}" aria-hidden="false" class="flooder block tint w-[max(28vw,14vh)] md:w-[96px]" draggable="false" />
-        <label class="block nav-link text-2xl sm:text-lg
-     underline decoration-dashed decoration-1
-     text-primary-400 dark:text-primary-300 hover:text-accent-500 dark:hover:text-accent-400
-     cursor-pointer
-     ">
+  <a class="menu__link" href="{{ $attrs.href }}" {{- with index $attrs "aria-current" }} aria-current="{{ . }}"{{ end }}>
+
+        <img class="menu__icon" src="{{ $attrs.pre }}" alt="" aria-hidden="false" data-menu-icon draggable="false" />
+        <label class="menu__label">
         {{ $name }}
         </label>
 
 
 
 
-
     </a>
       {{- with .Children }}
-        <ul>
+        <ul class="menu menu--nested">
           {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
         </ul>
       {{- end }}

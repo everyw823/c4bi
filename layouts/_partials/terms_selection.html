@@ -1,44 +1,37 @@
 {{- /*
-Render all terms for a given taxonomy.
+Render the checkbox list used by the character filter sidebar.
 
 @context {page} page The current page.
 @context {string} taxonomy The taxonomy.
+@context {string} sub Optional - only terms whose `sub` param matches are rendered.
 
-@example: {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+@example: {{ partial "terms_selection.html" (dict "taxonomy" "tags" "site" .Site "sub" "years") }}
 */}}
 
 {{- $taxonomy := .taxonomy }}
-{{- $subtax := .sub}}
+{{- $subtax := .sub }}
 {{- $taxonomies := .site.Taxonomies }}
-{{- $classes := .class}}
 {{- $page := .Page }}
-{{- $color := "primary"}}
 
     {{- with index $taxonomies $taxonomy }}
-    <ul class="  h-full flex flex-row flex-wrap ">
-      
+    <ul class="term-picker">
+
       {{- range .Alphabetical }}
       {{- if eq .Page.Params.sub $subtax }}
-        <li> 
+        <li class="term-picker__item">
 
-      {{- with .Page.Params.color }}
-        {{- $color = . }}
-      {{- end }}
-      
-
-      <label class="btn-checkbox block mx-0.5 my-0.5"> 
+      <label class="term-picker__option" data-term-picker>
         <input
         type="checkbox"
         data-term="{{ .Page.Title }}"
         />
 
-        <span>{{- if (T .Page.Title)}}{{ T .Page.Title }}{{- else }}{{ .Page.Title }}{{- end }}</span>
-    
+        <span class="term-picker__label">{{- if (T .Page.Title)}}{{ T .Page.Title }}{{- else }}{{ .Page.Title }}{{- end }}</span>
+
       </label>
-      
+
     </li>
     {{- end }}
     {{- end }}
     </ul>
     {{- end }}
-

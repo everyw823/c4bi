@@ -14,11 +14,11 @@ async function fetchImage(url) {
 }
 
 export function initImagePreviews() {
-    const preview = document.querySelectorAll('.post-preview');
+    const preview = document.querySelectorAll("[data-post-preview]");
     preview.forEach(p => {
         const pa = p.querySelector('a');
-        const pp = p.querySelector('img.img-preview');
-        const wrapper = p.querySelector('.image-text-preview-wrapper');
+        const pp = p.querySelector("img[data-preview-image]");
+        const wrapper = p.querySelector("[data-preview-body]");
         const url = pa.getAttribute('href');
 
         fetchImage(url).then(imageUrl => {

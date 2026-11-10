@@ -5,24 +5,24 @@ Renders pagination controls for paginated content.
 
 @example: {{ partial "pagination.html" . }}
 */}}
-<div class="flex justify-center w-full mt-5">
+<div class="pagination">
 
   {{ if .Paginator.HasPrev }}
-  <a href="{{ .Paginator.Prev.URL }}" class="mx-2 text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">← 上一页</a>
+  <a href="{{ .Paginator.Prev.URL }}" class="pagination__step pagination__step--prev">← 上一页</a>
 {{ end }}
 
-<ul class=" hidden sm:flex px-2">
+<ul class="pagination__pages">
 {{ $p := .Paginator }}
 {{- if le .Paginator.TotalPages 6 }}
 
 
 {{- range .Paginator.Pagers | first 3 }}
-<li class="px-2 ">
-  
+<li class="pagination__item">
+
   {{- if eq $p.PageNumber .PageNumber }}
-  <a aria-disabled="true" class="text-secondary-500 dark:text-secondary-400 ">{{ .PageNumber }}</a>
+  <a class="pagination__link pagination__link--current" aria-disabled="true">{{ .PageNumber }}</a>
   {{- else }}
-  <a href="{{ .URL }}" class="">{{ .PageNumber }}</a>
+  <a class="pagination__link" href="{{ .URL }}">{{ .PageNumber }}</a>
   {{- end }}
 </li>
 
@@ -37,10 +37,10 @@ Renders pagination controls for paginated content.
 
 {{- if ge $p.PageNumber 4}}
  {{- with index $p.Pagers 0}}
- <li class="px-2 ">
-  <a href="{{ .URL }}">{{ .PageNumber }}</a>
+ <li class="pagination__item">
+  <a class="pagination__link" href="{{ .URL }}">{{ .PageNumber }}</a>
   </li>
-  <li class="px-2 ">
+  <li class="pagination__item pagination__item--gap">
     ...
   </li>
   {{- end }}
@@ -49,14 +49,14 @@ Renders pagination controls for paginated content.
 {{- range seq (math.Sub $p.PageNumber 3) (math.Add $p.PageNumber 1) }}
 
 {{- with index $p.Pagers . }}
- 
-<li class="px-2">
- 
-  
+
+<li class="pagination__item">
+
+
   {{- if eq $p.PageNumber .PageNumber }}
-  <a aria-disabled="true" >{{ .PageNumber }}</a>
+  <a class="pagination__link pagination__link--current" aria-disabled="true">{{ .PageNumber }}</a>
   {{- else }}
-  <a href="{{ .URL }}">{{ .PageNumber }}</a>
+  <a class="pagination__link" href="{{ .URL }}">{{ .PageNumber }}</a>
   {{- end }}
 </li>
 {{- end }}
@@ -66,11 +66,11 @@ Renders pagination controls for paginated content.
 {{- if le $p.PageNumber (math.Sub $p.TotalPages 3)}}
 
  {{- with index $p.Pagers (math.Sub $p.TotalPages 1)}}
-  <li class="px-2 ">
+  <li class="pagination__item pagination__item--gap">
     ...
   </li>
-  <li class="px-2 ">
-  <a href="{{ .URL }}" class="">{{ .PageNumber }}</a>
+  <li class="pagination__item">
+  <a class="pagination__link" href="{{ .URL }}">{{ .PageNumber }}</a>
   </li>
   {{- end }}
   {{- end }}
@@ -82,6 +82,6 @@ Renders pagination controls for paginated content.
 {{- end }}</ul>
 {{ if .Paginator.HasNext }}
 
-  <a href="{{ .Paginator.Next.URL }}" class="mx-2 text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">下一页 →</a>
+  <a href="{{ .Paginator.Next.URL }}" class="pagination__step pagination__step--next">下一页 →</a>
 {{ end }}
 </div>

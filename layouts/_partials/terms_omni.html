@@ -4,41 +4,37 @@ Render all terms for a given taxonomy.
 @context {page} page The current page.
 @context {string} taxonomy The taxonomy.
 
-@example: {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+@example: {{ partial "terms_omni.html" (dict "taxonomy" "tags" "site" .Site) }}
 */}}
 
 {{- $taxonomy := .taxonomy }}
 {{- $taxonomies := .site.Taxonomies }}
-{{- $classes := .class}}
-{{- $withNum := .withNum}}
-{{- $page := .Page }}
+{{- $withNum := .withNum }}
 {{- $color := "primary"}}
 
     {{- with index $taxonomies $taxonomy }}
-    <ul class="  h-full flex flex-row flex-wrap text-sm ">
+    <ul class="term-cloud">
       {{- range .Alphabetical }}
-        <li> 
-                <a class="block  h-fit m-1"
-      href="{{ .Page.RelPermalink }}" data-count="{{ .Count }}">
+        <li class="term-cloud__item">
+                <a class="term-cloud__link" href="{{ .Page.RelPermalink }}" data-count="{{ .Count }}">
 
       {{- with .Page.Params.color }}
         {{- $color = . }}
       {{- end }}
-      
 
-      <div class="{{$classes}} tag bg-{{ $color }}-500 dark:bg-{{ $color }}-600"> 
+
+      <div class="term-cloud__tag tag tag--{{ $color }}">
                 {{- with .Page.Params.icon }}
-        <i data-lucide="{{ . }}" class="inline-block" wdith="14" height="14"></i>
+        <i data-lucide="{{ . }}"></i>
         {{- end }}
 
         {{- if (T .Page.Title)}}{{ T .Page.Title }}{{- else }}{{ .Page.Title }}{{- end }}
-    
+
         {{- if $withNum }}
-        <div
-          class=" relative bg-secondary-200 dark:bg-secondary-700 text-{{ $color }}-400 dark:text-{{ $color }}-300 inline-block rounded-full text-center ml-1 px-2 h-[1.5em]">
+        <div class="term-cloud__count tag__count">
           {{ .Count }}
         </div>
-        
+
         {{- $color = "primary"}}
         {{- end }}
       </div>
@@ -47,4 +43,3 @@ Render all terms for a given taxonomy.
     {{- end }}
     </ul>
     {{- end }}
-

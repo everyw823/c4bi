@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
     // updateOverlaySize();
     // globalThis.borderOverlay.style.display = 'fixed';
 
-    SVGInject(document.querySelectorAll('img.injectable')).then(() => {
+    SVGInject(document.querySelectorAll("img[data-svg-inject]")).then(() => {
         // Strip the baked-in px size before the tint pass measures anything.
-        document.querySelectorAll('svg.logo-responsive').forEach(makeResponsive);
+        document.querySelectorAll("svg[data-logo-responsive]").forEach(makeResponsive);
     }).then(addColorChangeListener);
 
 
@@ -50,19 +50,19 @@ document.addEventListener('DOMContentLoaded', function (e) {
         display.innerText = timeString.trim();
     }
 
-    const timer = document.querySelectorAll('.timer');
+    const timer = document.querySelectorAll('[data-timer]');
     timer.forEach(timer => {
-        const mark = timer.querySelector('.timer-mark');
-        const display = timer.querySelector('.timer-display');
+        const mark = timer.querySelector('[data-timer-mark]');
+        const display = timer.querySelector('[data-timer-display]');
         UpdateTimerDisplay(new Date(mark.getAttribute('datetime')), new Date(), display);
         setInterval(() => UpdateTimerDisplay(new Date(mark.getAttribute('datetime')), new Date(), display), 1000);
     });
 
 
 
-    document.querySelectorAll('.time-context').forEach(el => {
-        const times = el.querySelectorAll('time.time-interval');
-        const rt = el.querySelector('.root-time');
+    document.querySelectorAll('[data-time-context]').forEach(el => {
+        const times = el.querySelectorAll('[data-time-interval], time.time-interval');
+        const rt = el.querySelector('[data-root-time]');
         const rootTime = new Date(rt.getAttribute("datetime"));
        
         rt.title = rootTime;
@@ -76,28 +76,28 @@ document.addEventListener('DOMContentLoaded', function (e) {
         });
     });
 
-    document.querySelectorAll('time.time-interval').forEach(el => {
+    document.querySelectorAll('[data-time-interval], time.time-interval').forEach(el => {
         const timeMarker = document.createElement('i');
         timeMarker.setAttribute('data-lucide', 'clock');
         timeMarker.setAttribute('width', '16px');
         timeMarker.setAttribute('height', '16px');
-        timeMarker.setAttribute('class', 'time-icon inline-block');
+        timeMarker.setAttribute('class', 'time-icon');
         el.insertAdjacentElement('beforeBegin', timeMarker);
     });
 
 
-    const dates = document.querySelectorAll('time.date');
+    const dates = document.querySelectorAll('[data-date]');
     console.log("woc",dates);
     dates.forEach(el => {
         const dateMarker = document.createElement('i');
         dateMarker.setAttribute('data-lucide', 'calendar-days');
         dateMarker.setAttribute('width', '16px');
         dateMarker.setAttribute('height', '16px');
-        dateMarker.setAttribute('class', 'time-icon inline-block');
+        dateMarker.setAttribute('class', 'time-icon');
         el.insertAdjacentElement('beforeBegin', dateMarker);
     })
 
-    const s = document.querySelectorAll(".scattered");
+    const s = document.querySelectorAll("[data-scattered]");
     console.log(s);
     s.forEach(el => {
         el.style.transform = `rotate(${Math.random() * 10 - 5}deg)`;
@@ -110,16 +110,15 @@ document.addEventListener('DOMContentLoaded', function (e) {
         extMarker.setAttribute('data-lucide', 'square-arrow-out-up-right');
         extMarker.setAttribute('width', '16px');
         extMarker.setAttribute('height', '16px');
-        extMarker.setAttribute('class', 'inline-block');
         link.insertAdjacentElement('beforeEnd', extMarker);
     });
 
     let hugocounts = [];
-    document.querySelectorAll(".tag").forEach(el => hugocounts.push(el.getAttribute('tag-count')));
+    document.querySelectorAll("[data-tag-count]").forEach(el => hugocounts.push(el.getAttribute('tag-count')));
     const countsMax = Math.max(...hugocounts);
     hugocounts = hugocounts.map(count => count / countsMax);
 
-    const nav = document.querySelector('nav.fixed');
+    const nav = document.querySelector('[data-nav-fixed]');
     console.log(nav);
 
     if (nav) {
@@ -159,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
     }
 
 
-    const sliders = document.querySelectorAll('.slider');
+    const sliders = document.querySelectorAll('[data-slider]');
     
     sliders.forEach(slider =>{
     const s = slider.querySelector('input');
@@ -217,7 +216,7 @@ function thematicColorChange(event) {
 
     let preferredTheme = event.matches;
     console.log(preferredTheme);
-    document.querySelectorAll("svg.tint").forEach(el => {
+    document.querySelectorAll("svg[data-svg-tint]").forEach(el => {
         tintSVG(el, globalThis.primary[preferredTheme ? 700 : 500], globalThis.primary[preferredTheme ? 500 : 300]);
     });
 
@@ -239,26 +238,24 @@ ${l * blend} ${l * blend} ${l * blend} 0 ${nprimary[2] * (1 - blend)}
 
 window.addEventListener("load", function () {
 
-    const imgcs = document.querySelectorAll(".img-container");
+    const imgcs = document.querySelectorAll("[data-img-container]");
     imgcs.forEach(el => {
         console.log("img:")
         const i = el.querySelector("img");
         if (i.clientHeight > i.clientWidth * 1.5) {
-            i.classList.add("aspect-square");
-            i.classList.add("object-cover");
-            i.classList.add("object-top");
-            el.insertAdjacentHTML('beforeEnd', `<div data-status="closed" class="text-center expander border-dotted border-4 text-secondary-500 bg-secondary-50 dark:bg-secondary-900 border-secondary-200 hover:bg-secondary-100 hover:dark:bg-secondary-800 dark:border-secondary-600 h-12 p-2 w-full">点这里展开图片</div>`);
+            i.classList.add("img-container__image--clipped");
+            el.insertAdjacentHTML('beforeEnd', `<div data-expander data-status="closed" class="img-container__expander">点这里展开图片</div>`);
 
-            const expander = el.querySelector(".expander");
+            const expander = el.querySelector("[data-expander]");
 
             expander.addEventListener("click", () => {
                 if (expander.getAttribute("data-status") === "closed") {
-                    i.classList.remove("aspect-square");
+                    i.classList.remove("img-container__image--clipped");
                     expander.setAttribute("data-status", "opened");
                     expander.innerText = "点这里收起图片";
 
                 } else {
-                    i.classList.add("aspect-square");
+                    i.classList.add("img-container__image--clipped");
                     expander.setAttribute("data-status", "closed");
                     expander.innerText = "点这里展开图片";
                 }

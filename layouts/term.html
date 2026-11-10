@@ -1,38 +1,37 @@
 {{ define "main" }}
 {{- $page := . }}
 {{- $color := "primary"}}
-<div class="mb-15">
+<div class="list-head">
 	{{- if ( T .Title )}}
 
 	{{- with .Params.color }}
         {{- $color = . }}
     {{- end }}
-<div class="flex flex-nowrap mb-3">
-		<div class="hidden md:block decor-shapes flex-1" aria-hidden="true"
+<div class="list-head__row">
+		<div class="list-head__decor" data-decor-shapes aria-hidden="true"
            data-seed="{{ $page.RelPermalink }}" data-max="14" data-density="1.1"></div>
-<h1 class=" scattered py-2 tag bg-{{ $color }}-500 dark:bg-{{ $color }}-600 text-center mb-2">
+<h1 class="list-head__title tag tag--{{ $color }}" data-scattered>
 		{{ T .Title }}
 	</h1>
-<div class="decor-shapes flex-1 -scale-x-100" aria-hidden="true"
+<div class="list-head__decor list-head__decor--mirrored" data-decor-shapes aria-hidden="true"
            data-seed="{{ $page.RelPermalink }}" data-max="14" data-density="1.1"></div></div>
-	
+
 	{{- else }}
-	<h1 class="text-center mb-2">
+	<h1 class="list-head__title">
 		{{ $page.Title }}
 	</h1>
 
 	{{- end }}
-	</h1>
 
 	{{- if eq .Paginator.PageNumber 1 }}
-	<div class="text-center">{{ $page.Content }}</div>
+	<div class="list-head__content">{{ $page.Content }}</div>
 
-	<div class="text-secondary-400 dark:text-secondary-500 text-center mt-5 mb-10 text-sm">{{ T "found_with_count" (len
+	<div class="list-head__count">{{ T "found_with_count" (len
 		.Pages) }}</div>
 	{{- end }}
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2">
+<div class="post-list post-list--tight">
 
 	{{- range ( .Paginate .Pages ).Pages }}
 	{{ partial "preview/post.html" (dict "page" . "summaryLength" 200 ) }}
@@ -40,7 +39,7 @@
 
 </div>
 
-<div class="flex">
+<div class="list-pager">
 	{{ partial "pagination.html" . }}
 </div>
 

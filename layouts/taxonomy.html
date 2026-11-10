@@ -1,14 +1,10 @@
 
 {{ define "main" }}
 
-<h1 class="text-center text-4xl font-bold text-primary-500 dark:text-primary-400 mb-8">{{ .Title }}</h1>
+<h1 class="taxonomy__title">{{ .Title }}</h1>
 
-<div class="text-center">{{ .Content }}</div>
+<div class="taxonomy__content">{{ .Content }}</div>
 
-<div class="text-secondary-400 dark:text-secondary-500 text-center mb-10 text-sm">{{ T "found_with_count" (len .Pages) }}</div>
-
-<div class="flex">
-
-</div>
+<div class="taxonomy__count">{{ T "found_with_count" (len .Pages) }}</div>
 
 {{ end }}

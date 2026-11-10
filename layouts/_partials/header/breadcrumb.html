@@ -1,15 +1,15 @@
 {{- $page := .page}}
 
-<nav aria-label="breadcrumb" class="pt-8 w-full overflow-x-auto" >
-  <ol class="w-full breadcrumb flex flex-row justify-center">
+<nav aria-label="breadcrumb" class="breadcrumb">
+  <ol class="breadcrumb__list">
     {{ range $page.Ancestors.Reverse }}
 
-    <li class="breadcrumb-item whitespace-nowrap">
-      <a href="{{ .Permalink }}">{{ .Title }}</a>
-    </li> <div class="mx-2 text-secondary-300 dark:text-secondary-600 select-none"> / </div>
+    <li class="breadcrumb__item">
+      <a class="breadcrumb__link" href="{{ .Permalink }}">{{ .Title }}</a>
+    </li> <div class="breadcrumb__separator" aria-hidden="true"> / </div>
     {{ end }}
-    <li class="breadcrumb-item active whitespace-nowrap" aria-current="page">
-      <strong>
+    <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">
+      <strong class="breadcrumb__current">
         {{- if (T $page.Title)}}{{ T $page.Title }}{{- else }}{{ $page.Title }}{{- end }}</strong>
     </li>
   </ol>

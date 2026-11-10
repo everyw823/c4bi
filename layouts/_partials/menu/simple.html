@@ -1,33 +1,32 @@
 {{- $page := .page }}
 {{- $menuID := .menuID }}
 {{- $isMin := .isMinimal}}
-{{- $class := .class}}
 
 {{- with index site.Menus $menuID }}
-<ul class="flex">
+<ul class="quicknav">
 {{- range . }}
     {{- $attrs := dict "href" .URL "post" .Post}}
     {{- if $page.IsMenuCurrent .Menu . }}
-      {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
+      {{- $attrs = merge $attrs (dict "aria-current" "page") }}
     {{- else if $page.HasMenuCurrent .Menu .}}
-      {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
+      {{- $attrs = merge $attrs (dict "aria-current" "true") }}
     {{- end }}
     {{- $name := .Name }}
-    
+
     {{- with .Identifier }}
       {{- with T . }}
         {{- $name = . }}
       {{- end }}
     {{- end }}
 
-    
-    <li class="mx-2  lg:mx-3 xl:mx-4 2xl:mx-5 ">
-      
-      <a class="{{ $class }}" href="{{ $attrs.href }}">
-        <i class="inline-block" data-lucide="{{ $attrs.post }}"></i>
+
+    <li class="quicknav__item">
+
+      <a class="quicknav__link" href="{{ $attrs.href }}" {{- with index $attrs "aria-current" }} aria-current="{{ . }}"{{ end }}>
+        <i data-lucide="{{ $attrs.post }}"></i>
         {{- if not $isMin }}
         {{ $name }}
-          
+
         {{- end }}
           </a>
     </li>
